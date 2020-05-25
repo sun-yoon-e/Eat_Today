@@ -111,9 +111,9 @@ class BlackJack:
         self.hitPlayer(0)       #플레이어 카드 한장
         self.hitDealerDown()    #딜러 카드 한장 숨기기
         self.hitPlayer(1)       #플레이어 카드 한장 더
-        self.hitDealer(0)       #딜러 카드 한장
-        self.nCardsPlayer = 1   #보여진 갯수
-        self.nCardsDealer = 0   #+1
+        self.hitDealer(1)       #딜러 카드 한장
+        self.nCardsPlayer = 1   #
+        self.nCardsDealer = 1   #
 
         self.B50['state'] = 'disabled'
         self.B50['bg'] = 'gray'
@@ -124,7 +124,6 @@ class BlackJack:
 
     def hitDealer(self, n):
         # 딜러 카드 한장 보여주기
-        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
         newCard = Card(self.cardDeck[self.deckN])
         self.deckN += 1
         self.dealer.addCard(newCard)
@@ -132,11 +131,12 @@ class BlackJack:
         self.LcardsDealer.append(Label(self.window, image=p))
 
         self.LcardsDealer[self.dealer.inHand() - 1].image = p
-        self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + n * 30, y=350)
+        self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + n * 30, y=150)
+
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def hitDealerDown(self):
         # 딜러 카드 한장 숨기기
-        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
         newCard = Card(self.cardDeck[self.deckN])
         self.deckN += 1
         self.dealer.addCard(newCard)
@@ -144,7 +144,9 @@ class BlackJack:
         self.LcardsDealer.append(Label(self.window, image=p))
 
         self.LcardsDealer[self.dealer.inHand() - 1].image = p
-        self.LcardsDealer[self.dealer.inHand() - 1].place(x=250, y=350)
+        self.LcardsDealer[self.dealer.inHand() - 1].place(x=250, y=150)
+
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def hitPlayer(self, n):
         newCard = Card(self.cardDeck[self.deckN])
@@ -155,7 +157,6 @@ class BlackJack:
 
         # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
         self.LcardsPlayer[self.player.inHand() - 1].image = p
-
         self.LcardsPlayer[self.player.inHand() - 1].place(x=250 + n * 30, y=350)
 
         self.LplayerPts.configure(text=str(self.player.value()))
@@ -202,7 +203,19 @@ class BlackJack:
         self.Again['state'] = 'disabled'
         self.Again['bg'] = 'gray'
 
-        
+        #카드 초기화
+        self.nCardsDealer = 0
+        self.nCardsPlayer = 0
+        self.LcardsPlayer.clear()
+        self.LcardsDealer.clear()
+        self.deckN = 0
+
+        self.Lstatus.configure(text="")
+        self.LplayerPts.configure(text="")
+        self.LdealerPts.configure(text="")
+
+
+
 
     def checkWinner(self):
         #뒤집힌 카드를 다시 그린다.
