@@ -108,12 +108,12 @@ class BlackJack:
         random.shuffle(self.cardDeck)
         self.deckN = 0
 
-        self.hitPlayer(0)
-        self.hitDealerDown()
-        self.hitPlayer(1)
-        self.hitDealer(0)
-        self.nCardsPlayer = 1
-        self.nCardsDealer = 0
+        self.hitPlayer(0)       #플레이어 카드 한장
+        self.hitDealerDown()    #딜러 카드 한장 숨기기
+        self.hitPlayer(1)       #플레이어 카드 한장 더
+        self.hitDealer(0)       #딜러 카드 한장
+        self.nCardsPlayer = 1   #보여진 갯수
+        self.nCardsDealer = 0   #+1
 
         self.B50['state'] = 'disabled'
         self.B50['bg'] = 'gray'
@@ -123,10 +123,28 @@ class BlackJack:
         self.B1['bg'] = 'gray'
 
     def hitDealer(self, n):
-        pass
+        # 딜러 카드 한장 보여주기
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        newCard = Card(self.cardDeck[self.deckN])
+        self.deckN += 1
+        self.dealer.addCard(newCard)
+        p = PhotoImage(file="cards/" + newCard.filename())
+        self.LcardsDealer.append(Label(self.window, image=p))
+
+        self.LcardsDealer[self.dealer.inHand() - 1].image = p
+        self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + n * 30, y=350)
 
     def hitDealerDown(self):
-        pass
+        # 딜러 카드 한장 숨기기
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        newCard = Card(self.cardDeck[self.deckN])
+        self.deckN += 1
+        self.dealer.addCard(newCard)
+        p = PhotoImage(file="cards/b2fv.png")
+        self.LcardsDealer.append(Label(self.window, image=p))
+
+        self.LcardsDealer[self.dealer.inHand() - 1].image = p
+        self.LcardsDealer[self.dealer.inHand() - 1].place(x=250, y=350)
 
     def hitPlayer(self, n):
         newCard = Card(self.cardDeck[self.deckN])
@@ -150,21 +168,16 @@ class BlackJack:
             self.checkWinner()
 
     def pressedStay(self):
-        pass
+        self.nCardsDealer += 1
+        self.hitDealer(self.nCardsDealer)
+        if self.dealer.value() > 21:
+            self.checkWinner()
 
     def pressedDeal(self):
+        self.deal()
+
         self.Deal["state"] = "disabled"
         self.Deal["bg"] = "gray"
-        for i in range(2):
-            PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
-            newCard = Card(self.cardDeck[self.deckN])
-            self.deckN += 1
-            self.player.addCard(newCard)
-            p = PhotoImage(file="cards/" + newCard.filename())
-            self.LcardsPlayer.append(Label(self.window, image=p))
-            self.LcardsPlayer[self.player.inHand() - 1].image = p
-            self.LcardsPlayer[self.player.inHand() - 1].place(x=250 + (i - 1) * 30, y=350)
-
 
         self.B50['state'] = 'disabled'
         self.B50['bg'] = 'gray'
@@ -179,7 +192,17 @@ class BlackJack:
         self.Stay['bg'] = 'white'
 
     def pressedAgain(self):
-        pass
+        self.B50['state'] = 'active'
+        self.B50['bg'] = 'white'
+        self.B10['state'] = 'active'
+        self.B10['bg'] = 'white'
+        self.B1['state'] = 'active'
+        self.B1['bg'] = 'white'
+
+        self.Again['state'] = 'disabled'
+        self.Again['bg'] = 'gray'
+
+        
 
     def checkWinner(self):
         #뒤집힌 카드를 다시 그린다.

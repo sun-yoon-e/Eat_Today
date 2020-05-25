@@ -23,22 +23,7 @@ class Player:
         for i in range(self.N):
             total += self.cards[i].getValue()
             if self.cards[i].getValue() ==1:
-                pass
-            if self.cards[i].getValue() == 2:
-                pass
-            if self.cards[i].getValue() == 3:
-                pass
-            if self.cards[i].getValue() == 4:
-                pass
-            if self.cards[i].getValue() == 5:
-                pass
-            if self.cards[i].getValue() == 6:
-                pass
-            if self.cards[i].getValue() == 7:
-                pass
-            if self.cards[i].getValue() == 8:
-                pass
-            if self.cards[i].getValue() == 9:
-                pass
-            if self.cards[i].getValue() == 10:
-                pass
+                total += 10
+                if total > 21:
+                    total -= 10
+        return total
