@@ -19,11 +19,15 @@ class Player:
         #ace는 1혹은 11로 모두 사용 가능
         #일단 11로 계산한 후 21이 넘어가면 1로 정정
         total = 0
-        #ace = 0
+        ace = False
         for i in range(self.N):
-            total += self.cards[i].getValue()
-            if self.cards[i].getValue() ==1:
-                total += 10
-                if total > 21:
-                    total -= 10
+            if self.cards[i].getValue() == 1:
+                ace = True
+                total += 11
+            else:
+                total += self.cards[i].getValue()
+        if (ace == True) and (total > 21):
+            total = 0
+            for i in range(self.N):
+                total += self.cards[i].getValue()
         return total
