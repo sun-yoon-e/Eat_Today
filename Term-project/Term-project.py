@@ -12,7 +12,7 @@ class EatToday:
         self.font2 = font.Font(self.window, size=18, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
         self.font3 = font.Font(self.window, size=16, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
 
-        #self.Logo #로고이미지
+        #self.Logo = PhotoImage(file='resources/image/logo.png')
         self.initMail()
         self.initSearchListBox()
         self.initInputLabel()
@@ -93,30 +93,30 @@ class EatToday:
         pass
 
     def setupButton(self):
-        self.Korea = Button(self.window, text="한식", font=self.font, command=self.pressedKr)
+        self.Korea = Button(self.window, text="한식", font=self.font, command=self.pressedKorea)
         self.Korea.place(x=25, y=200)
-        self.China = Button(self.window, text="중식", font=self.font, command=self.pressedCn)
+        self.China = Button(self.window, text="중식", font=self.font, command=self.pressedChina)
         self.China.place(x=120, y=200)
-        self.Japan = Button(self.window, text="일식", font=self.font, command=self.pressedJp)
+        self.Japan = Button(self.window, text="일식", font=self.font, command=self.pressedJapan)
         self.Japan.place(x=215, y=200)
-        self.Italy = Button(self.window, text="양식", font=self.font, command=self.pressedIt)
+        self.Italy = Button(self.window, text="양식", font=self.font, command=self.pressedItaly)
         self.Italy.place(x=310, y=200)
-        self.Cafe = Button(self.window, text="카페", font=self.font, command=self.pressedCf)
+        self.Cafe = Button(self.window, text="카페", font=self.font, command=self.pressedCafe)
         self.Cafe.place(x=405, y=200)
-        self.Famous = Button(self.window, text="맛집", font=self.font, command=self.pressedFm)
+        self.Famous = Button(self.window, text="맛집", font=self.font, command=self.pressedFamous)
         self.Famous.place(x=500, y=200)
 
-    def pressedKr(self):
+    def pressedKorea(self):
         pass
-    def pressedCn(self):
+    def pressedChina(self):
         pass
-    def pressedJp(self):
+    def pressedJapan(self):
         pass
-    def pressedIt(self):
+    def pressedItaly(self):
         pass
-    def pressedCf(self):
+    def pressedCafe(self):
         pass
-    def pressedFm(self):
+    def pressedFamous(self):
         pass
 
     def initEateryList(self):
@@ -129,6 +129,7 @@ class EatToday:
         pass
 
     def initGraph(self):
+        # 그래프가 캔버스에 그리는거 였나
         pass
 
     def initMap(self):
