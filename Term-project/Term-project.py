@@ -5,20 +5,24 @@ class EatToday:
     def __init__(self):
         self.window = Tk()
         self.window.title('오늘 뭐 먹지~?')
-        self.window.geometry('600x800')
+        self.window.geometry('600x600')
         self.window.configure(bg='lemon chiffon') #RosyBrown1 thistle powder blue
 
         self.font = font.Font(self.window, size=20, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
         self.font2 = font.Font(self.window, size=18, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
         self.font3 = font.Font(self.window, size=16, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
-        #self.Logo
 
+        #self.Logo #로고이미지
         self.initMail()
         self.initSearchListBox()
         self.initInputLabel()
         self.initSearchButton()
         self.setupButton()
-
+        self.initEateryList()
+        self.initInformation()
+        self.FoodImage()
+        self.initGraph()
+        self.initMap()
 
         self.window.mainloop()
 
@@ -115,5 +119,19 @@ class EatToday:
     def pressedFm(self):
         pass
 
+    def initEateryList(self):
+        pass
+
+    def initInformation(self):
+        pass
+
+    def FoodImage(self):
+        pass
+
+    def initGraph(self):
+        pass
+
+    def initMap(self):
+        pass
 
 EatToday()
