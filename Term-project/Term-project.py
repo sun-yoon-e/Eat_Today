@@ -82,12 +82,12 @@ class EatToday:
         global InputLabel
         InputLabel = Entry(self.window, font=self.font3, width=18, bd=12, relief='ridge')
         InputLabel.pack()
-        InputLabel.place(x=265, y=130)
+        InputLabel.place(x=263, y=130)
 
     def initSearchButton(self):
         SearchButton = Button(self.window, font=self.font2, text="검색", command=self.SearchButtonAction)
         SearchButton.pack()
-        SearchButton.place(x=509, y=130)
+        SearchButton.place(x=507, y=130)
 
     def SearchButtonAction(self):
         pass
@@ -132,6 +132,13 @@ class EatToday:
         pass
 
     def initMap(self):
+        self.mapImage = PhotoImage(file='resources/image/map.png')
+        self.mapButton = Button(self.window, image=self.mapImage, command=self.openMap)
+        self.mapButton.place(x=480, y=450)
+
+    def openMap(self):
         pass
+
+    # x y 위치는 예쁘게 조정이 어렵다... 모르겠어 !!!!!!!!!!!!!!!
 
 EatToday()
