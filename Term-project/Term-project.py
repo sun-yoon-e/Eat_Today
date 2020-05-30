@@ -1,18 +1,20 @@
 from tkinter import *
 from tkinter import font
 
+bgColor = 'lemon chiffon'
+
 class EatToday:
     def __init__(self):
         self.window = Tk()
         self.window.title('오늘 뭐 먹지~?')
-        self.window.geometry('600x600')
-        self.window.configure(bg='lemon chiffon') #RosyBrown1 thistle powder blue
+        self.window.geometry('600x750+450-50') #윈도우 고정
+        self.window.configure(background=bgColor) #RosyBrown1 thistle powder blue
 
         self.font = font.Font(self.window, size=20, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
         self.font2 = font.Font(self.window, size=18, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
         self.font3 = font.Font(self.window, size=16, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
 
-        #self.Logo = PhotoImage(file='resources/image/logo.png')
+        self.Logo()
         self.initMail()
         self.initSearchListBox()
         self.initInputLabel()
@@ -26,10 +28,15 @@ class EatToday:
 
         self.window.mainloop()
 
+    def Logo(self):
+        self.logoImage = PhotoImage(file='resources/image/logo.png')
+        logo = Label(self.window, image=self.logoImage, background=bgColor)
+        logo.place(x=25,y=5)
+
     def initMail(self):
         self.mailImage = PhotoImage(file='resources/image/gmail.png')
         self.mailButton = Button(self.window, image=self.mailImage, command=self.sendMail)
-        self.mailButton.place(x=450, y=30)
+        self.mailButton.place(x=470, y=20)
 
     def sendMail(self):
         pass
@@ -106,18 +113,66 @@ class EatToday:
         self.Famous = Button(self.window, text="맛집", font=self.font, command=self.pressedFamous)
         self.Famous.place(x=500, y=200)
 
+        self.Korea['state'] = 'active'
+        self.Korea['bg'] = 'light gray'
+        self.China['state'] = 'active'
+        self.China['bg'] = 'light gray'
+        self.Japan['state'] = 'active'
+        self.Japan['bg'] = 'light gray'
+        self.Italy['state'] = 'active'
+        self.Italy['bg'] = 'light gray'
+        self.Cafe['state'] = 'active'
+        self.Cafe['bg'] = 'light gray'
+        self.Famous['state'] = 'active'
+        self.Famous['bg'] = 'light gray'
+
     def pressedKorea(self):
-        pass
+        self.setupButton()
+        self.Korea['state'] = 'disabled'
+        self.Korea['bg'] = 'gray'
+        self.KoreaImage = PhotoImage(file='resources/image/Korea.png')
+        korea = Label(self.window, image=self.KoreaImage, background=bgColor)
+        korea.place(x=15, y=590)
+
     def pressedChina(self):
-        pass
+        self.setupButton()
+        self.China['state'] = 'disabled'
+        self.China['bg'] = 'gray'
+        self.ChinaImage = PhotoImage(file='resources/image/China.png')
+        china = Label(self.window, image=self.ChinaImage, background=bgColor)
+        china.place(x=15, y=590)
+
     def pressedJapan(self):
-        pass
+        self.setupButton()
+        self.Japan['state'] = 'disabled'
+        self.Japan['bg'] = 'gray'
+        self.JapanImage = PhotoImage(file='resources/image/Japan.png')
+        japan = Label(self.window, image=self.JapanImage, background=bgColor)
+        japan.place(x=15, y=590)
+
     def pressedItaly(self):
-        pass
+        self.setupButton()
+        self.Italy['state'] = 'disabled'
+        self.Italy['bg'] = 'gray'
+        self.ItalyImage = PhotoImage(file='resources/image/Italy.png')
+        italy = Label(self.window, image=self.ItalyImage, background=bgColor)
+        italy.place(x=15, y=590)
+
     def pressedCafe(self):
-        pass
+        self.setupButton()
+        self.Cafe['state'] = 'disabled'
+        self.Cafe['bg'] = 'gray'
+        self.CafeImage = PhotoImage(file='resources/image/Cafe.png')
+        cafe = Label(self.window, image=self.CafeImage, background=bgColor)
+        cafe.place(x=15, y=590)
+
     def pressedFamous(self):
-        pass
+        self.setupButton()
+        self.Famous['state'] = 'disabled'
+        self.Famous['bg'] = 'gray'
+        self.FamousImage = PhotoImage(file='resources/image/Famous.png')
+        famous = Label(self.window, image=self.FamousImage, background=bgColor)
+        famous.place(x=15, y=590)
 
     def initEateryList(self):
         pass
@@ -135,7 +190,7 @@ class EatToday:
     def initMap(self):
         self.mapImage = PhotoImage(file='resources/image/map.png')
         self.mapButton = Button(self.window, image=self.mapImage, command=self.openMap)
-        self.mapButton.place(x=480, y=450)
+        self.mapButton.place(x=480, y=630)
 
     def openMap(self):
         pass
