@@ -14,7 +14,7 @@ class EatToday:
         self.font2 = font.Font(self.window, size=18, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
         self.font3 = font.Font(self.window, size=16, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
 
-        self.Logo()
+        self.initLogo()
         self.initMail()
         self.initSearchListBox()
         self.initInputLabel()
@@ -22,13 +22,12 @@ class EatToday:
         self.setupButton()
         self.initEateryList()
         self.initInformation()
-        self.FoodImage()
         self.initGraph()
         self.initMap()
 
         self.window.mainloop()
 
-    def Logo(self):
+    def initLogo(self):
         self.logoImage = PhotoImage(file='resources/image/logo.png')
         logo = Label(self.window, image=self.logoImage, background=bgColor)
         logo.place(x=25,y=5)
@@ -87,12 +86,13 @@ class EatToday:
 
     def initInputLabel(self):
         global InputLabel
-        InputLabel = Entry(self.window, font=self.font3, width=18, bd=12, relief='ridge')
+        InputLabel = Entry(self.window, font=self.font3, width=18, bd=12, relief='ridge', cursor='heart', fg='thistle4')
+
         InputLabel.pack()
         InputLabel.place(x=263, y=130)
 
     def initSearchButton(self):
-        SearchButton = Button(self.window, font=self.font2, text="검색", command=self.SearchButtonAction)
+        SearchButton = Button(self.window, font=self.font2, text="검색", cursor='heart', command=self.SearchButtonAction)
         SearchButton.pack()
         SearchButton.place(x=507, y=130)
 
@@ -100,31 +100,25 @@ class EatToday:
         pass
 
     def setupButton(self):
-        self.Korea = Button(self.window, text="한식", font=self.font, command=self.pressedKorea)
+        self.Korea = Button(self.window, cursor='heart', text="한식", font=self.font, command=self.pressedKorea)
         self.Korea.place(x=25, y=200)
-        self.China = Button(self.window, text="중식", font=self.font, command=self.pressedChina)
+        self.China = Button(self.window, cursor='heart', text="중식", font=self.font, command=self.pressedChina)
         self.China.place(x=120, y=200)
-        self.Japan = Button(self.window, text="일식", font=self.font, command=self.pressedJapan)
+        self.Japan = Button(self.window, cursor='heart', text="일식", font=self.font, command=self.pressedJapan)
         self.Japan.place(x=215, y=200)
-        self.Italy = Button(self.window, text="양식", font=self.font, command=self.pressedItaly)
+        self.Italy = Button(self.window, cursor='heart', text="양식", font=self.font, command=self.pressedItaly)
         self.Italy.place(x=310, y=200)
-        self.Cafe = Button(self.window, text="카페", font=self.font, command=self.pressedCafe)
+        self.Cafe = Button(self.window, cursor='heart', text="카페", font=self.font, command=self.pressedCafe)
         self.Cafe.place(x=405, y=200)
-        self.Famous = Button(self.window, text="맛집", font=self.font, command=self.pressedFamous)
+        self.Famous = Button(self.window, cursor='heart', text="맛집", font=self.font, command=self.pressedFamous)
         self.Famous.place(x=500, y=200)
 
         self.Korea['state'] = 'active'
-        self.Korea['bg'] = 'light gray'
         self.China['state'] = 'active'
-        self.China['bg'] = 'light gray'
         self.Japan['state'] = 'active'
-        self.Japan['bg'] = 'light gray'
         self.Italy['state'] = 'active'
-        self.Italy['bg'] = 'light gray'
         self.Cafe['state'] = 'active'
-        self.Cafe['bg'] = 'light gray'
         self.Famous['state'] = 'active'
-        self.Famous['bg'] = 'light gray'
 
     def pressedKorea(self):
         self.setupButton()
@@ -180,9 +174,6 @@ class EatToday:
     def initInformation(self):
         pass
 
-    def FoodImage(self):
-        pass
-
     def initGraph(self):
         # 그래프가 캔버스에 그리는거 였나
         pass
@@ -193,6 +184,7 @@ class EatToday:
         self.mapButton.place(x=480, y=630)
 
     def openMap(self):
+        # 인터넷 창 뜨게 하기
         pass
 
     # x y 위치는 예쁘게 조정이 어렵다... 모르겠어 !!!!!!!!!!!!!!!
