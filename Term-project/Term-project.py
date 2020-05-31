@@ -80,6 +80,7 @@ class EatToday:
         SearchList.insert(29, "포천시")
         SearchList.insert(30, "하남시")
         SearchList.insert(31, "화성시")
+
         SearchList.pack()
         SearchList.place(x=25, y=130)
         ListScrollbar.config(command=SearchList.yview)
@@ -175,7 +176,8 @@ class EatToday:
 
         global EateryText
         EateryText = Text(self.window, width=32, height=22, borderwidth=12, relief='ridge',
-                          yscrollcommand=Escrollbar.set)
+                          cursor='heart', yscrollcommand=Escrollbar.set)
+
         EateryText.pack()
         EateryText.place(x=25, y=270)
 
@@ -185,6 +187,9 @@ class EatToday:
 
         EateryText.configure(state='disabled')
 
+    # 여기 위랑 밑에 스크롤 먼가 이상함 아직 내용이 없어서 그런가 왜 뭔가 다르지 !!!
+    # 암튼 UI 끝~~~
+
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
         Iscrollbar.pack()
@@ -192,7 +197,7 @@ class EatToday:
 
         global InfoText
         InfoText = Text(self.window, width=32, height=22, borderwidth=12, relief='ridge',
-                          yscrollcommand=Iscrollbar.set)
+                        cursor='heart', yscrollcommand=Iscrollbar.set)
         InfoText.pack()
         InfoText.place(x=310, y=270)
 
@@ -203,7 +208,7 @@ class EatToday:
         InfoText.configure(state='disabled')
 
     def initGraph(self):
-        self.graphCanvas = Canvas(self.window, width=300, height=90, bg='white')
+        self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=90, bg='white')
         self.graphCanvas.pack()
         self.graphCanvas.place(x=165, y=630)
         pass
