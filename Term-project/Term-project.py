@@ -34,7 +34,7 @@ class EatToday:
 
     def initMail(self):
         self.mailImage = PhotoImage(file='resources/image/gmail.png')
-        self.mailButton = Button(self.window, image=self.mailImage, command=self.sendMail)
+        self.mailButton = Button(self.window, cursor='heart', image=self.mailImage, command=self.sendMail)
         self.mailButton.place(x=470, y=20)
 
     def sendMail(self):
@@ -123,7 +123,7 @@ class EatToday:
     def pressedKorea(self):
         self.setupButton()
         self.Korea['state'] = 'disabled'
-        self.Korea['bg'] = 'gray'
+        self.Korea['bg'] = 'RosyBrown1'
         self.KoreaImage = PhotoImage(file='resources/image/Korea.png')
         korea = Label(self.window, image=self.KoreaImage, background=bgColor)
         korea.place(x=15, y=590)
@@ -131,7 +131,7 @@ class EatToday:
     def pressedChina(self):
         self.setupButton()
         self.China['state'] = 'disabled'
-        self.China['bg'] = 'gray'
+        self.China['bg'] = 'RosyBrown1'
         self.ChinaImage = PhotoImage(file='resources/image/China.png')
         china = Label(self.window, image=self.ChinaImage, background=bgColor)
         china.place(x=15, y=590)
@@ -139,7 +139,7 @@ class EatToday:
     def pressedJapan(self):
         self.setupButton()
         self.Japan['state'] = 'disabled'
-        self.Japan['bg'] = 'gray'
+        self.Japan['bg'] = 'RosyBrown1'
         self.JapanImage = PhotoImage(file='resources/image/Japan.png')
         japan = Label(self.window, image=self.JapanImage, background=bgColor)
         japan.place(x=15, y=590)
@@ -147,7 +147,7 @@ class EatToday:
     def pressedItaly(self):
         self.setupButton()
         self.Italy['state'] = 'disabled'
-        self.Italy['bg'] = 'gray'
+        self.Italy['bg'] = 'RosyBrown1'
         self.ItalyImage = PhotoImage(file='resources/image/Italy.png')
         italy = Label(self.window, image=self.ItalyImage, background=bgColor)
         italy.place(x=15, y=590)
@@ -155,7 +155,7 @@ class EatToday:
     def pressedCafe(self):
         self.setupButton()
         self.Cafe['state'] = 'disabled'
-        self.Cafe['bg'] = 'gray'
+        self.Cafe['bg'] = 'RosyBrown1'
         self.CafeImage = PhotoImage(file='resources/image/Cafe.png')
         cafe = Label(self.window, image=self.CafeImage, background=bgColor)
         cafe.place(x=15, y=590)
@@ -163,24 +163,54 @@ class EatToday:
     def pressedFamous(self):
         self.setupButton()
         self.Famous['state'] = 'disabled'
-        self.Famous['bg'] = 'gray'
+        self.Famous['bg'] = 'RosyBrown1'
         self.FamousImage = PhotoImage(file='resources/image/Famous.png')
         famous = Label(self.window, image=self.FamousImage, background=bgColor)
         famous.place(x=15, y=590)
 
     def initEateryList(self):
-        pass
+        Escrollbar = Scrollbar(self.window)
+        Escrollbar.pack()
+        Escrollbar.place(x=277, y=270)
+
+        global EateryText
+        EateryText = Text(self.window, width=32, height=22, borderwidth=12, relief='ridge',
+                          yscrollcommand=Escrollbar.set)
+        EateryText.pack()
+        EateryText.place(x=25, y=270)
+
+        Escrollbar.config(command=EateryText.yview)
+        Escrollbar.pack()
+        Escrollbar.place(x=277, y=270)
+
+        EateryText.configure(state='disabled')
 
     def initInformation(self):
-        pass
+        Iscrollbar = Scrollbar(self.window)
+        Iscrollbar.pack()
+        Iscrollbar.place(x=563, y=270)
+
+        global InfoText
+        InfoText = Text(self.window, width=32, height=22, borderwidth=12, relief='ridge',
+                          yscrollcommand=Iscrollbar.set)
+        InfoText.pack()
+        InfoText.place(x=310, y=270)
+
+        Iscrollbar.config(command=InfoText.yview)
+        Iscrollbar.pack()
+        Iscrollbar.place(x=563, y=270)
+
+        InfoText.configure(state='disabled')
 
     def initGraph(self):
-        # 그래프가 캔버스에 그리는거 였나
+        self.graphCanvas = Canvas(self.window, width=300, height=90, bg='white')
+        self.graphCanvas.pack()
+        self.graphCanvas.place(x=165, y=630)
         pass
 
     def initMap(self):
         self.mapImage = PhotoImage(file='resources/image/map.png')
-        self.mapButton = Button(self.window, image=self.mapImage, command=self.openMap)
+        self.mapButton = Button(self.window, cursor='heart', image=self.mapImage, command=self.openMap)
         self.mapButton.place(x=480, y=630)
 
     def openMap(self):
