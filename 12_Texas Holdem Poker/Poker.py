@@ -256,8 +256,9 @@ class Poker:
         self.DealerValue.sort()
         self.PlayerValue.sort()
 
+        dealerScore = 0 #
         dealerPair = 0
-        straightCount = 1
+        dealerStraight = 1
         # 딜러 카드 7장 체크
         # 숫자 체크
         for i in range (0, 6):
@@ -271,10 +272,10 @@ class Poker:
             self.Lstatus.configure(text="No Pair")
             for i in range(1, len(self.DealerValue)):
                 if (self.DealerValue[i - 1] == self.DealerValue[i] - 1):
-                    straightCount += 1
+                    dealerStraight += 1
                 else:
                     straightCount = 1
-                if (straightCount == 5):
+                if (dealerStraight == 5):
                     self.Lstatus.configure(text="Straight")
         # 원페어
         elif dealerPair == 1:
@@ -294,34 +295,11 @@ class Poker:
 
         print(self.DealerValue)
         print(dealerPair)
-        print(straightCount)
+        print(dealerStraight)
 
         playerPair = 0
         # 플레이어 카드 7장 체크
         # 숫자 체크
-        for i in range (0, 6):
-            for j in range(i+1, 7):
-                if self.PlayerValue[i] == self.PlayerValue[j]:
-                    playerPair = playerPair+1
-
-        # 노페어
-        if playerPair == 0:
-            self.Lstatus.configure(text="No Pair")
-        # 원페어
-        elif playerPair == 1:
-            self.Lstatus.configure(text="One Pair")
-        # 투페어
-        elif playerPair == 2:
-            self.Lstatus.configure(text="Two Pair")
-        # 트리플
-        elif playerPair == 3:
-            self.Lstatus.configure(text="Two Pair")
-        # 풀하우스
-        elif playerPair == 4:
-            self.Lstatus.configure(text="Full House")
-        # 포카드
-        elif playerPair == 6:
-            self.Lstatus.configure(text="Four Card")
 
         self.betMoney = 10
         self.LplayerMoney.configure(text="You have $" + str(self.playerMoney))
