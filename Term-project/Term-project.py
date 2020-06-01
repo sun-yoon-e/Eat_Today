@@ -34,7 +34,7 @@ class EatToday:
 
     def initMail(self):
         self.mailImage = PhotoImage(file='resources/image/gmail.png')
-        self.mailButton = Button(self.window, cursor='heart', image=self.mailImage, command=self.sendMail)
+        self.mailButton = Button(self.window, cursor='heart', image=self.mailImage, background=bgColor, command=self.sendMail)
         self.mailButton.place(x=470, y=20)
 
     def sendMail(self):
@@ -215,7 +215,7 @@ class EatToday:
 
     def initMap(self):
         self.mapImage = PhotoImage(file='resources/image/map.png')
-        self.mapButton = Button(self.window, cursor='heart', image=self.mapImage, command=self.openMap)
+        self.mapButton = Button(self.window, cursor='heart', image=self.mapImage, background=bgColor, command=self.openMap)
         self.mapButton.place(x=480, y=630)
 
     def openMap(self):
