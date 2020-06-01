@@ -9,7 +9,7 @@ import random
 class Poker:
     def __init__(self):
         self.window = Tk()
-        self.window.title("Black Jack")
+        self.window.title("Texas Holdem Poker")
         self.window.geometry("800x600")
         self.window.configure(bg="green")
         self.fontstyle = font.Font(self.window, size=24, weight='bold', family='Consolas')
@@ -27,6 +27,8 @@ class Poker:
         self.LcardsPlayer = []
         self.LcardsDealer = []
         self.LcardsTable = []
+        self.PlayerCards = []
+        self.DealerCards = []
         self.deckN = 0
         self.window.mainloop()
 
@@ -128,6 +130,8 @@ class Poker:
         self.hitDealer(0)  # 딜러 카드 한장
         self.hitPlayer(1)  # 플레이어 카드 한장 더
         self.hitDealer(1)  # 딜러 카드 한장 더
+        self.player.returnValue()
+        self.dealer.returnValue()
 
         self.Check['state'] = 'active'
         self.Check['bg'] = 'light gray'

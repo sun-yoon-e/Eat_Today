@@ -2,6 +2,8 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.cards = []
+        self.suits = []
+        self.values = []
         self.N = 0
 
     def inHand(self):
@@ -14,3 +16,8 @@ class Player:
     def reset(self):
         self.N = 0
         self.cards.clear()
+
+    def returnValue(self):
+        for i in range(len(self.cards)):
+            self.values.append(self.cards[i].getValue())
+        print(self.values)
