@@ -27,8 +27,12 @@ class Poker:
         self.LcardsPlayer = []
         self.LcardsDealer = []
         self.LcardsTable = []
-        self.PlayerCards = []
-        self.DealerCards = []
+        self.PlayerValue = []
+        self.DealerValue = []
+        self.PlayerSuit = []
+        self.DealerSuit = []
+        self.TableValue = []
+        self.TableSuit = []
         self.deckN = 0
         self.window.mainloop()
 
@@ -130,8 +134,10 @@ class Poker:
         self.hitDealer(0)  # 딜러 카드 한장
         self.hitPlayer(1)  # 플레이어 카드 한장 더
         self.hitDealer(1)  # 딜러 카드 한장 더
-        self.player.returnValue()
-        self.dealer.returnValue()
+        self.DealerSuit = self.dealer.returnSuit()
+        self.PlayerSuit = self.player.returnSuit()
+        self.DealerValue = self.dealer.returnValue()
+        self.PlayerValue = self.player.returnValue()
 
         self.Check['state'] = 'active'
         self.Check['bg'] = 'light gray'
@@ -196,6 +202,8 @@ class Poker:
         elif self.count == 4 or self.count == 5:
             self.hitTable(1)
         elif self.count == 6:
+            self.TableSuit = self.table.returnSuit()
+            self.TableValue = self.table.returnValue()
             self.checkWinner()
 
         self.Deal["state"] = "disabled"
