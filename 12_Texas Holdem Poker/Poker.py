@@ -134,10 +134,6 @@ class Poker:
         self.hitDealer(0)  # 딜러 카드 한장
         self.hitPlayer(1)  # 플레이어 카드 한장 더
         self.hitDealer(1)  # 딜러 카드 한장 더
-        self.DealerSuit = self.dealer.returnSuit()
-        self.PlayerSuit = self.player.returnSuit()
-        self.DealerValue = self.dealer.returnValue()
-        self.PlayerValue = self.player.returnValue()
 
         self.Check['state'] = 'active'
         self.Check['bg'] = 'light gray'
@@ -202,8 +198,6 @@ class Poker:
         elif self.count == 4 or self.count == 5:
             self.hitTable(1)
         elif self.count == 6:
-            self.TableSuit = self.table.returnSuit()
-            self.TableValue = self.table.returnValue()
             self.checkWinner()
 
         self.Deal["state"] = "disabled"
@@ -252,6 +246,75 @@ class Poker:
         self.LcardsDealer[1].configure(image=p1)
         self.LcardsDealer[1].image = p1
 
+        self.TableSuit = self.table.returnSuit()
+        self.DealerSuit = self.dealer.returnSuit() + self.TableSuit
+        self.PlayerSuit = self.player.returnSuit() + self.TableSuit
+        self.TableValue = self.table.returnValue()
+        self.DealerValue = self.dealer.returnValue() + self.TableValue
+        self.PlayerValue = self.player.returnValue() + self.TableValue
+
+        dealerPair = 0
+        # 딜러 카드 7장 체크
+        # 숫자 체크
+        for i in range (0, 6):
+            for j in range(i+1, 7):
+                if self.DealerValue[i] == self.DealerValue[j]:
+                    dealerPair = dealerPair+1
+
+        # 노페어
+        if dealerPair == 0:
+            self.Lstatus.configure(text="No Pair")
+        # 원페어
+        elif dealerPair == 1:
+            self.Lstatus.configure(text="One Pair")
+        # 투페어
+        elif dealerPair == 2:
+            self.Lstatus.configure(text="Two Pair")
+        # 트리플
+        elif dealerPair == 3:
+            self.Lstatus.configure(text="Two Pair")
+        # 풀하우스
+        elif dealerPair == 4:
+            self.Lstatus.configure(text="Full House")
+        # 포카드
+        elif dealerPair == 6:
+            self.Lstatus.configure(text="Four Card")
+
+        print(self.DealerValue)
+        print(dealerPair)
+
+        playerPair = 0
+        # 플레이어 카드 7장 체크
+        # 숫자 체크
+        for i in range (0, 6):
+            for j in range(i+1, 7):
+                if self.PlayerValue[i] == self.PlayerValue[j]:
+                    playerPair = playerPair+1
+
+        # 노페어
+        if playerPair == 0:
+            self.Lstatus.configure(text="No Pair")
+        # 원페어
+        elif playerPair == 1:
+            self.Lstatus.configure(text="One Pair")
+        # 투페어
+        elif playerPair == 2:
+            self.Lstatus.configure(text="Two Pair")
+        # 트리플
+        elif playerPair == 3:
+            self.Lstatus.configure(text="Two Pair")
+        # 풀하우스
+        elif playerPair == 4:
+            self.Lstatus.configure(text="Full House")
+        # 포카드
+        elif playerPair == 6:
+            self.Lstatus.configure(text="Four Card")
+
+        print(self.PlayerValue)
+        print(playerPair)
+
+
+
         self.betMoney = 10
         self.LplayerMoney.configure(text="You have $" + str(self.playerMoney))
         self.LbetMoney.configure(text="$" + str(self.betMoney))
@@ -266,8 +329,5 @@ class Poker:
         self.Deal['bg'] = 'gray'
         self.Again['state'] = 'active'
         self.Again['bg'] = 'white'
-
-        print(3)
-
 
 Poker()

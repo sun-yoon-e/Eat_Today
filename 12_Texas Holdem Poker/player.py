@@ -16,6 +16,8 @@ class Player:
     def reset(self):
         self.N = 0
         self.cards.clear()
+        self.suits.clear()
+        self.values.clear()
 
     def returnValue(self):
         for i in range(len(self.cards)):
