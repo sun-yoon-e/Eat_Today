@@ -253,53 +253,62 @@ class Poker:
         self.DealerValue = self.dealer.returnValue() + self.TableValue
         self.PlayerValue = self.player.returnValue() + self.TableValue
 
-        self.DealerValue.sort()
-        self.PlayerValue.sort()
-
-        dealerScore = 0 #
-        dealerPair = 0
-        dealerStraight = 1
         # 딜러 카드 7장 체크
-        # 숫자 체크
-        for i in range (0, 6):
-            for j in range(i+1, 7):
+        dealerState = "" #딜러 상태
+        dealerPair = 0  #딜러 페어
+        dealerSame = 0  #딜러 같은 모양
+        dealerStraight = 1  #딜러 스트레이트
+
+        # 페어 체크
+        for i in range (0, len(self.DealerValue)-1):
+            for j in range(i + 1, len(self.DealerValue)):
                 if self.DealerValue[i] == self.DealerValue[j]:
                     dealerPair += 1
 
-        # 노페어 & 스트레이트
         self.DealerValue = self.DealerValue = list(set(self.DealerValue))
+        self.DealerValue.sort()
+
+        # 노페어(플러쉬, 스트레이트)
         if dealerPair == 0:
-            self.Lstatus.configure(text="No Pair")
-            for i in range(1, len(self.DealerValue)):
-                if (self.DealerValue[i - 1] == self.DealerValue[i] - 1):
+            # 모양 체크
+            for i in range(0, len(self.DealerSuit) - 1):
+                for j in range(i + 1, len(self.DealerSuit)):
+                    if self.DealerSuit[i] == self.DealerSuit[j]:
+                        dealerSame += 1
+            # 같은 무늬 5장(플러쉬) 체크
+            if dealerSame == 5:
+                dealerState = "Flush"
+
+            # 스트레이트 체크
+            for j in range(1, len(self.DealerValue)):
+                if (self.DealerValue[j - 1] == self.DealerValue[j] - 1):
                     dealerStraight += 1
                 else:
-                    straightCount = 1
+                    dealerStraight = 1
                 if (dealerStraight == 5):
-                    self.Lstatus.configure(text="Straight")
+                    dealerState = "Straight"
         # 원페어
         elif dealerPair == 1:
-            self.Lstatus.configure(text="One Pair")
+            dealerState = "One Fair"
         # 투페어
         elif dealerPair == 2:
-            self.Lstatus.configure(text="Two Pair")
+            dealerState = "Two Fair"
         # 트리플
         elif dealerPair == 3:
-            self.Lstatus.configure(text="Two Pair")
+            dealerState = "Triple"
         # 풀하우스
         elif dealerPair == 4:
-            self.Lstatus.configure(text="Full House")
+            dealerState = "Full House"
         # 포카드
         elif dealerPair == 6:
-            self.Lstatus.configure(text="Four Card")
+            dealerState = "Four card"
 
         print(self.DealerValue)
         print(dealerPair)
         print(dealerStraight)
+        print(dealerState)
 
-        playerPair = 0
-        # 플레이어 카드 7장 체크
-        # 숫자 체크
+
 
         self.betMoney = 10
         self.LplayerMoney.configure(text="You have $" + str(self.playerMoney))
