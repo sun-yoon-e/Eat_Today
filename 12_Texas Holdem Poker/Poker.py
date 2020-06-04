@@ -447,15 +447,6 @@ class Poker:
             self.Lstatus.configure(text="Win")
             self.playerMoney += self.betMoney * 2
 
-        print(dealerState)
-        print(dealerScore)
-        print(dealerMaxNopair)
-        print(dealerMaxPair)
-        print(playerState)
-        print(playerScore)
-        print(playerMaxNopair)
-        print(playerMaxPair)
-
         self.betMoney = 0
         self.LplayerMoney.configure(text="You have $" + str(self.playerMoney))
         self.LbetMoney.configure(text="$" + str(self.betMoney))
