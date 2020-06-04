@@ -5,13 +5,9 @@ class Card:
         self.x = temp // 13
 
     def getValue(self):
-        #카드 값 JQK는 10으로 결정
-        if self.value > 10:
-            return 10
-        else:
-            return self.value
+        return self.value
 
-    def getsuit(self):
+    def getSuit(self):
         #카드 무늬 결정
         if self.x == 0:
             self.suit = "Clubs"
@@ -25,4 +21,4 @@ class Card:
 
     def filename(self):
         #카드 이미지 파일 이름
-        return self.getsuit() + str(self.value) + ".png"
+        return self.getSuit() + str(self.value) + ".png"
