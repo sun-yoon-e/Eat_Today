@@ -17,9 +17,9 @@ class EatToday:
         self.window.geometry('600x750+450-50') #윈도우 고정
         self.window.configure(background=bgColor) #RosyBrown1 thistle powder blue
 
-        self.font = font.Font(self.window, size=20, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
-        self.font2 = font.Font(self.window, size=18, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
-        self.font3 = font.Font(self.window, size=16, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
+        self.font = font.Font(self.window, size=20, weight='bold', family="메이플스토리")
+        self.font2 = font.Font(self.window, size=18, weight='bold', family="배달의민족 주아")
+        self.font3 = font.Font(self.window, size=16, weight='bold', family="배달의민족 주아")
 
         self.initLogo()
         self.initMail()
@@ -53,7 +53,7 @@ class EatToday:
         ListScrollbar.pack()
         ListScrollbar.place(x=230, y=130)
 
-        SearchList = Listbox(self.window, font=self.font3, activestyle='dotbox', width=15, height=1, bd=12,
+        SearchList = Listbox(self.window, font=self.font3, activestyle='dotbox', width=13, height=1, bd=12,
                               cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
 
         SearchList.insert(1, "가평군")
@@ -94,7 +94,7 @@ class EatToday:
 
     def initInputLabel(self):
         global InputLabel
-        InputLabel = Entry(self.window, font=self.font3, width=18, bd=12, relief='ridge', cursor='heart', fg='thistle4')
+        InputLabel = Entry(self.window, font=self.font3, width=15, bd=12, relief='ridge', cursor='heart', fg='thistle4')
 
         InputLabel.pack()
         InputLabel.place(x=263, y=130)
