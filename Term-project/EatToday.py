@@ -229,7 +229,7 @@ class EatToday:
 
     def InsertEatery(self, Category):
         List = Food.getList(Category)
-        for i in len(List):
+        for i in range(len(List)):
             EateryText.insert(INSERT, "시군명 : " + List[i][0] + "\n")
             EateryText.insert(INSERT, "사업장명 : " + List[i][1] + "\n")
             EateryText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n")
