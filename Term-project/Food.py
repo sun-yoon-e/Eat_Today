@@ -34,7 +34,7 @@ def URLrequest(Category, KEY):   #카테고리별 파싱
 
     if req.status == 200:
         temp = req.read().decode('utf-8')
-        print("Data Downloading Complete!")
+        print(Category + " Data Downloading Complete!")
         if Category == "Famous":
             return XmlToList2(Category, temp)
         else: return XmlToList1(Category, temp)
