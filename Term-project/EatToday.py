@@ -1,18 +1,38 @@
 from tkinter import *
 from tkinter import font
 
+#김밥 : https://openapi.gg.go.kr/Genrestrtlunch?KEY=e3cf2cbfc9de4094be303ae7228830ec
+#탕류 : https://openapi.gg.go.kr/Genrestrtsoup?KEY=fa427c00090a4b038ea49b16f7d89bb4
+#중식 : https://openapi.gg.go.kr/Genrestrtchifood?KEY=276156d6228540bf85da172f3b4f5c62
+#일식 : https://openapi.gg.go.kr/Genrestrtjpnfood?KEY=fe6ad0c3bacb49fd9f0e5593f52cd171
+#패스트푸드 : https://openapi.gg.go.kr/Genrestrtfastfood?KEY=07f10ac144ac494681a6ab463fcf48b4
+#카페 : https://openapi.gg.go.kr/Genrestrtcate?KEY=e140dcd96b81457b92335277c9adbe8b
+#맛집 : https://openapi.gg.go.kr/PlaceThatDoATasteyFoodSt?KEY=47d93cfef7644a4c8fe8144d1ac72638
+
 bgColor = 'lemon chiffon'
+
+CityList = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시',
+        '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
+        '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
+        '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
+
+KoreaList = []
+ChinaList = []
+JapanList = []
+ItalyList = []
+CafeList = []
+FamousList = []
 
 class EatToday:
     def __init__(self):
         self.window = Tk()
         self.window.title('오늘 뭐 먹지~?')
-        self.window.geometry('600x750+450-50') #윈도우 고정
-        self.window.configure(background=bgColor) #RosyBrown1 thistle powder blue
+        self.window.geometry('600x750+450-50')  # 윈도우 고정
+        self.window.configure(background=bgColor)  # RosyBrown1 thistle powder blue
 
-        self.font = font.Font(self.window, size=20, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
-        self.font2 = font.Font(self.window, size=18, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
-        self.font3 = font.Font(self.window, size=16, weight='bold', family='resources/font/BMJU_ttf_0.ttf')
+        self.font = font.Font(self.window, size=20, weight='bold', family="메이플스토리")
+        self.font2 = font.Font(self.window, size=18, weight='bold', family="메이플스토리")
+        self.font3 = font.Font(self.window, size=16, weight='bold', family="메이플스토리")
 
         self.initLogo()
         self.initMail()
@@ -30,11 +50,11 @@ class EatToday:
     def initLogo(self):
         self.logoImage = PhotoImage(file='resources/image/logo.png')
         logo = Label(self.window, image=self.logoImage, background=bgColor)
-        logo.place(x=25,y=5)
+        logo.place(x=25, y=5)
 
     def initMail(self):
         self.mailImage = PhotoImage(file='resources/image/gmail.png')
-        self.mailButton = Button(self.window, cursor='heart', image=self.mailImage, background=bgColor, command=self.sendMail)
+        self.mailButton = Button(self.window, cursor='heart', image=self.mailImage, command=self.sendMail)
         self.mailButton.place(x=470, y=20)
 
     def sendMail(self):
@@ -46,40 +66,11 @@ class EatToday:
         ListScrollbar.pack()
         ListScrollbar.place(x=230, y=130)
 
-        SearchList = Listbox(self.window, font=self.font3, activestyle='dotbox', width=15, height=1, bd=12,
-                              cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
+        SearchList = Listbox(self.window, font=self.font3, activestyle='dotbox', width=13, height=1, bd=12,
+                             cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
 
-        SearchList.insert(1, "가평군")
-        SearchList.insert(2, "고양시")
-        SearchList.insert(3, "과천시")
-        SearchList.insert(4, "광명시")
-        SearchList.insert(5, "광주시")
-        SearchList.insert(6, "구리시")
-        SearchList.insert(7, "군포시")
-        SearchList.insert(8, "김포시")
-        SearchList.insert(9, "남양주시")
-        SearchList.insert(10, "동두천시")
-        SearchList.insert(11, "부천시")
-        SearchList.insert(12, "성남시")
-        SearchList.insert(13, "수원시")
-        SearchList.insert(14, "시흥시")
-        SearchList.insert(15, "안산시")
-        SearchList.insert(16, "안성시")
-        SearchList.insert(17, "안양시")
-        SearchList.insert(18, "양주시")
-        SearchList.insert(19, "양평군")
-        SearchList.insert(20, "여주시")
-        SearchList.insert(21, "연천군")
-        SearchList.insert(22, "오산시")
-        SearchList.insert(23, "용인시")
-        SearchList.insert(24, "의왕시")
-        SearchList.insert(25, "의정부시")
-        SearchList.insert(26, "이천시")
-        SearchList.insert(27, "파주시")
-        SearchList.insert(28, "평택시")
-        SearchList.insert(29, "포천시")
-        SearchList.insert(30, "하남시")
-        SearchList.insert(31, "화성시")
+        for i in range(30):
+            SearchList.insert(i + 1, CityList[i])
 
         SearchList.pack()
         SearchList.place(x=25, y=130)
@@ -87,7 +78,7 @@ class EatToday:
 
     def initInputLabel(self):
         global InputLabel
-        InputLabel = Entry(self.window, font=self.font3, width=18, bd=12, relief='ridge', cursor='heart', fg='thistle4')
+        InputLabel = Entry(self.window, font=self.font3, width=15, bd=12, relief='ridge', cursor='heart', fg='thistle4')
 
         InputLabel.pack()
         InputLabel.place(x=263, y=130)
@@ -169,6 +160,12 @@ class EatToday:
         famous = Label(self.window, image=self.FamousImage, background=bgColor)
         famous.place(x=15, y=590)
 
+        global FamousList
+        global MailList
+        self.clearEateryData()
+
+    #        FamousList =
+
     def initEateryList(self):
         Escrollbar = Scrollbar(self.window)
         Escrollbar.pack()
@@ -187,8 +184,9 @@ class EatToday:
 
         EateryText.configure(state='disabled')
 
-    # 여기 위랑 밑에 스크롤 먼가 이상함 아직 내용이 없어서 그런가 왜 뭔가 다르지 !!!
-    # 암튼 UI 끝~~~
+    def clearEateryData(self):
+        global EateryText
+        EateryText.delete(0, EateryText.size())
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
@@ -207,6 +205,10 @@ class EatToday:
 
         InfoText.configure(state='disabled')
 
+    def clearInfoData(self):
+        global InfoText
+        InfoText.delete('1.0', END)
+
     def initGraph(self):
         self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=90, bg='white')
         self.graphCanvas.pack()
@@ -215,13 +217,12 @@ class EatToday:
 
     def initMap(self):
         self.mapImage = PhotoImage(file='resources/image/map.png')
-        self.mapButton = Button(self.window, cursor='heart', image=self.mapImage, background=bgColor, command=self.openMap)
+        self.mapButton = Button(self.window, cursor='heart', image=self.mapImage, command=self.openMap)
         self.mapButton.place(x=480, y=630)
 
     def openMap(self):
         # 인터넷 창 뜨게 하기
         pass
 
-    # x y 위치는 예쁘게 조정이 어렵다... 모르겠어 !!!!!!!!!!!!!!!
 
 EatToday()

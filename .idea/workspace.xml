@@ -20,8 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31f211b5-cd4a-46ca-a0e6-65a3c6af145d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Term-project/Cafe.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Term-project/China.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Term-project/Gmail.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Term-project/Italy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Term-project/Japan.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Term-project/Korea.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/book.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/12_Texas Holdem Poker/Poker.py" beforeDir="false" afterPath="$PROJECT_DIR$/12_Texas Holdem Poker/Poker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Term-project/Term-project.py" beforeDir="false" afterPath="$PROJECT_DIR$/Term-project/EatToday.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,50 +58,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.Poker">
-    <configuration name="BlackJack" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Eat_Today" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/11_Black Jack" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/11_Black Jack/BlackJack.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Poker" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Eat_Today" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/12_Texas Holdem Poker" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/12_Texas Holdem Poker/Poker.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Term-project" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.Famous">
+    <configuration name="EatToday" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Eat_Today" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -106,7 +71,91 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Term-project/Term-project.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Term-project/EatToday.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Famous" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Eat_Today" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Term-project" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Term-project/Famous.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="launcher" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Eat_Today" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2부/17장" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2부/17장/launcher.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="openapi_http" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Eat_Today" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2부/17장" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2부/17장/openapi_http.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="openapi_urllib" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Eat_Today" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2부/17장" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2부/17장/openapi_urllib.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -117,9 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Poker" />
-        <item itemvalue="Python.BlackJack" />
-        <item itemvalue="Python.Term-project" />
+        <item itemvalue="Python.Famous" />
+        <item itemvalue="Python.EatToday" />
+        <item itemvalue="Python.openapi_http" />
+        <item itemvalue="Python.openapi_urllib" />
+        <item itemvalue="Python.launcher" />
       </list>
     </recent_temporary>
   </component>
@@ -149,42 +200,46 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="530" y="212" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591274564119">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="530" y="212" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1591274564119" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1590503943251">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1590503943251" />
-    <state width="1515" height="125" key="GridCell.Tab.0.bottom" timestamp="1591130689618">
+    <state width="758" height="216" key="GridCell.Tab.0.bottom" timestamp="1591359143660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="125" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591130689618" />
-    <state width="1515" height="125" key="GridCell.Tab.0.center" timestamp="1591130689618">
+    <state width="758" height="216" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591359143660" />
+    <state width="758" height="216" key="GridCell.Tab.0.center" timestamp="1591359143660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="125" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591130689618" />
-    <state width="1515" height="125" key="GridCell.Tab.0.left" timestamp="1591130689618">
+    <state width="758" height="216" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591359143660" />
+    <state width="758" height="216" key="GridCell.Tab.0.left" timestamp="1591359143660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="125" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591130689618" />
-    <state width="1515" height="125" key="GridCell.Tab.0.right" timestamp="1591130689618">
+    <state width="758" height="216" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591359143660" />
+    <state width="758" height="216" key="GridCell.Tab.0.right" timestamp="1591359143660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="125" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591130689618" />
-    <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1591010002962">
+    <state width="758" height="216" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591359143660" />
+    <state width="779" height="257" key="GridCell.Tab.1.bottom" timestamp="1591277365626">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591010002962" />
-    <state width="1515" height="261" key="GridCell.Tab.1.center" timestamp="1591010002962">
+    <state width="779" height="257" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591277365626" />
+    <state width="779" height="257" key="GridCell.Tab.1.center" timestamp="1591277365626">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1591010002962" />
-    <state width="1515" height="261" key="GridCell.Tab.1.left" timestamp="1591010002962">
+    <state width="779" height="257" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1591277365626" />
+    <state width="779" height="257" key="GridCell.Tab.1.left" timestamp="1591277365626">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1591010002962" />
-    <state width="1515" height="261" key="GridCell.Tab.1.right" timestamp="1591010002962">
+    <state width="779" height="257" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1591277365626" />
+    <state width="779" height="257" key="GridCell.Tab.1.right" timestamp="1591277365626">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1591010002962" />
+    <state width="779" height="257" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1591277365626" />
     <state x="572" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590503471651">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
