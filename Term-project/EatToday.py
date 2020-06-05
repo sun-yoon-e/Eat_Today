@@ -2,6 +2,13 @@ from tkinter import *
 from tkinter import font
 
 bgColor = 'lemon chiffon'
+MailList = []
+KoreaList = []
+ChinaList = []
+JapanList = []
+ItalyList =[]
+CafeList = []
+FamousList = []
 
 class EatToday:
     def __init__(self):
@@ -169,6 +176,12 @@ class EatToday:
         famous = Label(self.window, image=self.FamousImage, background=bgColor)
         famous.place(x=15, y=590)
 
+        global FamousList
+        global MailList
+        self.clearEateryData()
+
+#        FamousList =
+
     def initEateryList(self):
         Escrollbar = Scrollbar(self.window)
         Escrollbar.pack()
@@ -187,8 +200,9 @@ class EatToday:
 
         EateryText.configure(state='disabled')
 
-    # 여기 위랑 밑에 스크롤 먼가 이상함 아직 내용이 없어서 그런가 왜 뭔가 다르지 !!!
-    # 암튼 UI 끝~~~
+    def clearEateryData(self):
+        global EateryText
+        EateryText.delete(0, EateryText.size())
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
@@ -206,6 +220,10 @@ class EatToday:
         Iscrollbar.place(x=563, y=270)
 
         InfoText.configure(state='disabled')
+
+    def clearInfoData(self):
+        global InfoText
+        InfoText.delete('1.0', END)
 
     def initGraph(self):
         self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=90, bg='white')
