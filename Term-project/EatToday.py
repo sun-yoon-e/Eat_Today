@@ -9,10 +9,11 @@ JapanList = []
 ItalyList =[]
 CafeList = []
 FamousList = []
-City = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시',
+CityList = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시',
         '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
         '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
         '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
+CategoryButton = 0
 
 class EatToday:
     def __init__(self):
@@ -60,8 +61,8 @@ class EatToday:
         SearchList = Listbox(self.window, font=self.font3, activestyle='dotbox', width=13, height=1, bd=12,
                               cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
 
-        for i in range(30):
-            SearchList.insert(i + 1, City[i])
+        for i in range(31):
+            SearchList.insert(i, CityList[i])
 
         SearchList.pack()
         SearchList.place(x=25, y=130)
@@ -80,7 +81,19 @@ class EatToday:
         SearchButton.place(x=507, y=130)
 
     def SearchButtonAction(self):
-        pass
+        global CategoryButton
+        if CategoryButton == 0: #한식
+            pass
+        if CategoryButton == 1: #중식
+            pass
+        if CategoryButton == 2: #일식
+            pass
+        if CategoryButton == 3: #양식
+            pass
+        if CategoryButton == 4: #카페
+            pass
+        if CategoryButton == 5: #맛집
+            pass
 
     def setupButton(self):
         self.Korea = Button(self.window, cursor='heart', text="한식", font=self.font, command=self.pressedKorea)
@@ -111,6 +124,9 @@ class EatToday:
         korea = Label(self.window, image=self.KoreaImage, background=bgColor)
         korea.place(x=15, y=590)
 
+        global CategoryButton
+        CategoryButton = 0
+
     def pressedChina(self):
         self.setupButton()
         self.China['state'] = 'disabled'
@@ -118,6 +134,9 @@ class EatToday:
         self.ChinaImage = PhotoImage(file='resources/image/China.png')
         china = Label(self.window, image=self.ChinaImage, background=bgColor)
         china.place(x=15, y=590)
+
+        global CategoryButton
+        CategoryButton = 1
 
     def pressedJapan(self):
         self.setupButton()
@@ -127,6 +146,9 @@ class EatToday:
         japan = Label(self.window, image=self.JapanImage, background=bgColor)
         japan.place(x=15, y=590)
 
+        global CategoryButton
+        CategoryButton = 2
+
     def pressedItaly(self):
         self.setupButton()
         self.Italy['state'] = 'disabled'
@@ -134,6 +156,9 @@ class EatToday:
         self.ItalyImage = PhotoImage(file='resources/image/Italy.png')
         italy = Label(self.window, image=self.ItalyImage, background=bgColor)
         italy.place(x=15, y=590)
+
+        global CategoryButton
+        CategoryButton = 3
 
     def pressedCafe(self):
         self.setupButton()
@@ -143,6 +168,9 @@ class EatToday:
         cafe = Label(self.window, image=self.CafeImage, background=bgColor)
         cafe.place(x=15, y=590)
 
+        global CategoryButton
+        CategoryButton = 4
+
     def pressedFamous(self):
         self.setupButton()
         self.Famous['state'] = 'disabled'
@@ -150,6 +178,9 @@ class EatToday:
         self.FamousImage = PhotoImage(file='resources/image/Famous.png')
         famous = Label(self.window, image=self.FamousImage, background=bgColor)
         famous.place(x=15, y=590)
+
+        global CategoryButton
+        CategoryButton = 5
 
         global FamousList
         global MailList
