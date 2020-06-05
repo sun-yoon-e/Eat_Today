@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import font
+import Food
 
 bgColor = 'lemon chiffon'
 MailList = []
@@ -13,7 +14,15 @@ CityList = ['가평군', '고양시', '과천시', '광명시', '광주시', '�
         '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
         '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
         '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
+
 CategoryButton = 0
+KoreaKEY = "/Genrestrtsoup?KEY=eacb09e4cc1e4b5f9bf7f14ebe87291b"
+ChinaKEY = "/Genrestrtchifood?KEY=062afd00409748bfbeedbd63d2851b62"
+JapanKEY = "/Genrestrtjpnfood?KEY=55e63a8c30644642b07f671996903252"
+ItalyKEY = "/Genrestrtfastfood?KEY=308a1836ded941e69da26b59698c3c68"
+CafeKEY = "/Genrestrtcate?KEY=46c5a83322734a8b83ae785069ca6619"
+FamousKEY = "/PlaceThatDoATasteyFoodSt?KEY=de547a5cf35444bb9e49043ce00f4115"
+
 
 class EatToday:
     def __init__(self):
@@ -81,17 +90,21 @@ class EatToday:
         SearchButton.place(x=507, y=130)
 
     def SearchButtonAction(self):
-        global CategoryButton
+        global CategoryButton, EateryText
+
+        EateryText.configure(state='normal')
+        EateryText.delete(0.0, END)
+
         if CategoryButton == 0: #한식
-            pass
+            Food.URLrequest(KoreaKEY)
         if CategoryButton == 1: #중식
-            pass
+            Food.URLrequest(ChinaKEY)
         if CategoryButton == 2: #일식
-            pass
+            Food.URLrequest(JapanKEY)
         if CategoryButton == 3: #양식
-            pass
+            Food.URLrequest(ItalyKEY)
         if CategoryButton == 4: #카페
-            pass
+            Food.URLrequest(CafeKEY)
         if CategoryButton == 5: #맛집
             pass
 
@@ -181,12 +194,6 @@ class EatToday:
 
         global CategoryButton
         CategoryButton = 5
-
-        global FamousList
-        global MailList
-        self.clearEateryData()
-
-#        FamousList =
 
     def initEateryList(self):
         Escrollbar = Scrollbar(self.window)
