@@ -11,9 +11,9 @@ ItalyList =[]
 CafeList = []
 FamousList = []
 CityList = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시',
-        '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
-        '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
-        '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
+            '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
+            '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
+            '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
 
 CategoryButton = 0
 KoreaKEY = "/Genrestrtsoup?KEY=eacb09e4cc1e4b5f9bf7f14ebe87291b"
@@ -64,7 +64,6 @@ class EatToday:
     def initSearchListBox(self):
         global SearchList
         ListScrollbar = Scrollbar(self.window)
-        ListScrollbar.pack()
         ListScrollbar.place(x=230, y=130)
 
         SearchList = Listbox(self.window, font=self.font3, activestyle='dotbox', width=13, height=1, bd=12,
@@ -90,21 +89,18 @@ class EatToday:
         SearchButton.place(x=507, y=130)
 
     def SearchButtonAction(self):
-        global CategoryButton, EateryText
-
-        EateryText.configure(state='normal')
-        EateryText.delete(0.0, END)
+        global CategoryButton, InfoText
 
         if CategoryButton == 0: #한식
-            Food.URLrequest(KoreaKEY)
+            pass
         if CategoryButton == 1: #중식
-            Food.URLrequest(ChinaKEY)
+            pass
         if CategoryButton == 2: #일식
-            Food.URLrequest(JapanKEY)
+            pass
         if CategoryButton == 3: #양식
-            Food.URLrequest(ItalyKEY)
+            pass
         if CategoryButton == 4: #카페
-            Food.URLrequest(CafeKEY)
+            pass
         if CategoryButton == 5: #맛집
             pass
 
@@ -137,8 +133,14 @@ class EatToday:
         korea = Label(self.window, image=self.KoreaImage, background=bgColor)
         korea.place(x=15, y=590)
 
-        global CategoryButton
+        global CategoryButton, EateryText
+
+        EateryText.configure(state='normal')
+        EateryText.delete(0.0, END)
+
         CategoryButton = 0
+        Food.URLbuilder("Korea")
+        self.InsertEatery("Korea")
 
     def pressedChina(self):
         self.setupButton()
@@ -148,8 +150,14 @@ class EatToday:
         china = Label(self.window, image=self.ChinaImage, background=bgColor)
         china.place(x=15, y=590)
 
-        global CategoryButton
+        global CategoryButton, EateryText
+
+        EateryText.configure(state='normal')
+        EateryText.delete(0.0, END)
+
         CategoryButton = 1
+        Food.URLbuilder("China")
+        self.InsertEatery("China")
 
     def pressedJapan(self):
         self.setupButton()
@@ -159,8 +167,14 @@ class EatToday:
         japan = Label(self.window, image=self.JapanImage, background=bgColor)
         japan.place(x=15, y=590)
 
-        global CategoryButton
+        global CategoryButton, EateryText
+
+        EateryText.configure(state='normal')
+        EateryText.delete(0.0, END)
+
         CategoryButton = 2
+        Food.URLbuilder("Japan")
+        self.InsertEatery("Japan")
 
     def pressedItaly(self):
         self.setupButton()
@@ -170,8 +184,14 @@ class EatToday:
         italy = Label(self.window, image=self.ItalyImage, background=bgColor)
         italy.place(x=15, y=590)
 
-        global CategoryButton
+        global CategoryButton, EateryText
+
+        EateryText.configure(state='normal')
+        EateryText.delete(0.0, END)
+
         CategoryButton = 3
+        Food.URLbuilder("Italy")
+        self.InsertEatery("Italy")
 
     def pressedCafe(self):
         self.setupButton()
@@ -181,8 +201,14 @@ class EatToday:
         cafe = Label(self.window, image=self.CafeImage, background=bgColor)
         cafe.place(x=15, y=590)
 
-        global CategoryButton
+        global CategoryButton, EateryText
+
+        EateryText.configure(state='normal')
+        EateryText.delete(0.0, END)
+
         CategoryButton = 4
+        Food.URLbuilder("Cafe")
+        self.InsertEatery("Cafe")
 
     def pressedFamous(self):
         self.setupButton()
@@ -192,8 +218,23 @@ class EatToday:
         famous = Label(self.window, image=self.FamousImage, background=bgColor)
         famous.place(x=15, y=590)
 
-        global CategoryButton
+        global CategoryButton, EateryText
+
+        EateryText.configure(state='normal')
+        EateryText.delete(0.0, END)
+
         CategoryButton = 5
+        Food.URLbuilder("Famous")
+        self.InsertEatery("Famous")
+
+    def InsertEatery(self, Category):
+        List = Food.getList(Category)
+        for i in len(List):
+            EateryText.insert(INSERT, "시군명 : " + List[i][0] + "\n")
+            EateryText.insert(INSERT, "사업장명 : " + List[i][1] + "\n")
+            EateryText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n")
+            EateryText.insert(INSERT, "지번주소 : " + List[i][3] + "\n")
+            EateryText.insert(INSERT, "우편번호 : " + List[i][4] + "\n")
 
     def initEateryList(self):
         Escrollbar = Scrollbar(self.window)
@@ -216,6 +257,9 @@ class EatToday:
     def clearEateryData(self):
         global EateryText
         EateryText.delete(0, EateryText.size())
+
+    def InsertInformation(self):
+        pass
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
