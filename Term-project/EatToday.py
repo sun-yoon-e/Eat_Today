@@ -1,27 +1,12 @@
 from tkinter import *
 from tkinter import font
 
-#김밥 : https://openapi.gg.go.kr/Genrestrtlunch?KEY=e3cf2cbfc9de4094be303ae7228830ec
-#탕류 : https://openapi.gg.go.kr/Genrestrtsoup?KEY=fa427c00090a4b038ea49b16f7d89bb4
-#중식 : https://openapi.gg.go.kr/Genrestrtchifood?KEY=276156d6228540bf85da172f3b4f5c62
-#일식 : https://openapi.gg.go.kr/Genrestrtjpnfood?KEY=fe6ad0c3bacb49fd9f0e5593f52cd171
-#패스트푸드 : https://openapi.gg.go.kr/Genrestrtfastfood?KEY=07f10ac144ac494681a6ab463fcf48b4
-#카페 : https://openapi.gg.go.kr/Genrestrtcate?KEY=e140dcd96b81457b92335277c9adbe8b
-#맛집 : https://openapi.gg.go.kr/PlaceThatDoATasteyFoodSt?KEY=47d93cfef7644a4c8fe8144d1ac72638
-
 bgColor = 'lemon chiffon'
 
 CityList = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시',
         '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
         '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
         '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
-
-KoreaList = []
-ChinaList = []
-JapanList = []
-ItalyList = []
-CafeList = []
-FamousList = []
 
 class EatToday:
     def __init__(self):
