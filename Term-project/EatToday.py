@@ -9,6 +9,10 @@ JapanList = []
 ItalyList =[]
 CafeList = []
 FamousList = []
+City = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시',
+        '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
+        '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
+        '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
 
 class EatToday:
     def __init__(self):
@@ -18,8 +22,8 @@ class EatToday:
         self.window.configure(background=bgColor) #RosyBrown1 thistle powder blue
 
         self.font = font.Font(self.window, size=20, weight='bold', family="메이플스토리")
-        self.font2 = font.Font(self.window, size=18, weight='bold', family="배달의민족 주아")
-        self.font3 = font.Font(self.window, size=16, weight='bold', family="배달의민족 주아")
+        self.font2 = font.Font(self.window, size=18, weight='bold', family="메이플스토리")
+        self.font3 = font.Font(self.window, size=16, weight='bold', family="메이플스토리")
 
         self.initLogo()
         self.initMail()
@@ -56,37 +60,8 @@ class EatToday:
         SearchList = Listbox(self.window, font=self.font3, activestyle='dotbox', width=13, height=1, bd=12,
                               cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
 
-        SearchList.insert(1, "가평군")
-        SearchList.insert(2, "고양시")
-        SearchList.insert(3, "과천시")
-        SearchList.insert(4, "광명시")
-        SearchList.insert(5, "광주시")
-        SearchList.insert(6, "구리시")
-        SearchList.insert(7, "군포시")
-        SearchList.insert(8, "김포시")
-        SearchList.insert(9, "남양주시")
-        SearchList.insert(10, "동두천시")
-        SearchList.insert(11, "부천시")
-        SearchList.insert(12, "성남시")
-        SearchList.insert(13, "수원시")
-        SearchList.insert(14, "시흥시")
-        SearchList.insert(15, "안산시")
-        SearchList.insert(16, "안성시")
-        SearchList.insert(17, "안양시")
-        SearchList.insert(18, "양주시")
-        SearchList.insert(19, "양평군")
-        SearchList.insert(20, "여주시")
-        SearchList.insert(21, "연천군")
-        SearchList.insert(22, "오산시")
-        SearchList.insert(23, "용인시")
-        SearchList.insert(24, "의왕시")
-        SearchList.insert(25, "의정부시")
-        SearchList.insert(26, "이천시")
-        SearchList.insert(27, "파주시")
-        SearchList.insert(28, "평택시")
-        SearchList.insert(29, "포천시")
-        SearchList.insert(30, "하남시")
-        SearchList.insert(31, "화성시")
+        for i in range(30):
+            SearchList.insert(i + 1, City[i])
 
         SearchList.pack()
         SearchList.place(x=25, y=130)
@@ -240,6 +215,5 @@ class EatToday:
         # 인터넷 창 뜨게 하기
         pass
 
-    # x y 위치는 예쁘게 조정이 어렵다... 모르겠어 !!!!!!!!!!!!!!!
 
 EatToday()
