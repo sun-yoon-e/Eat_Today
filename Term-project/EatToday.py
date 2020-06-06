@@ -136,14 +136,17 @@ class EatToday:
         korea = Label(self.window, image=self.KoreaImage, background=bgColor)
         korea.place(x=15, y=590)
 
-        global CategoryButton, EateryText
+        global CategoryButton, EateryText, SearchIndex, SearchList
 
         EateryText.configure(state='normal')
         EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 0
         Food.URLbuilder("Korea")
-        self.InsertEatery("Korea")
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Korea", i)
 
     def pressedChina(self):
         self.setupButton()
@@ -153,14 +156,17 @@ class EatToday:
         china = Label(self.window, image=self.ChinaImage, background=bgColor)
         china.place(x=15, y=590)
 
-        global CategoryButton, EateryText
+        global CategoryButton, EateryText, SearchIndex, SearchList
 
         EateryText.configure(state='normal')
         EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 1
         Food.URLbuilder("China")
-        self.InsertEatery("China")
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("China", i)
 
     def pressedJapan(self):
         self.setupButton()
@@ -170,14 +176,17 @@ class EatToday:
         japan = Label(self.window, image=self.JapanImage, background=bgColor)
         japan.place(x=15, y=590)
 
-        global CategoryButton, EateryText
+        global CategoryButton, EateryText, SearchIndex, SearchList
 
         EateryText.configure(state='normal')
         EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 2
         Food.URLbuilder("Japan")
-        self.InsertEatery("Japan")
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Japan", i)
 
     def pressedItaly(self):
         self.setupButton()
@@ -187,14 +196,17 @@ class EatToday:
         italy = Label(self.window, image=self.ItalyImage, background=bgColor)
         italy.place(x=15, y=590)
 
-        global CategoryButton, EateryText
+        global CategoryButton, EateryText, SerachIdex, SerachList
 
         EateryText.configure(state='normal')
         EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 3
         Food.URLbuilder("Italy")
-        self.InsertEatery("Italy")
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Italy", i)
 
     def pressedCafe(self):
         self.setupButton()
@@ -204,14 +216,17 @@ class EatToday:
         cafe = Label(self.window, image=self.CafeImage, background=bgColor)
         cafe.place(x=15, y=590)
 
-        global CategoryButton, EateryText
+        global CategoryButton, EateryText, SearchIndex, SearchList
 
         EateryText.configure(state='normal')
         EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 4
         Food.URLbuilder("Cafe")
-        self.InsertEatery("Cafe")
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Cafe", i)
 
     def pressedFamous(self):
         self.setupButton()
@@ -221,22 +236,26 @@ class EatToday:
         famous = Label(self.window, image=self.FamousImage, background=bgColor)
         famous.place(x=15, y=590)
 
-        global CategoryButton, EateryText
+        global CategoryButton, EateryText, SearchIndex, SearchList
 
         EateryText.configure(state='normal')
         EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 5
         Food.URLbuilder("Famous")
-        self.InsertEatery("Famous")
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Famous", i)
 
-    def InsertEatery(self, Category):
+    def InsertEatery(self, Category, CityNum):
         List = Food.getList(Category)
         for i in range(len(List)):
-            EateryText.insert(INSERT, "[")
-            EateryText.insert(INSERT, i + 1)
-            EateryText.insert(INSERT, "] ")
-            EateryText.insert(INSERT, List[i][1] + "\n\n")
+            if CityList[CityNum] == List[i][0]:
+                EateryText.insert(INSERT, "[")
+                EateryText.insert(INSERT, i + 1)
+                EateryText.insert(INSERT, "] ")
+                EateryText.insert(INSERT, List[i][1] + "\n\n")
 
     def initEateryList(self):
         Escrollbar = Scrollbar(self.window)
