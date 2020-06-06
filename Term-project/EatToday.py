@@ -89,23 +89,24 @@ class EatToday:
         SearchButton.place(x=507, y=130)
 
     def SearchButtonAction(self):
-        global CategoryButton, InfoText
+        global CategoryButton, InfoText, InputLabel
 
         InfoText.configure(state='normal')
         InfoText.delete(1.0, END)
+        Store = InputLabel.get()
 
         if CategoryButton == 0: #한식
-            pass
+            self.InsertInformation("Korea", Store)
         if CategoryButton == 1: #중식
-            pass
+            self.InsertInformation("China", Store)
         if CategoryButton == 2: #일식
-            pass
+            self.InsertInformation("Japan", Store)
         if CategoryButton == 3: #양식
-            pass
+            self.InsertInformation("Italy", Store)
         if CategoryButton == 4: #카페
-            pass
+            self.InsertInformation("Cafe", Store)
         if CategoryButton == 5: #맛집
-            pass
+            self.InsertInformation("Famous", Store)
 
     def setupButton(self):
         self.Korea = Button(self.window, cursor='heart', text="한식", font=self.font, command=self.pressedKorea)
@@ -249,6 +250,8 @@ class EatToday:
                 self.InsertEatery("Famous", i)
 
     def InsertEatery(self, Category, CityNum):
+        global EateryText
+
         List = Food.getList(Category)
         for i in range(len(List)):
             if CityList[CityNum] == List[i][0]:
@@ -275,17 +278,23 @@ class EatToday:
 
         EateryText.configure(state='disabled')
 
-    #def clearEateryData(self):
+    def clearEateryData(self):
     #    global EateryText
     #    EateryText.delete(0, EateryText.size())
-
-    def InsertInformation(self):
         pass
-        # EateryText.insert(INSERT, "시군명 : " + List[i][0] + "\n")
-        #EateryText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
-        # EateryText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n")
-        # EateryText.insert(INSERT, "지번주소 : " + List[i][3] + "\n")
-        # EateryText.insert(INSERT, "우편번호 : " + List[i][4] + "\n")
+
+    def InsertInformation(self, Category, StoreName):
+        global InfoText
+
+        List = Food.getList(Category)
+
+        for i in range(len(List)):
+            if StoreName == List[i][1]:
+                InfoText.insert(INSERT, "시군명 : " + List[i][0] + "\n\n")
+                InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
+                InfoText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n\n")
+                InfoText.insert(INSERT, "지번주소 : " + List[i][3] + "\n\n")
+                InfoText.insert(INSERT, "우편번호 : " + List[i][4] + "\n\n")
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
@@ -304,9 +313,10 @@ class EatToday:
 
         InfoText.configure(state='disabled')
 
-    #def clearInfoData(self):
+    def clearInfoData(self):
     #    global InfoText
     #    InfoText.delete('1.0', END)
+        pass
 
     def initGraph(self):
         self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=90, bg='white')
