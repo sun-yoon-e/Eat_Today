@@ -91,6 +91,9 @@ class EatToday:
     def SearchButtonAction(self):
         global CategoryButton, InfoText
 
+        InfoText.configure(state='normal')
+        InfoText.delete(1.0, END)
+
         if CategoryButton == 0: #한식
             pass
         if CategoryButton == 1: #중식
@@ -136,7 +139,7 @@ class EatToday:
         global CategoryButton, EateryText
 
         EateryText.configure(state='normal')
-        EateryText.delete(0.0, END)
+        EateryText.delete(1.0, END)
 
         CategoryButton = 0
         Food.URLbuilder("Korea")
@@ -153,7 +156,7 @@ class EatToday:
         global CategoryButton, EateryText
 
         EateryText.configure(state='normal')
-        EateryText.delete(0.0, END)
+        EateryText.delete(1.0, END)
 
         CategoryButton = 1
         Food.URLbuilder("China")
@@ -170,7 +173,7 @@ class EatToday:
         global CategoryButton, EateryText
 
         EateryText.configure(state='normal')
-        EateryText.delete(0.0, END)
+        EateryText.delete(1.0, END)
 
         CategoryButton = 2
         Food.URLbuilder("Japan")
@@ -187,7 +190,7 @@ class EatToday:
         global CategoryButton, EateryText
 
         EateryText.configure(state='normal')
-        EateryText.delete(0.0, END)
+        EateryText.delete(1.0, END)
 
         CategoryButton = 3
         Food.URLbuilder("Italy")
@@ -204,7 +207,7 @@ class EatToday:
         global CategoryButton, EateryText
 
         EateryText.configure(state='normal')
-        EateryText.delete(0.0, END)
+        EateryText.delete(1.0, END)
 
         CategoryButton = 4
         Food.URLbuilder("Cafe")
@@ -221,7 +224,7 @@ class EatToday:
         global CategoryButton, EateryText
 
         EateryText.configure(state='normal')
-        EateryText.delete(0.0, END)
+        EateryText.delete(1.0, END)
 
         CategoryButton = 5
         Food.URLbuilder("Famous")
@@ -230,11 +233,10 @@ class EatToday:
     def InsertEatery(self, Category):
         List = Food.getList(Category)
         for i in range(len(List)):
-            EateryText.insert(INSERT, "시군명 : " + List[i][0] + "\n")
-            EateryText.insert(INSERT, "사업장명 : " + List[i][1] + "\n")
-            EateryText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n")
-            EateryText.insert(INSERT, "지번주소 : " + List[i][3] + "\n")
-            EateryText.insert(INSERT, "우편번호 : " + List[i][4] + "\n")
+            EateryText.insert(INSERT, "[")
+            EateryText.insert(INSERT, i + 1)
+            EateryText.insert(INSERT, "] ")
+            EateryText.insert(INSERT, List[i][1] + "\n\n")
 
     def initEateryList(self):
         Escrollbar = Scrollbar(self.window)
@@ -254,12 +256,17 @@ class EatToday:
 
         EateryText.configure(state='disabled')
 
-    def clearEateryData(self):
-        global EateryText
-        EateryText.delete(0, EateryText.size())
+    #def clearEateryData(self):
+    #    global EateryText
+    #    EateryText.delete(0, EateryText.size())
 
     def InsertInformation(self):
         pass
+        # EateryText.insert(INSERT, "시군명 : " + List[i][0] + "\n")
+        #EateryText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
+        # EateryText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n")
+        # EateryText.insert(INSERT, "지번주소 : " + List[i][3] + "\n")
+        # EateryText.insert(INSERT, "우편번호 : " + List[i][4] + "\n")
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
@@ -278,9 +285,9 @@ class EatToday:
 
         InfoText.configure(state='disabled')
 
-    def clearInfoData(self):
-        global InfoText
-        InfoText.delete('1.0', END)
+    #def clearInfoData(self):
+    #    global InfoText
+    #    InfoText.delete('1.0', END)
 
     def initGraph(self):
         self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=90, bg='white')

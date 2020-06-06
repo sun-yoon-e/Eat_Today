@@ -42,7 +42,7 @@ def URLrequest(Category, KEY):  # 카테고리별 파싱
 
     if req.status == 200:
         temp = req.read().decode('utf-8')
-        # print(temp)
+        #print(temp)
         print(Category + "Data Downloading Complete!")
         if Category == "Famous":
             return XmlToList2(Category, temp)
@@ -92,7 +92,7 @@ def getList(Category):
     if Category == "Korea":
         return KoreaList
     elif Category == "China":
-        return CafeList
+        return ChinaList
     elif Category == "Japan":
         return JapanList
     elif Category == "Italy":
