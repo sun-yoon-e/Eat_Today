@@ -46,6 +46,13 @@ class EatToday:
         self.initGraph()
         self.initMap()
 
+        Food.URLbuilder("Korea")
+        Food.URLbuilder("China")
+        Food.URLbuilder("Japan")
+        Food.URLbuilder("Italy")
+        Food.URLbuilder("Cafe")
+        Food.URLbuilder("Famous")
+
         self.window.mainloop()
 
     def initLogo(self):
@@ -144,7 +151,6 @@ class EatToday:
         SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 0
-        Food.URLbuilder("Korea")
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery("Korea", i)
@@ -164,7 +170,6 @@ class EatToday:
         SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 1
-        Food.URLbuilder("China")
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery("China", i)
@@ -184,7 +189,6 @@ class EatToday:
         SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 2
-        Food.URLbuilder("Japan")
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery("Japan", i)
@@ -204,7 +208,6 @@ class EatToday:
         SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 3
-        Food.URLbuilder("Italy")
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery("Italy", i)
@@ -224,7 +227,6 @@ class EatToday:
         SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 4
-        Food.URLbuilder("Cafe")
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery("Cafe", i)
@@ -244,7 +246,6 @@ class EatToday:
         SearchIndex = SearchList.curselection()[0]
 
         CategoryButton = 5
-        Food.URLbuilder("Famous")
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery("Famous", i)
@@ -253,12 +254,14 @@ class EatToday:
         global EateryText
 
         List = Food.getList(Category)
+        count = 1
         for i in range(len(List)):
             if CityList[CityNum] == List[i][0]:
                 EateryText.insert(INSERT, "[")
-                EateryText.insert(INSERT, i + 1)
+                EateryText.insert(INSERT, count)
                 EateryText.insert(INSERT, "] ")
                 EateryText.insert(INSERT, List[i][1] + "\n\n")
+                count += 1
 
     def initEateryList(self):
         Escrollbar = Scrollbar(self.window)

@@ -33,7 +33,7 @@ def URLbuilder(Category):   #카테고리별 URL
         KEY = "/Genrestrtcate?KEY=46c5a83322734a8b83ae785069ca6619"
     elif Category == "Famous":
         KEY = "/PlaceThatDoATasteyFoodSt?KEY=de547a5cf35444bb9e49043ce00f4115"
-    URLrequest(Category, KEY)
+    URLrequest(Category, KEY + str("&pSize=300"))
 
 def URLrequest(Category, KEY):  # 카테고리별 파싱
     con = http.client.HTTPSConnection("openapi.gg.go.kr")
