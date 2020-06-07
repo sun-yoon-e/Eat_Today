@@ -4,13 +4,6 @@ import Food
 
 bgColor = 'lemon chiffon'
 CategoryButton = 0
-MailList = []
-KoreaList = []
-ChinaList = []
-JapanList = []
-ItalyList =[]
-CafeList = []
-FamousList = []
 CityList = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시',
             '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
             '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
@@ -147,6 +140,7 @@ class EatToday:
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery("Korea", i)
+        self.drawGraph()
 
     def pressedChina(self):
         self.setupButton()
@@ -321,7 +315,34 @@ class EatToday:
         self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=90, bg='white')
         self.graphCanvas.pack()
         self.graphCanvas.place(x=165, y=630)
-        pass
+
+    def drawGraph(self):
+        global SearchList, CityList
+        width, height = 300, 90
+
+        Index = SearchList.curselection()[0]
+
+        List = []
+        List.append(Food.getList("Korea"))
+        List.append(Food.getList("China"))
+        List.append(Food.getList("Japan"))
+        List.append(Food.getList("Italy"))
+        List.append(Food.getList("Cafe"))
+        List.append(Food.getList("Famous"))
+
+        counts = [0] * 6
+        for i in range(len(List)):
+            for j in range(len(List[i])):
+                if CityList[Index] == List[i][0]:
+                    counts[i] += 1
+        barWidth = (width - 20) / 6
+        maxCount = max(counts)
+        for i in range(len(List)):
+            self.graphCanvas.create_rectangle(5 + i * barWidth, height - (height - 5) * counts[i] / maxCount,
+                                              5 + (i + 1) * barWidth, height - 5, tags='graph')
+            self.graphCanvas.create_text(5 + i * barWidth + 7, height - 2, text=str(i), tags='graph')
+            self.graphCanvas.create_text(5 + i * barWidth + 7, height - (height - 5) * counts[i] / maxCount - 2,
+                                         text=str(counts[i]), tags='graph')
 
     def initMap(self):
         self.mapImage = PhotoImage(file='resources/image/map.png')
