@@ -1,19 +1,35 @@
 from tkinter import *
 from tkinter import font
+import Food
 
 bgColor = 'lemon chiffon'
-
+MailList = []
+KoreaList = []
+ChinaList = []
+JapanList = []
+ItalyList =[]
+CafeList = []
+FamousList = []
 CityList = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시',
             '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
             '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
             '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
 
+CategoryButton = 0
+KoreaKEY = "/Genrestrtsoup?KEY=eacb09e4cc1e4b5f9bf7f14ebe87291b"
+ChinaKEY = "/Genrestrtchifood?KEY=062afd00409748bfbeedbd63d2851b62"
+JapanKEY = "/Genrestrtjpnfood?KEY=55e63a8c30644642b07f671996903252"
+ItalyKEY = "/Genrestrtfastfood?KEY=308a1836ded941e69da26b59698c3c68"
+CafeKEY = "/Genrestrtcate?KEY=46c5a83322734a8b83ae785069ca6619"
+FamousKEY = "/PlaceThatDoATasteyFoodSt?KEY=de547a5cf35444bb9e49043ce00f4115"
+
+
 class EatToday:
     def __init__(self):
         self.window = Tk()
         self.window.title('오늘 뭐 먹지~?')
-        self.window.geometry('600x750+450-50')  # 윈도우 고정
-        self.window.configure(background=bgColor)  # RosyBrown1 thistle powder blue
+        self.window.geometry('600x750+450-50') #윈도우 고정
+        self.window.configure(background=bgColor) #RosyBrown1 thistle powder blue
 
         self.font = font.Font(self.window, size=20, weight='bold', family="메이플스토리")
         self.font2 = font.Font(self.window, size=18, weight='bold', family="메이플스토리")
@@ -30,12 +46,19 @@ class EatToday:
         self.initGraph()
         self.initMap()
 
+        Food.URLbuilder("Korea")
+        Food.URLbuilder("China")
+        Food.URLbuilder("Japan")
+        Food.URLbuilder("Italy")
+        Food.URLbuilder("Cafe")
+        Food.URLbuilder("Famous")
+
         self.window.mainloop()
 
     def initLogo(self):
         self.logoImage = PhotoImage(file='resources/image/logo.png')
         logo = Label(self.window, image=self.logoImage, background=bgColor)
-        logo.place(x=25, y=5)
+        logo.place(x=25,y=5)
 
     def initMail(self):
         self.mailImage = PhotoImage(file='resources/image/gmail.png')
@@ -48,14 +71,13 @@ class EatToday:
     def initSearchListBox(self):
         global SearchList
         ListScrollbar = Scrollbar(self.window)
-        ListScrollbar.pack()
         ListScrollbar.place(x=230, y=130)
 
         SearchList = Listbox(self.window, font=self.font3, activestyle='dotbox', width=13, height=1, bd=12,
-                             cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
+                              cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
 
-        for i in range(30):
-            SearchList.insert(i + 1, CityList[i])
+        for i in range(31):
+            SearchList.insert(i, CityList[i])
 
         SearchList.pack()
         SearchList.place(x=25, y=130)
@@ -74,7 +96,24 @@ class EatToday:
         SearchButton.place(x=507, y=130)
 
     def SearchButtonAction(self):
-        pass
+        global CategoryButton, InfoText, InputLabel
+
+        InfoText.configure(state='normal')
+        InfoText.delete(1.0, END)
+        Store = InputLabel.get()
+
+        if CategoryButton == 0: #한식
+            self.InsertInformation("Korea", Store)
+        if CategoryButton == 1: #중식
+            self.InsertInformation("China", Store)
+        if CategoryButton == 2: #일식
+            self.InsertInformation("Japan", Store)
+        if CategoryButton == 3: #양식
+            self.InsertInformation("Italy", Store)
+        if CategoryButton == 4: #카페
+            self.InsertInformation("Cafe", Store)
+        if CategoryButton == 5: #맛집
+            self.InsertInformation("Famous", Store)
 
     def setupButton(self):
         self.Korea = Button(self.window, cursor='heart', text="한식", font=self.font, command=self.pressedKorea)
@@ -105,6 +144,17 @@ class EatToday:
         korea = Label(self.window, image=self.KoreaImage, background=bgColor)
         korea.place(x=15, y=590)
 
+        global CategoryButton, EateryText, SearchIndex, SearchList
+
+        EateryText.configure(state='normal')
+        EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
+
+        CategoryButton = 0
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Korea", i)
+
     def pressedChina(self):
         self.setupButton()
         self.China['state'] = 'disabled'
@@ -112,6 +162,17 @@ class EatToday:
         self.ChinaImage = PhotoImage(file='resources/image/China.png')
         china = Label(self.window, image=self.ChinaImage, background=bgColor)
         china.place(x=15, y=590)
+
+        global CategoryButton, EateryText, SearchIndex, SearchList
+
+        EateryText.configure(state='normal')
+        EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
+
+        CategoryButton = 1
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("China", i)
 
     def pressedJapan(self):
         self.setupButton()
@@ -121,6 +182,17 @@ class EatToday:
         japan = Label(self.window, image=self.JapanImage, background=bgColor)
         japan.place(x=15, y=590)
 
+        global CategoryButton, EateryText, SearchIndex, SearchList
+
+        EateryText.configure(state='normal')
+        EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
+
+        CategoryButton = 2
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Japan", i)
+
     def pressedItaly(self):
         self.setupButton()
         self.Italy['state'] = 'disabled'
@@ -128,6 +200,17 @@ class EatToday:
         self.ItalyImage = PhotoImage(file='resources/image/Italy.png')
         italy = Label(self.window, image=self.ItalyImage, background=bgColor)
         italy.place(x=15, y=590)
+
+        global CategoryButton, EateryText, SerachIdex, SerachList
+
+        EateryText.configure(state='normal')
+        EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
+
+        CategoryButton = 3
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Italy", i)
 
     def pressedCafe(self):
         self.setupButton()
@@ -137,6 +220,17 @@ class EatToday:
         cafe = Label(self.window, image=self.CafeImage, background=bgColor)
         cafe.place(x=15, y=590)
 
+        global CategoryButton, EateryText, SearchIndex, SearchList
+
+        EateryText.configure(state='normal')
+        EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
+
+        CategoryButton = 4
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Cafe", i)
+
     def pressedFamous(self):
         self.setupButton()
         self.Famous['state'] = 'disabled'
@@ -145,11 +239,29 @@ class EatToday:
         famous = Label(self.window, image=self.FamousImage, background=bgColor)
         famous.place(x=15, y=590)
 
-        global FamousList
-        global MailList
-        self.clearEateryData()
+        global CategoryButton, EateryText, SearchIndex, SearchList
 
-    #        FamousList =
+        EateryText.configure(state='normal')
+        EateryText.delete(1.0, END)
+        SearchIndex = SearchList.curselection()[0]
+
+        CategoryButton = 5
+        for i in range(31):
+            if SearchIndex == i:
+                self.InsertEatery("Famous", i)
+
+    def InsertEatery(self, Category, CityNum):
+        global EateryText
+
+        List = Food.getList(Category)
+        count = 1
+        for i in range(len(List)):
+            if CityList[CityNum] == List[i][0]:
+                EateryText.insert(INSERT, "[")
+                EateryText.insert(INSERT, count)
+                EateryText.insert(INSERT, "] ")
+                EateryText.insert(INSERT, List[i][1] + "\n\n")
+                count += 1
 
     def initEateryList(self):
         Escrollbar = Scrollbar(self.window)
@@ -170,8 +282,24 @@ class EatToday:
         EateryText.configure(state='disabled')
 
     def clearEateryData(self):
-        global EateryText
-        EateryText.delete(0, EateryText.size())
+    #    global EateryText
+    #    EateryText.delete(0, EateryText.size())
+        pass
+
+    def InsertInformation(self, Category, StoreName):
+        global InfoText
+        List = Food.getList(Category)
+
+        for i in range(len(List)):
+            for j in range(len(List[i])):
+                if List[i][j] == None:
+                    List[i][j] = ""
+            if StoreName == List[i][1]:
+                InfoText.insert(INSERT, "시군명 : " + List[i][0] + "\n\n")
+                InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
+                InfoText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n\n")
+                InfoText.insert(INSERT, "지번주소 : " + List[i][3] + "\n\n")
+                InfoText.insert(INSERT, "우편번호 : " + List[i][4] + "\n\n")
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
@@ -191,8 +319,9 @@ class EatToday:
         InfoText.configure(state='disabled')
 
     def clearInfoData(self):
-        global InfoText
-        InfoText.delete('1.0', END)
+    #    global InfoText
+    #    InfoText.delete('1.0', END)
+        pass
 
     def initGraph(self):
         self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=90, bg='white')
