@@ -33,7 +33,7 @@ def URLbuilder(Category):   #카테고리별 URL
         KEY = "/Genrestrtcate?KEY=46c5a83322734a8b83ae785069ca6619"
     elif Category == "Famous":
         KEY = "/PlaceThatDoATasteyFoodSt?KEY=de547a5cf35444bb9e49043ce00f4115"
-    URLrequest(Category, KEY + str("&pSize=300"))
+    URLrequest(Category, KEY + str("&pSize=500"))
 
 def URLrequest(Category, KEY):  # 카테고리별 파싱
     con = http.client.HTTPSConnection("openapi.gg.go.kr")
@@ -44,6 +44,7 @@ def URLrequest(Category, KEY):  # 카테고리별 파싱
         temp = req.read().decode('utf-8')
         #print(temp)
         print(Category + "Data Downloading Complete!")
+
         if Category == "Famous":
             return XmlToList2(Category, temp)
         else:
@@ -57,22 +58,22 @@ def XmlToList1(Category, xml):  # xml → 카테고리별(맛집 외) 리스트�
     for restaurant in tree.findall('./row'):
         City = restaurant.find('SIGUN_NM')  # 시군명(1)
         Name = restaurant.find('BIZPLC_NM')  # 사업장명(3)
-        RoadAdress = restaurant.find('REFINE_ROADNM_ADDR')  # 도로명 주소(19)
+        RoadAddress = restaurant.find('REFINE_ROADNM_ADDR')  # 도로명 주소(19)
         Address = restaurant.find('REFINE_LOTNO_ADDR')  # 지번 주소(20)
         Post = restaurant.find('REFINE_ZIP_CD')  # 우편 번호(21)
         Lat = restaurant.find('REFINE_WGS84_LAT')  # 위도(22)
         Long = restaurant.find('REFINE_WGS84_LOGT')  # 경도(23)
 
         if Category == "Korea":
-            KoreaList.append([City.text, Name.text, RoadAdress.text, Address.text, Post.text, Lat.text, Long.text])
+            KoreaList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
         elif Category == "China":
-            ChinaList.append([City.text, Name.text, RoadAdress.text, Address.text, Post.text, Lat.text, Long.text])
+            ChinaList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
         elif Category == "Japan":
-            JapanList.append([City.text, Name.text, RoadAdress.text, Address.text, Post.text, Lat.text, Long.text])
+            JapanList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
         elif Category == "Italy":
-            ItalyList.append([City.text, Name.text, RoadAdress.text, Address.text, Post.text, Lat.text, Long.text])
+            ItalyList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
         elif Category == "Cafe":
-            CafeList.append([City.text, Name.text, RoadAdress.text, Address.text, Post.text, Lat.text, Long.text])
+            CafeList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
 
 def XmlToList2(Category, xml):  # xml → 맛집 리스트로
     tree = ElementTree.fromstring(xml)

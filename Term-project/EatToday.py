@@ -3,6 +3,7 @@ from tkinter import font
 import Food
 
 bgColor = 'lemon chiffon'
+CategoryButton = 0
 MailList = []
 KoreaList = []
 ChinaList = []
@@ -15,21 +16,13 @@ CityList = ['가평군', '고양시', '과천시', '광명시', '광주시', '�
             '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
             '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
 
-CategoryButton = 0
-KoreaKEY = "/Genrestrtsoup?KEY=eacb09e4cc1e4b5f9bf7f14ebe87291b"
-ChinaKEY = "/Genrestrtchifood?KEY=062afd00409748bfbeedbd63d2851b62"
-JapanKEY = "/Genrestrtjpnfood?KEY=55e63a8c30644642b07f671996903252"
-ItalyKEY = "/Genrestrtfastfood?KEY=308a1836ded941e69da26b59698c3c68"
-CafeKEY = "/Genrestrtcate?KEY=46c5a83322734a8b83ae785069ca6619"
-FamousKEY = "/PlaceThatDoATasteyFoodSt?KEY=de547a5cf35444bb9e49043ce00f4115"
-
 
 class EatToday:
     def __init__(self):
         self.window = Tk()
         self.window.title('오늘 뭐 먹지~?')
-        self.window.geometry('600x750+450-50') #윈도우 고정
-        self.window.configure(background=bgColor) #RosyBrown1 thistle powder blue
+        self.window.geometry('600x750+450-50')  # 윈도우 고정
+        self.window.configure(background=bgColor)  # RosyBrown1 thistle powder blue
 
         self.font = font.Font(self.window, size=20, weight='bold', family="메이플스토리")
         self.font2 = font.Font(self.window, size=18, weight='bold', family="메이플스토리")
@@ -58,7 +51,7 @@ class EatToday:
     def initLogo(self):
         self.logoImage = PhotoImage(file='resources/image/logo.png')
         logo = Label(self.window, image=self.logoImage, background=bgColor)
-        logo.place(x=25,y=5)
+        logo.place(x=25, y=5)
 
     def initMail(self):
         self.mailImage = PhotoImage(file='resources/image/gmail.png')
@@ -292,6 +285,9 @@ class EatToday:
         List = Food.getList(Category)
 
         for i in range(len(List)):
+            for j in range(len(List[i])):
+                if List[i][j] == None:
+                    List[i][j] = ""
             if StoreName == List[i][1]:
                 InfoText.insert(INSERT, "시군명 : " + List[i][0] + "\n\n")
                 InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
