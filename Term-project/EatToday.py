@@ -280,7 +280,7 @@ class EatToday:
         pass
 
     def InsertInformation(self, Category, StoreName):
-        global InfoText
+        global InfoText, SearchList, CityList
 
         List = Food.getList(Category)
 
@@ -288,7 +288,7 @@ class EatToday:
             for j in range(len(List[i])):
                 if List[i][j] == None:
                     List[i][j] = ""
-            if StoreName == List[i][1]:
+            if StoreName == List[i][1] and CityList[SearchList.curselection()[0]] == List[i][0]:
                 InfoText.insert(INSERT, "시군명 : " + List[i][0] + "\n\n")
                 InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
                 InfoText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n\n")
