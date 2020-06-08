@@ -2,15 +2,13 @@ from tkinter import *
 from tkinter import font
 import Food
 
-CityList = ['가평군', '고양시', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시',
-            '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안성시',
-            '안양시', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시', '의왕시',
-            '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시']
-
 bgColor = 'lemon chiffon'
 CategoryButton = 0
 CategoryNum = 0
 GraphData = [0 for i in range(6)]
+width, height = 300, 120
+barWidth = (width - 20) / 6
+
 
 class EatToday:
     def __init__(self):
@@ -61,7 +59,7 @@ class EatToday:
                              cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
 
         for i in range(31):
-            Search.insert(i, CityList[i])
+            Search.insert(i, Food.CityList[i])
 
         Search.pack()
         Search.place(x=25, y=130)
@@ -138,6 +136,8 @@ class EatToday:
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery(0, i)
+
+        self.initGraph()
         self.drawGraph()
 
     def pressedChina(self):
@@ -159,6 +159,9 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(1, i)
 
+        self.initGraph()
+        self.drawGraph()
+
     def pressedJapan(self):
         self.setupButton()
         self.Japan['state'] = 'disabled'
@@ -177,6 +180,9 @@ class EatToday:
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery(2, i)
+
+        self.initGraph()
+        self.drawGraph()
 
     def pressedItaly(self):
         self.setupButton()
@@ -197,6 +203,9 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(3, i)
 
+        self.initGraph()
+        self.drawGraph()
+
     def pressedCafe(self):
         self.setupButton()
         self.Cafe['state'] = 'disabled'
@@ -215,6 +224,9 @@ class EatToday:
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery(4, i)
+
+        self.initGraph()
+        self.drawGraph()
 
     def pressedFamous(self):
         self.setupButton()
@@ -235,6 +247,9 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(5, i)
 
+        self.initGraph()
+        self.drawGraph()
+
     def InsertEatery(self, CategoryNum, CityNum):
         global EateryText
 
@@ -242,16 +257,12 @@ class EatToday:
         count = 1
         maxcount = 0
         for i in range(len(List)):
-            if CityList[CityNum] == List[i][0]:
+            if Food.CityList[CityNum] == List[i][0]:
                 EateryText.insert(INSERT, "[")
                 EateryText.insert(INSERT, count)
                 EateryText.insert(INSERT, "] ")
                 EateryText.insert(INSERT, List[i][1] + "\n\n")
                 count += 1
-        if count > maxcount:
-            maxcount = count - 1
-        GraphData[CategoryNum] = maxcount
-        print(GraphData)
 
     def initEateryList(self):   #검색용 리스트
         Escrollbar = Scrollbar(self.window)
@@ -277,7 +288,7 @@ class EatToday:
         pass
 
     def InsertInformation(self, CategoryNum, StoreName):
-        global InfoText, Search, CityList
+        global InfoText, Search#, CityList
 
         List = Food.getList(CategoryNum)
 
@@ -285,7 +296,7 @@ class EatToday:
             for j in range(len(List[i])):
                 if List[i][j] == None:
                     List[i][j] = ""
-            if StoreName == List[i][1] and CityList[Search.curselection()[0]] == List[i][0]:
+            if StoreName == List[i][1] and Food.CityList[Search.curselection()[0]] == List[i][0]:
                 InfoText.insert(INSERT, "시군명 : " + List[i][0] + "\n\n")
                 InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
                 InfoText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n\n")
@@ -315,37 +326,39 @@ class EatToday:
         pass
 
     def initGraph(self):
-        self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=90, bg='white')
+        self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=120, bg='white')
         self.graphCanvas.pack()
-        self.graphCanvas.place(x=165, y=630)
+        self.graphCanvas.place(x=165, y=610)
+
+        self.graphCanvas.create_text(25.5 + 0 * barWidth + 10, height - 5, text="한식", tags='graph')
+        self.graphCanvas.create_text(25.5 + 1 * barWidth + 10, height - 5, text="중식", tags='graph')
+        self.graphCanvas.create_text(25.5 + 2 * barWidth + 10, height - 5, text="일식", tags='graph')
+        self.graphCanvas.create_text(25.5 + 3 * barWidth + 10, height - 5, text="양식", tags='graph')
+        self.graphCanvas.create_text(25.5 + 4 * barWidth + 10, height - 5, text="카페", tags='graph')
+        self.graphCanvas.create_text(25.5 + 5 * barWidth + 10, height - 5, text="맛집", tags='graph')
 
     def drawGraph(self):
         global Search, CityList
-        width, height = 300, 90
 
         Index = Search.curselection()[0]
 
-        List = []
-        List.append(Food.getList(0))
-        List.append(Food.getList(1))
-        List.append(Food.getList(2))
-        List.append(Food.getList(3))
-        List.append(Food.getList(4))
-        List.append(Food.getList(5))
+        AllList = []  # 해당 도시 리스트
+        counts = []
+        for i in range(6):
+            AllList.append([])
+            for j in range(len(Food.getList(i))):
+                if Food.CityList[Index] == Food.getList(i)[j][0]:
+                    AllList[i].append(Food.getList(i)[j][1])
 
-        # counts = [0] * 6
-        # for i in range(len(List)):
-        #     for j in range(len(List[i])):
-        #         if CityList[Index] == List[i][0]:
-        #             counts[i] += 1
-        # barWidth = (width - 20) / 6
-        # maxCount = max(counts)
-        # for i in range(len(List)):
-        #     self.graphCanvas.create_rectangle(5 + i * barWidth, height - (height - 5) * counts[i] / maxCount,
-        #                                       5 + (i + 1) * barWidth, height - 5, tags='graph')
-        #     self.graphCanvas.create_text(5 + i * barWidth + 7, height - 2, text=str(i), tags='graph')
-        #     self.graphCanvas.create_text(5 + i * barWidth + 7, height - (height - 5) * counts[i] / maxCount - 2,
-        #                                  text=str(counts[i]), tags='graph')
+        for i in range(len(AllList)):
+            counts.append(len(AllList[i]))
+
+        maxCount = max(counts)
+        for i in range(len(AllList)):
+            self.graphCanvas.create_rectangle(12.5 + i * barWidth, height - (height - 20) * counts[i] / maxCount,
+                                              12.5 + (i + 1) * barWidth, height - 15, tags='graph')
+            self.graphCanvas.create_text(25 + i * barWidth + 10, height - 110,
+                                         text=str(counts[i]), tags='graph')
 
     def initMap(self):
         self.mapImage = PhotoImage(file='resources/image/map.png')
