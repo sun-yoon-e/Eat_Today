@@ -13,25 +13,21 @@ recipientAddr = "shinee252525@icloud.com"   # 받는 사람 email 주소
 
 def sendMail(MailList):
     html = ""
-    title = 'Eat_Today'
+    title = 'Eat_Today 정보 전송'
     passwd = 'tjs*951753'
-    msgtext = 'y'
 
-    if msgtext == 'y':
-        for informaion in MailList:
-            for text in informaion:
-                html = html + text
-            html += "\n"
-        print(html)
+    for informaion in MailList:
+        for text in informaion:
+            html = html + text
+    print(html)
 
+    msg = MIMEBase("multipart", "alternative")
     msg = MIMEMultipart('alternative')
     msg['Subject'] = title
     msg['From'] = senderAddr
     msg['To'] = recipientAddr
-    msgPart = MIMEText(msgtext, 'plain')
-    htmlPart = MIMEText(html, 'html', _charset='UTF-8')
 
-    msg.attach(msgPart)
+    htmlPart = MIMEText(html, 'html', _charset='UTF-8')
     msg.attach(htmlPart)
     print("connect smtp server ... ")
 

@@ -299,6 +299,11 @@ class EatToday:
                     List[i][j] = ""
             if StoreName == List[i][1] and Food.CityList[Search.curselection()[0]] == List[i][0]:
                 InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
+                if CategoryNum == 5:
+                    InfoText.insert(INSERT, "대표메뉴 : " + List[i][7] + "\n\n")
+                    InfoText.insert(INSERT, "전화번호 : " + List[i][8] + "\n\n")
+                else:
+                    InfoText.insert(INSERT, "허가일자 : " + List[i][7] + "\n\n")
                 InfoText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n\n")
                 InfoText.insert(INSERT, "지번주소 : " + List[i][3] + "\n\n")
                 InfoText.insert(INSERT, "우편번호 : " + List[i][4] + "\n\n")

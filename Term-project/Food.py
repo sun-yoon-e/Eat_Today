@@ -50,38 +50,41 @@ def XmlToList1(CategoryNum, xml):  # xml → 카테고리별(맛집 외) 리스�
     tree = ElementTree.fromstring(xml)
 
     for restaurant in tree.findall('./row'):
-        City = restaurant.find('SIGUN_NM')  # 시군명(1)
-        Name = restaurant.find('BIZPLC_NM')  # 사업장명(3)
-        RoadAddress = restaurant.find('REFINE_ROADNM_ADDR')  # 도로명 주소(19)
-        Address = restaurant.find('REFINE_LOTNO_ADDR')  # 지번 주소(20)
-        Post = restaurant.find('REFINE_ZIP_CD')  # 우편 번호(21)
-        Lat = restaurant.find('REFINE_WGS84_LAT')  # 위도(22)
-        Long = restaurant.find('REFINE_WGS84_LOGT')  # 경도(23)
+        City = restaurant.find('SIGUN_NM')                  # 시군명(1)
+        Name = restaurant.find('BIZPLC_NM')                 # 사업장명(3)
+        RoadAddress = restaurant.find('REFINE_ROADNM_ADDR') # 도로명 주소(19)
+        Address = restaurant.find('REFINE_LOTNO_ADDR')      # 지번 주소(20)
+        Post = restaurant.find('REFINE_ZIP_CD')             # 우편 번호(21)
+        Lat = restaurant.find('REFINE_WGS84_LAT')           # 위도(22)
+        Long = restaurant.find('REFINE_WGS84_LOGT')         # 경도(23)
+        Open = restaurant.find('LICENSG_DE')                # 인허가일자(4)
 
         if CategoryNum == 0:
-            KoreaList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
+            KoreaList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text, Open.text])
         elif CategoryNum == 1:
-            ChinaList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
+            ChinaList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text, Open.text])
         elif CategoryNum == 2:
-            JapanList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
+            JapanList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text, Open.text])
         elif CategoryNum == 3:
-            ItalyList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
+            ItalyList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text, Open.text])
         elif CategoryNum == 4:
-            CafeList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text])
+            CafeList.append([City.text, Name.text, RoadAddress.text, Address.text, Post.text, Lat.text, Long.text, Open.text])
 
 def XmlToList2(xml):  # xml → 맛집 리스트로
     tree = ElementTree.fromstring(xml)
 
     for restaurant in tree.findall('./row'):
-        City = restaurant.find('SIGUN_NM')  # 시군명(1)
-        Name = restaurant.find('RESTRT_NM')  # 사업장명(3)
-        RoadAdress = restaurant.find('REFINE_ROADNM_ADDR')  # 도로명 주소(19)
-        Address = restaurant.find('REFINE_LOTNO_ADDR')  # 지번 주소(20)
-        Post = restaurant.find('REFINE_ZIP_CD')  # 우편 번호(21)
-        Lat = restaurant.find('REFINE_WGS84_LAT')  # 위도(22)
-        Long = restaurant.find('REFINE_WGS84_LOGT')  # 경도(23)
+        City = restaurant.find('SIGUN_NM')                  # 시군명(1)
+        Name = restaurant.find('RESTRT_NM')                 # 음식점명(3)
+        RoadAdress = restaurant.find('REFINE_ROADNM_ADDR')  # 도로명 주소(7)
+        Address = restaurant.find('REFINE_LOTNO_ADDR')      # 지번 주소(8)
+        Post = restaurant.find('REFINE_ZIP_CD')             # 우편 번호(6)
+        Lat = restaurant.find('REFINE_WGS84_LAT')           # 위도(22)
+        Long = restaurant.find('REFINE_WGS84_LOGT')         # 경도(23)
+        Menu = restaurant.find('REPRSNT_FOOD_NM')           # 대표음식명(5)
+        Tel = restaurant.find('TASTFDPLC_TELNO')             # 맛집전화번호(4)
 
-        FamousList.append([City.text, Name.text, RoadAdress.text, Address.text, Post.text, Lat.text, Long.text])
+        FamousList.append([City.text, Name.text, RoadAdress.text, Address.text, Post.text, Lat.text, Long.text, Menu.text, Tel.text])
 
 def getList(CategoryNum):
     if CategoryNum == 0:
