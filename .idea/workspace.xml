@@ -20,6 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31f211b5-cd4a-46ca-a0e6-65a3c6af145d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Eat_Today.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Eat_Today.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Term-project/EatToday.py" beforeDir="false" afterPath="$PROJECT_DIR$/Term-project/EatToday.py" afterDir="false" />
     </list>
@@ -50,7 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -203,26 +205,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="530" y="212" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1591274564119" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1590503943251">
+    <state x="550" y="150" key="FileChooserDialogImpl" timestamp="1591613163065">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1590503943251" />
-    <state width="1515" height="185" key="GridCell.Tab.0.bottom" timestamp="1591611166481">
+    <state x="550" y="150" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591613163065" />
+    <state width="960" height="187" key="GridCell.Tab.0.bottom" timestamp="1591614873102">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="185" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591611166481" />
-    <state width="1515" height="185" key="GridCell.Tab.0.center" timestamp="1591611166481">
+    <state width="960" height="187" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591614873102" />
+    <state width="960" height="187" key="GridCell.Tab.0.center" timestamp="1591614873101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="185" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591611166481" />
-    <state width="1515" height="185" key="GridCell.Tab.0.left" timestamp="1591611166481">
+    <state width="960" height="187" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591614873101" />
+    <state width="960" height="187" key="GridCell.Tab.0.left" timestamp="1591614873100">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="185" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591611166481" />
-    <state width="1515" height="185" key="GridCell.Tab.0.right" timestamp="1591611166481">
+    <state width="960" height="187" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591614873100" />
+    <state width="960" height="187" key="GridCell.Tab.0.right" timestamp="1591614873101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="185" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591611166481" />
+    <state width="960" height="187" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591614873101" />
     <state width="1515" height="259" key="GridCell.Tab.1.bottom" timestamp="1591564326411">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -239,10 +241,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1515" height="259" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1591564326410" />
-    <state x="277" y="56" key="SettingsEditor" timestamp="1591539962554">
+    <state x="277" y="56" key="SettingsEditor" timestamp="1591613165334">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591539962554" />
+    <state x="277" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591613165334" />
     <state x="572" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590503471651">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

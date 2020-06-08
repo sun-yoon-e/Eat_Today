@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import font
+import folium
+import webbrowser
 import Food
 
 bgColor = 'lemon chiffon'
@@ -8,7 +10,6 @@ CategoryNum = 0
 GraphData = [0 for i in range(6)]
 width, height = 300, 120
 barWidth = (width - 20) / 6
-
 
 class EatToday:
     def __init__(self):
@@ -137,7 +138,6 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(0, i)
 
-        self.initGraph()
         self.drawGraph()
 
     def pressedChina(self):
@@ -159,7 +159,6 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(1, i)
 
-        self.initGraph()
         self.drawGraph()
 
     def pressedJapan(self):
@@ -181,7 +180,6 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(2, i)
 
-        self.initGraph()
         self.drawGraph()
 
     def pressedItaly(self):
@@ -203,7 +201,6 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(3, i)
 
-        self.initGraph()
         self.drawGraph()
 
     def pressedCafe(self):
@@ -225,7 +222,6 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(4, i)
 
-        self.initGraph()
         self.drawGraph()
 
     def pressedFamous(self):
@@ -247,7 +243,6 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(5, i)
 
-        self.initGraph()
         self.drawGraph()
 
     def InsertEatery(self, CategoryNum, CityNum):
@@ -282,13 +277,8 @@ class EatToday:
 
         EateryText.configure(state='disabled')
 
-    def clearEateryData(self):
-        #    global EateryText
-        #    EateryText.delete(0, EateryText.size())
-        pass
-
     def InsertInformation(self, CategoryNum, StoreName):
-        global InfoText, Search#, CityList
+        global InfoText, Search, Name, Lat, Long
 
         List = Food.getList(CategoryNum)
 
@@ -297,11 +287,13 @@ class EatToday:
                 if List[i][j] == None:
                     List[i][j] = ""
             if StoreName == List[i][1] and Food.CityList[Search.curselection()[0]] == List[i][0]:
-                InfoText.insert(INSERT, "시군명 : " + List[i][0] + "\n\n")
                 InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
                 InfoText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n\n")
                 InfoText.insert(INSERT, "지번주소 : " + List[i][3] + "\n\n")
                 InfoText.insert(INSERT, "우편번호 : " + List[i][4] + "\n\n")
+                Name = List[i][1]
+                Lat = List[i][5]
+                Long = List[i][6]
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
@@ -319,11 +311,6 @@ class EatToday:
         Iscrollbar.place(x=563, y=270)
 
         InfoText.configure(state='disabled')
-
-    def clearInfoData(self):
-        #    global InfoText
-        #    InfoText.delete('1.0', END)
-        pass
 
     def initGraph(self):
         self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=120, bg='white')
@@ -366,8 +353,10 @@ class EatToday:
         self.mapButton.place(x=480, y=630)
 
     def openMap(self):
-        # 인터넷 창 뜨게 하기
-        pass
-
+        global Name, Lat, Long
+        map = folium.Map(location=[Lat, Long], zoom_start=15)   #위도, 경도 지정
+        folium.Marker([Lat, Long], popup = Name, icon = folium.Icon(icon = 'glyphicon glyphicon-cutlery')).add_to(map)    #마커 지정
+        map.save('map.html')    # html 파일로 저장
+        webbrowser.open_new('map.html')
 
 EatToday()
