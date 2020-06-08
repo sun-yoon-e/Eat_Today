@@ -44,7 +44,7 @@ class EatToday:
 
     def initMail(self):
         self.mailImage = PhotoImage(file='resources/image/gmail.png')
-        self.mailButton = Button(self.window, cursor='heart', image=self.mailImage, command=self.sendMail)
+        self.mailButton = Button(self.window, cursor='heart', image=self.mailImage, background=bgColor, command=self.sendMail)
         self.mailButton.place(x=470, y=20)
 
     def sendMail(self):
@@ -356,13 +356,13 @@ class EatToday:
         maxCount = max(counts)
         for i in range(len(AllList)):
             self.graphCanvas.create_rectangle(12.5 + i * barWidth, height - (height - 20) * counts[i] / maxCount,
-                                              12.5 + (i + 1) * barWidth, height - 15, tags='graph')
+                                              12.5 + (i + 1) * barWidth, height - 20, tags='graph')
             self.graphCanvas.create_text(25 + i * barWidth + 10, height - 110,
                                          text=str(counts[i]), tags='graph')
 
     def initMap(self):
         self.mapImage = PhotoImage(file='resources/image/map.png')
-        self.mapButton = Button(self.window, cursor='heart', image=self.mapImage, command=self.openMap)
+        self.mapButton = Button(self.window, cursor='heart', image=self.mapImage, background=bgColor, command=self.openMap)
         self.mapButton.place(x=480, y=630)
 
     def openMap(self):
