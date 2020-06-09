@@ -431,29 +431,37 @@ class Poker:
         # 위너 체크
         if dScore > pScore:
             self.Lstatus.configure(text="Lose")
+            PlaySound('sounds/wrong.wav', SND_FILENAME)
 
         if dScore == pScore:
             if dScore == 1 or dScore == 5 or dScore == 6:  # 노페어일때 맥스값 비교
                 if dealerMaxNopair > playerMaxNopair:
                     self.Lstatus.configure(text="Lose")
+                    PlaySound('sounds/wrong.wav', SND_FILENAME)
                 elif dealerMaxNopair == playerMaxNopair:
                     self.Lstatus.configure(text="Push")
+                    PlaySound('sounds/ding.wav', SND_FILENAME)
                     self.playerMoney += self.betMoney
                 elif dealerMaxNopair < playerMaxNopair:
                     self.Lstatus.configure(text="Win")
+                    PlaySound('sounds/win.wav', SND_FILENAME)
                     self.playerMoney += self.betMoney * 2
             else:  # 페어일때 맥스값 비교
                 if dealerMaxPair > playerMaxPair:
                     self.Lstatus.configure(text="Lose")
+                    PlaySound('sounds/wrong.wav', SND_FILENAME)
                 elif dealerMaxPair == playerMaxPair:
                     self.Lstatus.configure(text="Push")
+                    PlaySound('sounds/ding.wav', SND_FILENAME)
                     self.playerMoney += self.betMoney
                 elif dealerMaxPair < playerMaxPair:
                     self.Lstatus.configure(text="Win")
+                    PlaySound('sounds/win.wav', SND_FILENAME)
                     self.playerMoney += self.betMoney * 2
 
         if dScore < pScore:
             self.Lstatus.configure(text="Win")
+            PlaySound('sounds/win.wav', SND_FILENAME)
             self.playerMoney += self.betMoney * 2
 
         self.betMoney = 0
