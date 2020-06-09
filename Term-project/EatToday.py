@@ -3,20 +3,22 @@ from tkinter import font
 import folium
 import webbrowser
 import Food
+import Gmail
 
 bgColor = 'lemon chiffon'
 CategoryButton = 0
 CategoryNum = 0
-GraphData = [0 for i in range(6)]
 width, height = 300, 120
 barWidth = (width - 20) / 6
+MailList = []
+
 
 class EatToday:
     def __init__(self):
         self.window = Tk()
         self.window.title('오늘 뭐 먹지~?')
         self.window.geometry('600x750+450-50')  # 윈도우 고정
-        self.window.configure(background=bgColor)  # RosyBrown1 thistle powder blue
+        self.window.configure(background=bgColor)  # misty rose RosyBrown1 thistle powder blue
 
         self.font = font.Font(self.window, size=20, weight='bold', family="메이플스토리")
         self.font2 = font.Font(self.window, size=18, weight='bold', family="메이플스토리")
@@ -45,19 +47,21 @@ class EatToday:
 
     def initMail(self):
         self.mailImage = PhotoImage(file='resources/image/gmail.png')
-        self.mailButton = Button(self.window, cursor='heart', image=self.mailImage, background=bgColor, command=self.sendMail)
+        self.mailButton = Button(self.window, cursor='heart', image=self.mailImage, bg=bgColor, command=self.sendMail)
         self.mailButton.place(x=470, y=20)
 
     def sendMail(self):
+        global MailList
+        Gmail.sendMail(MailList)
         pass
 
-    def initCityListBox(self):    #시(군) 선택창
+    def initCityListBox(self):  # 시(군) 선택창
         global Search
         ListScrollbar = Scrollbar(self.window)
         ListScrollbar.place(x=230, y=130)
 
         Search = Listbox(self.window, font=self.font3, activestyle='dotbox', width=13, height=1, bd=12,
-                             cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
+                         cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
 
         for i in range(31):
             Search.insert(i, Food.CityList[i])
@@ -66,7 +70,7 @@ class EatToday:
         Search.place(x=25, y=130)
         ListScrollbar.config(command=Search.yview)
 
-    def initInputLabel(self):   #검색 창
+    def initInputLabel(self):  # 검색 창
         global InputLabel
         InputLabel = Entry(self.window, font=self.font3, width=15, bd=12, relief='ridge', cursor='heart', fg='thistle4')
 
@@ -74,14 +78,16 @@ class EatToday:
         InputLabel.place(x=263, y=130)
 
     def initSearchButton(self):
-        SearchButton = Button(self.window, font=self.font2, text="검색", cursor='heart', command=self.SearchButtonAction)
+        SearchButton = Button(self.window, font=self.font2, bg='lavender blush', text="검색", cursor='heart',
+                              command=self.SearchButtonAction)
         SearchButton.pack()
         SearchButton.place(x=507, y=130)
 
-    def SearchButtonAction(self): #검색 버튼
+    def SearchButtonAction(self):  # 검색 버튼
         global CategoryButton, InfoText, InputLabel
 
         InfoText.configure(state='normal')
+        # InfoText.delete(0, InfoText.size())
         InfoText.delete(1.0, END)
         Store = InputLabel.get()
 
@@ -122,7 +128,7 @@ class EatToday:
     def pressedKorea(self):
         self.setupButton()
         self.Korea['state'] = 'disabled'
-        self.Korea['bg'] = 'RosyBrown1'
+        self.Korea['bg'] = 'misty rose'
         self.KoreaImage = PhotoImage(file='resources/image/Korea.png')
         korea = Label(self.window, image=self.KoreaImage, background=bgColor)
         korea.place(x=15, y=590)
@@ -138,12 +144,13 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(0, i)
 
+        self.initGraph()
         self.drawGraph()
 
     def pressedChina(self):
         self.setupButton()
         self.China['state'] = 'disabled'
-        self.China['bg'] = 'RosyBrown1'
+        self.China['bg'] = 'misty rose'
         self.ChinaImage = PhotoImage(file='resources/image/China.png')
         china = Label(self.window, image=self.ChinaImage, background=bgColor)
         china.place(x=15, y=590)
@@ -159,12 +166,13 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(1, i)
 
+        self.initGraph()
         self.drawGraph()
 
     def pressedJapan(self):
         self.setupButton()
         self.Japan['state'] = 'disabled'
-        self.Japan['bg'] = 'RosyBrown1'
+        self.Japan['bg'] = 'misty rose'
         self.JapanImage = PhotoImage(file='resources/image/Japan.png')
         japan = Label(self.window, image=self.JapanImage, background=bgColor)
         japan.place(x=15, y=590)
@@ -180,12 +188,13 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(2, i)
 
+        self.initGraph()
         self.drawGraph()
 
     def pressedItaly(self):
         self.setupButton()
         self.Italy['state'] = 'disabled'
-        self.Italy['bg'] = 'RosyBrown1'
+        self.Italy['bg'] = 'misty rose'
         self.ItalyImage = PhotoImage(file='resources/image/Italy.png')
         italy = Label(self.window, image=self.ItalyImage, background=bgColor)
         italy.place(x=15, y=590)
@@ -201,12 +210,13 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(3, i)
 
+        self.initGraph()
         self.drawGraph()
 
     def pressedCafe(self):
         self.setupButton()
         self.Cafe['state'] = 'disabled'
-        self.Cafe['bg'] = 'RosyBrown1'
+        self.Cafe['bg'] = 'misty rose'
         self.CafeImage = PhotoImage(file='resources/image/Cafe.png')
         cafe = Label(self.window, image=self.CafeImage, background=bgColor)
         cafe.place(x=15, y=590)
@@ -222,12 +232,13 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(4, i)
 
+        self.initGraph()
         self.drawGraph()
 
     def pressedFamous(self):
         self.setupButton()
         self.Famous['state'] = 'disabled'
-        self.Famous['bg'] = 'RosyBrown1'
+        self.Famous['bg'] = 'misty rose'
         self.FamousImage = PhotoImage(file='resources/image/Famous.png')
         famous = Label(self.window, image=self.FamousImage, background=bgColor)
         famous.place(x=15, y=590)
@@ -243,6 +254,7 @@ class EatToday:
             if SearchIndex == i:
                 self.InsertEatery(5, i)
 
+        self.initGraph()
         self.drawGraph()
 
     def InsertEatery(self, CategoryNum, CityNum):
@@ -250,7 +262,6 @@ class EatToday:
 
         List = Food.getList(CategoryNum)
         count = 1
-        maxcount = 0
         for i in range(len(List)):
             if Food.CityList[CityNum] == List[i][0]:
                 EateryText.insert(INSERT, "[")
@@ -259,7 +270,7 @@ class EatToday:
                 EateryText.insert(INSERT, List[i][1] + "\n\n")
                 count += 1
 
-    def initEateryList(self):   #검색용 리스트
+    def initEateryList(self):  # 검색용 리스트
         Escrollbar = Scrollbar(self.window)
         Escrollbar.pack()
         Escrollbar.place(x=277, y=270)
@@ -278,9 +289,10 @@ class EatToday:
         EateryText.configure(state='disabled')
 
     def InsertInformation(self, CategoryNum, StoreName):
-        global InfoText, Search, Name, Lat, Long
+        global InfoText, Search, Name, Lat, Long, MailList
 
         List = Food.getList(CategoryNum)
+        MailList.clear()
 
         for i in range(len(List)):
             for j in range(len(List[i])):
@@ -288,12 +300,23 @@ class EatToday:
                     List[i][j] = ""
             if StoreName == List[i][1] and Food.CityList[Search.curselection()[0]] == List[i][0]:
                 InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
+                if CategoryNum == 5:
+                    InfoText.insert(INSERT, "대표메뉴 : " + List[i][7] + "\n\n")
+                    InfoText.insert(INSERT, "전화번호 : " + List[i][8] + "\n\n")
+                else:
+                    InfoText.insert(INSERT, "허가일자 : " + List[i][7] + "\n\n")
                 InfoText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n\n")
                 InfoText.insert(INSERT, "지번주소 : " + List[i][3] + "\n\n")
                 InfoText.insert(INSERT, "우편번호 : " + List[i][4] + "\n\n")
+
                 Name = List[i][1]
                 Lat = List[i][5]
                 Long = List[i][6]
+
+                MailList.append("사업장명 : " + List[i][1] + "\n")
+                MailList.append("도로명주소 : " + List[i][2] + "\n")
+                MailList.append("지번주소 : " + List[i][3] + "\n")
+                MailList.append("우편번호 : " + List[i][4] + "\n")
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
@@ -313,16 +336,16 @@ class EatToday:
         InfoText.configure(state='disabled')
 
     def initGraph(self):
-        self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=120, bg='white')
+        self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=120, bg='floral white')
         self.graphCanvas.pack()
         self.graphCanvas.place(x=165, y=610)
 
-        self.graphCanvas.create_text(25.5 + 0 * barWidth + 10, height - 5, text="한식", tags='graph')
-        self.graphCanvas.create_text(25.5 + 1 * barWidth + 10, height - 5, text="중식", tags='graph')
-        self.graphCanvas.create_text(25.5 + 2 * barWidth + 10, height - 5, text="일식", tags='graph')
-        self.graphCanvas.create_text(25.5 + 3 * barWidth + 10, height - 5, text="양식", tags='graph')
-        self.graphCanvas.create_text(25.5 + 4 * barWidth + 10, height - 5, text="카페", tags='graph')
-        self.graphCanvas.create_text(25.5 + 5 * barWidth + 10, height - 5, text="맛집", tags='graph')
+        self.graphCanvas.create_text(25 + (1 / 2) + 0 * barWidth + 10, height - 5, text="한식", tags='graph')
+        self.graphCanvas.create_text(25 + (1 / 2) + 1 * barWidth + 10, height - 5, text="중식", tags='graph')
+        self.graphCanvas.create_text(25 + (1 / 2) + 2 * barWidth + 10, height - 5, text="일식", tags='graph')
+        self.graphCanvas.create_text(25 + (1 / 2) + 3 * barWidth + 10, height - 5, text="양식", tags='graph')
+        self.graphCanvas.create_text(25 + (1 / 2) + 4 * barWidth + 10, height - 5, text="카페", tags='graph')
+        self.graphCanvas.create_text(25 + (1 / 2) + 5 * barWidth + 10, height - 5, text="맛집", tags='graph')
 
     def drawGraph(self):
         global Search, CityList
@@ -336,27 +359,31 @@ class EatToday:
             for j in range(len(Food.getList(i))):
                 if Food.CityList[Index] == Food.getList(i)[j][0]:
                     AllList[i].append(Food.getList(i)[j][1])
+        # print(AllList)
 
         for i in range(len(AllList)):
             counts.append(len(AllList[i]))
 
         maxCount = max(counts)
         for i in range(len(AllList)):
-            self.graphCanvas.create_rectangle(12.5 + i * barWidth, height - (height - 20) * counts[i] / maxCount,
-                                              12.5 + (i + 1) * barWidth, height - 20, tags='graph')
-            self.graphCanvas.create_text(25 + i * barWidth + 10, height - 110,
+            self.graphCanvas.create_rectangle(12 + (1 / 2) + (i * barWidth),
+                                              height - (height - 20) * counts[i] / maxCount,
+                                              12 + (1 / 2) + ((i + 1) * barWidth), height - 10, tags='graph')
+            self.graphCanvas.create_text(25 + (1 / 2) + i * barWidth + 10, height - 110,
                                          text=str(counts[i]), tags='graph')
 
     def initMap(self):
         self.mapImage = PhotoImage(file='resources/image/map.png')
-        self.mapButton = Button(self.window, cursor='heart', image=self.mapImage, background=bgColor, command=self.openMap)
+        self.mapButton = Button(self.window, cursor='heart', image=self.mapImage, bg=bgColor, command=self.openMap)
         self.mapButton.place(x=480, y=630)
 
     def openMap(self):
         global Name, Lat, Long
-        map = folium.Map(location=[Lat, Long], zoom_start=15)   #위도, 경도 지정
-        folium.Marker([Lat, Long], popup = Name, icon = folium.Icon(icon = 'glyphicon glyphicon-cutlery')).add_to(map)    #마커 지정
-        map.save('map.html')    # html 파일로 저장
-        webbrowser.open_new('map.html')
+        map = folium.Map(location=[Lat, Long], zoom_start=15)  # 위도, 경도 지정
+        icon = folium.Icon(icon='glyphicon glyphicon-cutlery', color='pink')
+        folium.Marker([Lat, Long], poup=Name, icon=icon).add_to(map)  # 마커 지정
+        map.save('Eat_Today_Map.html')  # html 파일로 저장
+        webbrowser.open_new('Eat_Today_Map.html')
+
 
 EatToday()
