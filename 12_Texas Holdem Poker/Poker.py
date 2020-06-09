@@ -59,7 +59,8 @@ class Poker:
     def setupLabel(self):
         self.LbetMoney = Label(text="$10", width=4, height=1, font=self.fontstyle, bg="green", fg="orange")
         self.LbetMoney.place(x=200, y=450)
-        self.LplayerMoney = Label(text="You have $990", width=15, height=1, font=self.fontstyle, bg="green", fg="orange")
+        self.LplayerMoney = Label(text="You have $990", width=15, height=1, font=self.fontstyle, bg="green",
+                                  fg="orange")
         self.LplayerMoney.place(x=500, y=450)
         self.LplayerStatus = Label(text="", width=20, height=1, font=self.fontstyle, bg="green", fg="cyan")
         self.LplayerStatus.place(x=220, y=400)
@@ -266,165 +267,173 @@ class Poker:
         self.PlayerValue = self.player.returnValue() + self.TableValue
 
         # 딜러 카드 7장 체크---------------------------------------------
-        dealerState = "" #딜러 상태
-        dealerScore = 0  #딜러 점수
-        dealerPair = 0  #딜러 페어
-        dealerSame = 0  #딜러 같은 모양
-        dealerStraight = 1  #딜러 스트레이트
-        dealerMaxNopair = 0   #노페어일때 카드 최댓값
-        dealerValuePair = []  #페어일때 밸류값
-        dealerMaxPair = 0     #페어일때 카드 최댓값
+        dealerScore = []
+        dealerPair = 0  # 딜러 페어
+        dealerStraight = 1  # 딜러 스트레이트
+        dealerMaxNopair = 0  # 노페어일때 카드 최댓값
+        dealerValuePair = []  # 페어일때 밸류값
+        dealerMaxPair = 0  # 페어일때 카드 최댓값
 
         # 페어 체크
-        for i in range (0, len(self.DealerValue)-1):
+        for i in range(0, len(self.DealerValue) - 1):
             for j in range(i + 1, len(self.DealerValue)):
                 if self.DealerValue[i] == self.DealerValue[j]:
                     dealerPair += 1
                     if dealerPair > 0:
                         dealerValuePair.append(self.DealerValue[i])
 
-        self.DealerValue = self.DealerValue = list(set(self.DealerValue))
+        self.DealerValue = list(set(self.DealerValue))
         self.DealerValue.sort()
 
-        # 노페어(플러쉬, 스트레이트)
-        if dealerPair == 0:
-            dealerState = "No Pair"
-            dealerScore = 1
-            # 모양 체크
-            for i in range(0, len(self.DealerSuit) - 1):
-                for j in range(i + 1, len(self.DealerSuit)):
-                    if self.DealerSuit[i] == self.DealerSuit[j]:
-                        dealerSame += 1
-            # 같은 무늬 5장(플러쉬) 체크
-            if dealerSame == 5:
-                dealerState = "Flush"
-                dealerScore = 6
+        # 같은 무늬 5장(플러쉬) 체크
+        dcounts = []
+        dcounts.append(self.DealerSuit.count("Clubs"))
+        dcounts.append(self.DealerSuit.count("Spades"))
+        dcounts.append(self.DealerSuit.count("Hearts"))
+        dcounts.append(self.DealerSuit.count("Diamonds"))
+        dcount = max(dcounts)
+        if dcount == 5:
+            dealerScore.append(6)
 
-            # 스트레이트 체크
-            for j in range(1, len(self.DealerValue)):
-                if (self.DealerValue[j - 1] == self.DealerValue[j] - 1):
-                    dealerStraight += 1
-                else:
-                    dealerStraight = 1
-                if (dealerStraight == 5):
-                    dealerState = "Straight"
-                    dealerScore = 5
+        # 스트레이트 체크
+        for j in range(1, len(self.DealerValue)):
+            if (self.DealerValue[j - 1] == self.DealerValue[j] - 1):
+                dealerStraight += 1
+            else:
+                dealerStraight = 1
+            if (dealerStraight == 5):
+                dealerScore.append(5)
+
+        # 노페어
+        if dealerPair == 0:
+            dealerScore.append(1)
         # 원페어
         elif dealerPair == 1:
-            dealerState = "One Fair"
-            dealerScore = 2
+            dealerScore.append(2)
         # 투페어
         elif dealerPair == 2:
-            dealerState = "Two Fair"
-            dealerScore = 3
+            dealerScore.append(3)
         # 트리플
         elif dealerPair == 3:
-            dealerState = "Triple"
-            dealerScore = 4
+            dealerScore.append(4)
         # 풀하우스
         elif dealerPair == 4:
-            dealerState = "Full House"
-            dealerScore = 7
+            dealerScore.append(7)
         # 포카드
         elif dealerPair == 6:
-            dealerState = "Four card"
-            dealerScore = 8
+            dealerScore.append(8)
 
         # 카드 최댓값 계산
-        if dealerState == "No Pair":    #노페어일때
+        dScore = max(dealerScore)
+        if dScore == 1:  # 노페어일때
             dealerMaxNopair = max(self.DealerValue)
-            self.LdealerStatus.configure(text="" + str(dealerState) + str(dealerMaxNopair))
+            self.LdealerStatus.configure(text="No pair" + str(dealerMaxNopair))
+        elif dScore == 7:
+            self.LdealerStatus.configure(text="Full House" + str(dealerMaxNopair))
+        elif dScore == 8:
+            self.LdealerStatus.configure(text="Four Card" + str(dealerMaxNopair))
 
-        if dealerPair > 0:  #원페어 이상일때
+        elif 1 < dScore < 5 or dScore == 7 or dScore == 8:
             dealerMaxPair = max(dealerValuePair)
-            self.LdealerStatus.configure(text="" + str(dealerState) + str(dealerMaxPair))
+            if dScore == 2:
+                self.LdealerStatus.configure(text="One Pair" + str(dealerMaxPair))
+            elif dScore == 3:
+                self.LdealerStatus.configure(text="Two Pair" + str(dealerMaxPair))
+            elif dScore == 4:
+                self.LdealerStatus.configure(text="Triple" + str(dealerMaxPair))
 
-        if dealerScore == 5 or dealerScore == 6:
-            self.LdealerStatus.configure(text="" + str(dealerState))
+        elif dScore == 5:
+            self.LdealerStatus.configure(text="Straight")
+        elif dScore == 6:
+            self.LdealerStatus.configure(text="Flush")
 
         # 플레이어 카드 7장 체크---------------------------------------------
-        playerState = "" #플레이어 상태
-        playerScore = 0  #플레이어 점수
-        playerPair = 0  #플레이어 페어
-        playerSame = 0  #플레이어 같은 모양
-        playerStraight = 1  #플레이어 스트레이트
-        playerMaxNopair = 0   #노페어일때 카드 최댓값
-        playerValuePair = []  #페어일때 밸류값
-        playerMaxPair = 0     #페어일때 카드 최댓값
+        playerScore = []
+        playerPair = 0  # 딜러 페어
+        playerStraight = 1  # 딜러 스트레이트
+        playerMaxNopair = 0  # 노페어일때 카드 최댓값
+        playerValuePair = []  # 페어일때 밸류값
+        playerMaxPair = 0  # 페어일때 카드 최댓값
 
         # 페어 체크
-        for i in range (0, len(self.PlayerValue)-1):
+        for i in range(0, len(self.PlayerValue) - 1):
             for j in range(i + 1, len(self.PlayerValue)):
                 if self.PlayerValue[i] == self.PlayerValue[j]:
                     playerPair += 1
                     if playerPair > 0:
                         playerValuePair.append(self.PlayerValue[i])
 
-        self.PlayerValue = self.PlayerValue = list(set(self.PlayerValue))
+        self.PlayerValue = list(set(self.PlayerValue))
         self.PlayerValue.sort()
 
-        # 노페어(플러쉬, 스트레이트)
-        if playerPair == 0:
-            playerState = "No Pair"
-            playerScore = 1
-            # 모양 체크
-            for i in range(0, len(self.PlayerSuit) - 1):
-                for j in range(i + 1, len(self.PlayerSuit)):
-                    if self.PlayerSuit[i] == self.PlayerSuit[j]:
-                        playerSame += 1
-            # 같은 무늬 5장(플러쉬) 체크
-            if playerSame == 5:
-                playerState = "Flush"
-                playerScore = 6
+        # 같은 무늬 5장(플러쉬) 체크
+        pcounts = []
+        pcounts.append(self.PlayerSuit.count("Clubs"))
+        pcounts.append(self.PlayerSuit.count("Spades"))
+        pcounts.append(self.PlayerSuit.count("Hearts"))
+        pcounts.append(self.PlayerSuit.count("Diamonds"))
+        pcount = max(pcounts)
+        if pcount == 5:
+            playerScore.append(6)
 
-            # 스트레이트 체크
-            for j in range(1, len(self.PlayerValue)):
-                if (self.PlayerValue[j - 1] == self.PlayerValue[j] - 1):
-                    playerStraight += 1
-                else:
-                    playerStraight = 1
-                if (playerStraight == 5):
-                    playerState = "Straight"
-                    playerScore = 5
+        # 스트레이트 체크
+        for j in range(1, len(self.PlayerValue)):
+            if (self.PlayerValue[j - 1] == self.PlayerValue[j] - 1):
+                playerStraight += 1
+            else:
+                playerStraight = 1
+            if (playerStraight == 5):
+                playerScore.append(5)
+
+        # 노페어
+        if playerPair == 0:
+            playerScore.append(1)
         # 원페어
         elif playerPair == 1:
-            playerState = "One Fair"
-            playerScore = 2
+            playerScore.append(2)
         # 투페어
         elif playerPair == 2:
-            playerState = "Two Fair"
-            playerScore = 3
+            playerScore.append(3)
         # 트리플
         elif playerPair == 3:
-            playerState = "Triple"
-            playerScore = 4
+            playerScore.append(4)
         # 풀하우스
         elif playerPair == 4:
-            playerState = "Full House"
-            playerScore = 7
+            playerScore.append(7)
         # 포카드
         elif playerPair == 6:
-            playerState = "Four card"
-            playerScore = 8
+            playerScore.append(8)
 
         # 카드 최댓값 계산
-        if playerState == "No Pair":    #노페어일때
+        pScore = max(playerScore)
+        if pScore == 1:  # 노페어일때
             playerMaxNopair = max(self.PlayerValue)
-            self.LplayerStatus.configure(text="" + str(playerState) + str(playerMaxNopair))
+            self.LplayerStatus.configure(text="No pair" + str(playerMaxNopair))
+        elif pScore == 7:
+            self.LplayerStatus.configure(text="Full House" + str(playerMaxNopair))
+        elif pScore == 8:
+            self.LplayerStatus.configure(text="Four Card" + str(playerMaxNopair))
 
-        if playerPair > 0:  #원페어 이상일때
+        elif 1 < pScore < 5 or pScore == 7 or pScore == 8:
             playerMaxPair = max(playerValuePair)
-            self.LplayerStatus.configure(text="" + str(playerState) + str(playerMaxPair))
+            if pScore == 2:
+                self.LplayerStatus.configure(text="One Pair" + str(playerMaxPair))
+            elif pScore == 3:
+                self.LplayerStatus.configure(text="Two Pair" + str(playerMaxPair))
+            elif pScore == 4:
+                self.LplayerStatus.configure(text="Triple" + str(playerMaxPair))
 
-        if playerScore == 5 or playerScore == 6:
-            self.LplayerStatus.configure(text="" + str(playerState))
+        elif pScore == 5:
+            self.LplayerStatus.configure(text="Straight")
+        elif pScore == 6:
+            self.LplayerStatus.configure(text="Flush")
 
         # 위너 체크
-        if dealerScore > playerScore:
+        if dScore > pScore:
             self.Lstatus.configure(text="Lose")
 
-        if dealerScore == playerScore:
-            if dealerScore == 1:    #노페어일때 맥스값 비교
+        if dScore == pScore:
+            if dScore == 1 or dScore == 5 or dScore == 6:  # 노페어일때 맥스값 비교
                 if dealerMaxNopair > playerMaxNopair:
                     self.Lstatus.configure(text="Lose")
                 elif dealerMaxNopair == playerMaxNopair:
@@ -433,7 +442,7 @@ class Poker:
                 elif dealerMaxNopair < playerMaxNopair:
                     self.Lstatus.configure(text="Win")
                     self.playerMoney += self.betMoney * 2
-            if 2 <= dealerScore <= 8: #페어일때 맥스값 비교
+            else:  # 페어일때 맥스값 비교
                 if dealerMaxPair > playerMaxPair:
                     self.Lstatus.configure(text="Lose")
                 elif dealerMaxPair == playerMaxPair:
@@ -443,7 +452,7 @@ class Poker:
                     self.Lstatus.configure(text="Win")
                     self.playerMoney += self.betMoney * 2
 
-        if dealerScore < playerScore:
+        if dScore < pScore:
             self.Lstatus.configure(text="Win")
             self.playerMoney += self.betMoney * 2
 
@@ -461,5 +470,6 @@ class Poker:
         self.Deal['bg'] = 'gray'
         self.Again['state'] = 'active'
         self.Again['bg'] = 'white'
+
 
 Poker()

@@ -1,82 +1,73 @@
-# -*- coding: utf-8 -*-
 import mimetypes
-import mysmtplib
+import smtplib
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
-from http.client import HTTPSConnection
-from http.server import BaseHTTPRequestHandler, HTTPServer
-
-sendDataList = []
 
 #global value
 host = "smtp.gmail.com" # Gmail STMP 서버 주소.
 port = "587"
-htmlFileName = "logo.html"
 
-senderAddr = "min164337@gmail.com"     # 보내는 사람 email 주소.
-recipientAddr = "minf0723@naver.com"   # 받는 사람 email 주소.
+def MakeHtmlDoc(self):
+    from xml.dom.minidom import getDOMImplementation
+    impl = getDOMImplementation()
+    newdoc = impl.createDocument(None, "html", None)  # DOM 객체 생성
+    top_element = newdoc.documentElement
+    header = newdoc.createElement('header')
+    top_element.appendChild(header)
 
-msg = MIMEBase("multipart", "alternative")
-msg['Subject'] = "Test email in Python 3.0"
-msg['From'] = senderAddr
-msg['To'] = recipientAddr
+    # Body 엘리먼트 생성.
+    body = newdoc.createElement('body')
 
-# MIME 문서를 생성합니다.
-#htmlFD = open(htmlFileName, 'rb')
-#HtmlPart = MIMEText(htmlFD.read(),'html', _charset = 'UTF-8' )
-#htmlFD.close()
+    body.appendChild(newdoc.createTextNode('총 {} 개의 강의 정보를 수신하였습니다.\n'.format(self.books.__len__())))
+    body.appendChild(newdoc.createElement('br'))
+    body.appendChild(newdoc.createElement('br'))
+    body.appendChild(newdoc.createElement('br'))
 
-def sendGmail(rv, lst):
-    global host, port
-    html = ""
-    title = 'RestArea'
-    senderAddr = 'min164337@gmail.com'
-    recipientAddr = rv
-    #msgtext = 'tteexxtt'
-    passwd = '88088808!a'
-    msgtext = 'y'
+    for d in self.books:
+        body.appendChild(newdoc.createTextNode('강의이름 : {}'.format(d['course_title'])))
+        body.appendChild(newdoc.createElement('br'))
+        body.appendChild(newdoc.createTextNode('....제공기관 : {}'.format(d['provider'])))
+        body.appendChild(newdoc.createElement('br'))
+        body.appendChild(newdoc.createTextNode('....교수자명 : {}'.format(d['lecturer'])))
+        body.appendChild(newdoc.createElement('br'))
+        body.appendChild(newdoc.createTextNode('....강의링크 : {}'.format(d['course_url'])))
+        body.appendChild(newdoc.createElement('br'))
+        body.appendChild(newdoc.createElement('br'))
 
-    if msgtext == 'y' :
-        keyword = str(lst)
-        #html = MakeHtmlDoc(SearchBookTitle(keyword))
-        # html = 'hello'
-        for s in sendDataList:
-            for item in s:
-                html = html + item
-                # html += "\n"
-            html += " / "
-            # 메일 보내면 시부레것 엔터가 안되네
-        print(html)
+    top_element.appendChild(body)
+
+    return newdoc.toxml()
 
 
-    import mysmtplib
-    # MIMEMultipart의 MIME을 생성합니다.
-    from email.mime.multipart import MIMEMultipart
-    from email.mime.text import MIMEText
+# 메일을 발송한다.
+def sendmail(addr, html):
+    global host,port
+    senderAddr = "wjs3662@gmail.com"
+    recipientAddr = addr
 
-    #Message container를 생성합니다.
-    msg = MIMEMultipart('alternative')
+    msg = MIMEBase('multipart','alternative')
 
-    #set message
-    msg['Subject'] = title
-    msg['From'] = senderAddr
-    msg['To'] = recipientAddr
+    msg['Subject']="[E-Class(공개강의 검색 엔진)] 북마크 목록을 전송해드립니다."
+    msg['From']=senderAddr
+    msg['To']=recipientAddr
 
-    #msgPart = MIMEText(msgtext, 'plain')
-    sendData = MIMEText(html, 'html', _charset = 'UTF-8')
+    HtmlPart = MIMEText(html, 'html', _charset='UTF-8')
 
-    # 메세지에 생성한 MIME 문서를 첨부합니다.
-    #msg.attach(lst)
-    msg.attach(sendData)
+    msg.attach(HtmlPart)
 
-    print ("connect smtp server ... ")
-    s = mysmtplib.MySMTP(host,port)
-    #s.set_debuglevel(1)
+    print("connect smtp server ... ")
+    s = smtplib.SMTP(host, port)
     s.ehlo()
     s.starttls()
     s.ehlo()
-    s.login(senderAddr, passwd)    # 로긴을 합니다.
-    s.sendmail(senderAddr, [recipientAddr], msg.as_string())
-    s.close()
-
-    print ("Mail sending complete!!!")
+    s.login("wjs3662@gmail.com","wjs2156.")
+    try:
+        s.sendmail(senderAddr, [recipientAddr], msg.as_string())
+    except:
+        print("사망각")
+        s.close()
+        return False
+    else:
+        print("Mail sending complete!!!")
+        s.close()
+        return True
