@@ -53,7 +53,6 @@ class EatToday:
     def sendMail(self):
         global MailList
         Gmail.sendMail(MailList)
-        pass
 
     def initCityListBox(self):    #시(군) 선택창
         global Search
@@ -269,7 +268,7 @@ class EatToday:
                 EateryText.insert(INSERT, List[i][1] + "\n\n")
                 count += 1
 
-    def initEateryList(self):   #검색용 리스트
+    def initEateryList(self):
         Escrollbar = Scrollbar(self.window)
         Escrollbar.pack()
         Escrollbar.place(x=277, y=270)
