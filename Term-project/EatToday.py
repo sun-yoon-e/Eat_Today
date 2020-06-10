@@ -8,7 +8,7 @@ import Gmail
 bgColor = 'lemon chiffon'
 CategoryButton = 0
 CategoryNum = 0
-width, height = 300, 120
+width, height = 310, 120
 barWidth = (width - 20) / 6
 MailList = []
 
@@ -35,6 +35,7 @@ class EatToday:
         self.initGraph()
         self.initMap()
 
+        global CategoryNum
         for CategoryNum in range(6):
             Food.URLbuilder(CategoryNum)
 
@@ -298,23 +299,30 @@ class EatToday:
                     List[i][j] = ""
             if StoreName == List[i][1] and Food.CityList[Search.curselection()[0]] == List[i][0]:
                 InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
+                MailList.append("사업장명 : " + List[i][1])
+
                 if CategoryNum == 5:
                     InfoText.insert(INSERT, "대표메뉴 : " + List[i][7] + "\n\n")
                     InfoText.insert(INSERT, "전화번호 : " + List[i][8] + "\n\n")
+
+                    MailList.append("대표메뉴 : " + List[i][7])
+                    MailList.append("전화번호 : " + List[i][8])
+
                 else:
                     InfoText.insert(INSERT, "허가일자 : " + List[i][7] + "\n\n")
+                    MailList.append("허가일자 : " + List[i][7])
+
                 InfoText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n\n")
                 InfoText.insert(INSERT, "지번주소 : " + List[i][3] + "\n\n")
                 InfoText.insert(INSERT, "우편번호 : " + List[i][4] + "\n\n")
 
-                Name = List[i][1]
-                Lat = List[i][5]
-                Long = List[i][6]
-
-                MailList.append("사업장명 : " + List[i][1])
                 MailList.append("도로명주소 : " + List[i][2])
                 MailList.append("지번주소 : " + List[i][3])
                 MailList.append("우편번호 : " + List[i][4])
+
+                Name = List[i][1]
+                Lat = List[i][5]
+                Long = List[i][6]
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
@@ -334,22 +342,21 @@ class EatToday:
         InfoText.configure(state='disabled')
 
     def initGraph(self):
-        self.graphCanvas = Canvas(self.window, cursor='heart', width=300, height=120, bg='floral white')
+        self.graphCanvas = Canvas(self.window, cursor='heart', width=310, height=120, bg='floral white')
         self.graphCanvas.pack()
-        self.graphCanvas.place(x=165, y=610)
+        self.graphCanvas.place(x=160, y=610)
 
-        self.graphCanvas.create_text(25 + (1/2) + 0 * barWidth + 10, height - 5, text="한식", tags='graph')
-        self.graphCanvas.create_text(25 + (1/2) + 1 * barWidth + 10, height - 5, text="중식", tags='graph')
-        self.graphCanvas.create_text(25 + (1/2) + 2 * barWidth + 10, height - 5, text="일식", tags='graph')
-        self.graphCanvas.create_text(25 + (1/2) + 3 * barWidth + 10, height - 5, text="양식", tags='graph')
-        self.graphCanvas.create_text(25 + (1/2) + 4 * barWidth + 10, height - 5, text="카페", tags='graph')
-        self.graphCanvas.create_text(25 + (1/2) + 5 * barWidth + 10, height - 5, text="맛집", tags='graph')
+        self.graphCanvas.create_text(26 + 0 * barWidth + 10, height - 5, text="한식", tags='graph')
+        self.graphCanvas.create_text(26 + 1 * barWidth + 10, height - 5, text="중식", tags='graph')
+        self.graphCanvas.create_text(26 + 2 * barWidth + 10, height - 5, text="일식", tags='graph')
+        self.graphCanvas.create_text(26 + 3 * barWidth + 10, height - 5, text="양식", tags='graph')
+        self.graphCanvas.create_text(26 + 4 * barWidth + 10, height - 5, text="카페", tags='graph')
+        self.graphCanvas.create_text(26 + 5 * barWidth + 10, height - 5, text="맛집", tags='graph')
 
     def drawGraph(self):
         global Search, CityList
 
         Index = Search.curselection()[0]
-
         AllList = []    # 해당 도시 리스트
         counts = []
         for i in range(6):
@@ -364,9 +371,9 @@ class EatToday:
 
         maxCount = max(counts)
         for i in range(len(AllList)):
-            self.graphCanvas.create_rectangle(12 + (1/2) + (i * barWidth), height - (height - 20) * counts[i] / maxCount,
-                                              12 + (1/2) + ((i + 1) * barWidth), height - 10, tags='graph')
-            self.graphCanvas.create_text(25 + (1/2) + i * barWidth + 10, height - 110,
+            self.graphCanvas.create_rectangle(14 + (i * barWidth), height - (height - 20) * counts[i] / maxCount,
+                                              14 + (i + 1) * barWidth, height - 10, tags='graph')
+            self.graphCanvas.create_text(26 + i * barWidth + 10, height - 110,
                                          text=str(counts[i]), tags='graph')
 
     def initMap(self):
