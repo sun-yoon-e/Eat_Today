@@ -12,7 +12,6 @@ width, height = 300, 120
 barWidth = (width - 20) / 6
 MailList = []
 
-
 class EatToday:
     def __init__(self):
         self.window = Tk()
