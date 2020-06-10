@@ -5,25 +5,21 @@ from email.mime.text import MIMEText
 host = "smtp.gmail.com" # Gmail STMP 서버 주소.
 port = "587"    #"465"
 
-#htmlFileName = "Eat_Today_Map.html"
-
 
 def sendMail(MailList):
     global host, port
 
-    #html = "| "
-    html = ""
+    html = ""   # "| "
     title = 'Eat_Today 정보 전송'
     senderAddr = "eattodayproject@gmail.com"    # 보내는 사람 email 주소
     recipientAddr = "shinee252525@icloud.com"   # 받는 사람 email 주소
     passwd = "script11"
 
     for informaion in MailList:
-        html += "[ "
+        #html += "[ "
         for text in informaion:
             html += text
-        #html += "\n" " / " " | "
-        html += " ]"
+        html += "<br>"  # "\n" " / " " | " " ]"
     print(html)
 
     msg = MIMEBase("multipart", "alternative")
