@@ -359,24 +359,21 @@ class EatToday:
         Index = Search.curselection()[0]
 
         AllList = []  # 해당 도시 리스트
-        counts = []
+        counts = [] * 6
         for i in range(6):
             AllList.append([])
             for j in range(len(Food.getList(i))):
                 if Food.CityList[Index] == Food.getList(i)[j][0]:
                     AllList[i].append(Food.getList(i)[j][1])
-        # print(AllList)
 
         for i in range(len(AllList)):
             counts.append(len(AllList[i]))
 
         maxCount = max(counts)
-        for i in range(len(AllList)):
-            self.graphCanvas.create_rectangle(12 + (1 / 2) + (i * barWidth),
-                                              height - (height - 20) * counts[i] / maxCount,
-                                              12 + (1 / 2) + ((i + 1) * barWidth), height - 10, tags='graph')
-            self.graphCanvas.create_text(25 + (1 / 2) + i * barWidth + 10, height - 110,
-                                         text=str(counts[i]), tags='graph')
+        for i in range(6):
+            self.graphCanvas.create_rectangle(10+i*barWidth, height-(height-10)*counts[i]/maxCount,
+                                              10+(i+1)*barWidth, height-10, tags='graph')
+            self.graphCanvas.create_text(25+i*barWidth+10, height-110, text=counts[i], tags='graph')
 
     def initMap(self):
         self.mapImage = PhotoImage(file='resources/image/map.png')

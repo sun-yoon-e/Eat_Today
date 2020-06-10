@@ -1,9 +1,6 @@
-import mimetypes
 import smtplib
-#import mysmtplib
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
 host = "smtp.gmail.com" # Gmail STMP 서버 주소.
 port = "587"    #"465"
@@ -21,7 +18,6 @@ def sendMail(MailList):
         for text in informaion:
             html += text
         html += "<br>"
-    print(html)
 
     msg = MIMEBase("multipart", "alternative")
     msg['Subject'] = title
@@ -33,11 +29,10 @@ def sendMail(MailList):
     print("connect smtp server ... ")
 
     s = smtplib.SMTP(host, port)
-    #s.set_debuglevel(1)
     s.ehlo()
     s.starttls()
     s.ehlo()
     s.login(senderAddr, passwd)
     s.sendmail(senderAddr, [recipientAddr], msg.as_string())
     s.close()
-    print("Mail sending complete!!!")
+    print("Mail sending complete!")
