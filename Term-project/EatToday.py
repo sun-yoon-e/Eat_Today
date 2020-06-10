@@ -383,7 +383,7 @@ class EatToday:
         global Name, Lat, Long
         map = folium.Map(location=[Lat, Long], zoom_start=15)  # 위도, 경도 지정
         icon = folium.Icon(icon='glyphicon glyphicon-cutlery', color='pink')
-        folium.Marker([Lat, Long], poup=Name, icon=icon).add_to(map)  # 마커 지정
+        folium.Marker([Lat, Long], popup=Name, icon=icon).add_to(map)  # 마커 지정
         map.save('Eat_Today_Map.html')  # html 파일로 저장
         webbrowser.open_new('Eat_Today_Map.html')
 

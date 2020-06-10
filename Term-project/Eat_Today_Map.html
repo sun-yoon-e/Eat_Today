@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_24ec84de79b7488d9a9fe8815f2b6281 {
+                #map_51f7e7567be1400cb9b683a41289e461 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -35,15 +35,15 @@
 </head>
 <body>    
     
-            <div class="folium-map" id="map_24ec84de79b7488d9a9fe8815f2b6281" ></div>
+            <div class="folium-map" id="map_51f7e7567be1400cb9b683a41289e461" ></div>
         
 </body>
 <script>    
     
-            var map_24ec84de79b7488d9a9fe8815f2b6281 = L.map(
-                "map_24ec84de79b7488d9a9fe8815f2b6281",
+            var map_51f7e7567be1400cb9b683a41289e461 = L.map(
+                "map_51f7e7567be1400cb9b683a41289e461",
                 {
-                    center: [37.8365401349, 127.3506216518],
+                    center: [37.2581572, 127.0328669],
                     crs: L.CRS.EPSG3857,
                     zoom: 15,
                     zoomControl: true,
@@ -55,21 +55,34 @@
 
         
     
-            var tile_layer_1f2d97fa5fad4c34a59fcd79090d5af4 = L.tileLayer(
+            var tile_layer_40c247339b9444c89587dad97b8623e9 = L.tileLayer(
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_24ec84de79b7488d9a9fe8815f2b6281);
+            ).addTo(map_51f7e7567be1400cb9b683a41289e461);
         
     
-            var marker_e2e6124a41d245e89eaab3ac103db49f = L.marker(
-                [37.8365401349, 127.3506216518],
-                {"poup": "\ud558\ub9bc"}
-            ).addTo(map_24ec84de79b7488d9a9fe8815f2b6281);
+            var marker_6c15870e17df484da7a38bf3f3f50367 = L.marker(
+                [37.2581572, 127.0328669],
+                {}
+            ).addTo(map_51f7e7567be1400cb9b683a41289e461);
         
     
-            var icon_7cf9cde52b29469c8d0f765abd7f8044 = L.AwesomeMarkers.icon(
+            var icon_7881b2cf08d94e14b5892b1a1a305ca2 = L.AwesomeMarkers.icon(
                 {"extraClasses": "fa-rotate-0", "icon": "glyphicon glyphicon-cutlery", "iconColor": "white", "markerColor": "pink", "prefix": "glyphicon"}
             );
-            marker_e2e6124a41d245e89eaab3ac103db49f.setIcon(icon_7cf9cde52b29469c8d0f765abd7f8044);
+            marker_6c15870e17df484da7a38bf3f3f50367.setIcon(icon_7881b2cf08d94e14b5892b1a1a305ca2);
         
+    
+        var popup_635e9335472545d39b31eeeeaa3cb7f8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_02202772c06046018fdaea9bf06a63e8 = $(`<div id="html_02202772c06046018fdaea9bf06a63e8" style="width: 100.0%; height: 100.0%;">한국관</div>`)[0];
+            popup_635e9335472545d39b31eeeeaa3cb7f8.setContent(html_02202772c06046018fdaea9bf06a63e8);
+        
+
+        marker_6c15870e17df484da7a38bf3f3f50367.bindPopup(popup_635e9335472545d39b31eeeeaa3cb7f8)
+        ;
+
+        
+    
 </script>

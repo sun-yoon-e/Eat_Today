@@ -11,7 +11,7 @@ def sendMail(MailList):
     html = ""
     title = 'Eat_Today 정보 전송'
     senderAddr = "eattodayproject@gmail.com"         # 보내는 사람 email 주소
-    recipientAddr = "wjs3662@naver.com"  # 받는 사람 email 주소
+    recipientAddr = "gen_nie@naver.com"  # 받는 사람 email 주소
     passwd = "script11"
 
     for informaion in MailList:
