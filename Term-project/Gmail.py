@@ -1,11 +1,12 @@
 import mimetypes
 import smtplib
+#import mysmtplib
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 host = "smtp.gmail.com" # Gmail STMP 서버 주소.
-port = "587"
+port = "587"    #"465"
 
 #htmlFileName = "Eat_Today_Map.html"
 
@@ -13,15 +14,19 @@ port = "587"
 def sendMail(MailList):
     global host, port
 
+    #html = "| "
     html = ""
     title = 'Eat_Today 정보 전송'
-    senderAddr = "shinee2525@gmail.com"         # 보내는 사람 email 주소
+    senderAddr = "eattodayproject@gmail.com"         # 보내는 사람 email 주소
     recipientAddr = "shinee252525@icloud.com"  # 받는 사람 email 주소
-    passwd = 'tjs*951753'
+    passwd = "script11"
 
     for informaion in MailList:
+        html += "[ "
         for text in informaion:
             html += text
+        #html += '\n'
+        html += " ]"
     print(html)
 
     msg = MIMEBase("multipart", "alternative")

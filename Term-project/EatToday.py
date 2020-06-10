@@ -311,10 +311,10 @@ class EatToday:
                 Lat = List[i][5]
                 Long = List[i][6]
 
-                MailList.append("사업장명 : " + List[i][1] + "\n")
-                MailList.append("도로명주소 : " + List[i][2] + "\n")
-                MailList.append("지번주소 : " + List[i][3] + "\n")
-                MailList.append("우편번호 : " + List[i][4] + "\n")
+                MailList.append("사업장명 : " + List[i][1])
+                MailList.append("도로명주소 : " + List[i][2])
+                MailList.append("지번주소 : " + List[i][3])
+                MailList.append("우편번호 : " + List[i][4])
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
