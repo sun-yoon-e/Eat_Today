@@ -53,7 +53,6 @@ class EatToday:
     def sendMail(self):
         global MailList
         Gmail.sendMail(MailList)
-        pass
 
     def initCityListBox(self):  # 시(군) 선택창
         global Search
@@ -270,7 +269,7 @@ class EatToday:
                 EateryText.insert(INSERT, List[i][1] + "\n\n")
                 count += 1
 
-    def initEateryList(self):  # 검색용 리스트
+    def initEateryList(self):
         Escrollbar = Scrollbar(self.window)
         Escrollbar.pack()
         Escrollbar.place(x=277, y=270)
@@ -300,23 +299,30 @@ class EatToday:
                     List[i][j] = ""
             if StoreName == List[i][1] and Food.CityList[Search.curselection()[0]] == List[i][0]:
                 InfoText.insert(INSERT, "사업장명 : " + List[i][1] + "\n\n")
+                MailList.append("사업장명 : " + List[i][1])
+
                 if CategoryNum == 5:
                     InfoText.insert(INSERT, "대표메뉴 : " + List[i][7] + "\n\n")
                     InfoText.insert(INSERT, "전화번호 : " + List[i][8] + "\n\n")
+
+                    MailList.append("대표메뉴 : " + List[i][7])
+                    MailList.append("전화번호 : " + List[i][8])
+
                 else:
                     InfoText.insert(INSERT, "허가일자 : " + List[i][7] + "\n\n")
+                    MailList.append("허가일자 : " + List[i][7])
+
                 InfoText.insert(INSERT, "도로명주소 : " + List[i][2] + "\n\n")
                 InfoText.insert(INSERT, "지번주소 : " + List[i][3] + "\n\n")
                 InfoText.insert(INSERT, "우편번호 : " + List[i][4] + "\n\n")
 
+                MailList.append("도로명주소 : " + List[i][2])
+                MailList.append("지번주소 : " + List[i][3])
+                MailList.append("우편번호 : " + List[i][4])
+
                 Name = List[i][1]
                 Lat = List[i][5]
                 Long = List[i][6]
-
-                MailList.append("사업장명 : " + List[i][1] + "\n")
-                MailList.append("도로명주소 : " + List[i][2] + "\n")
-                MailList.append("지번주소 : " + List[i][3] + "\n")
-                MailList.append("우편번호 : " + List[i][4] + "\n")
 
     def initInformation(self):
         Iscrollbar = Scrollbar(self.window)
