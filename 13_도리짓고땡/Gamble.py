@@ -265,15 +265,30 @@ class Gamble:
             self.LcardsPlayer3[self.player3.inHand() - 1].place(x=450 + (i + self.count) * 30, y=380)
 
             # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+    def printPts(self):
+        self.Player1Month = self.player1.returnMonth()
+        self.Player2Month = self.player2.returnMonth()
+        self.Player3Month = self.player3.returnMonth()
+        self.DealerMonth = self.dealer.returnMonth()
+
+        for i in range(len(self.Player1Month)):
+            self.LplayerPts1 = Label(text=self.Player1Month[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
+            self.LplayerPts1.place(x=80 + i * 30, y=310)
+        for i in range(len(self.Player2Month)):
+            self.LplayerPts2 = Label(text=self.Player2Month[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
+            self.LplayerPts2.place(x=280 + i * 30, y=310)
+        for i in range(len(self.Player3Month)):
+            self.LplayerPts3 = Label(text=self.Player3Month[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+            self.LplayerPts3.place(x=470 + i * 30, y=310)
+        for i in range(len(self.DealerMonth)):
+            self.LdealerPts = Label(text=self.DealerMonth[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+            self.LdealerPts.place(x=280 + i * 30, y=40)
 
     def pressedDeal(self):
         if self.count == 0:
             self.deal()
             self.count += 1
-            self.Player1Month = self.player1.returnMonth()
-            for i in range(len(self.Player1Month)):
-                self.LplayerPts1 = Label(text=self.Player1Month[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-                self.LplayerPts1.place(x=80 + i * 30, y=310)
+            self.printPts()
 
         elif self.count == 1:
             self.hitDealer(3)
@@ -281,22 +296,14 @@ class Gamble:
             self.hitPlayer2(3)
             self.hitPlayer3(3)
             self.count += 3
-            self.Player1Month = self.player1.returnMonth()
-            for i in range(len(self.Player1Month)):
-                self.LplayerPts1 = Label(text=self.Player1Month[i], width=2, height=1, font=self.fontstyle2, bg="green",
-                                         fg="white")
-                self.LplayerPts1.place(x=80 + i * 30, y=310)
+            self.printPts()
 
         elif self.count == 4:
             self.hitDealer(1)
             self.hitPlayer1(1)
             self.hitPlayer2(1)
             self.hitPlayer3(1)
-            self.Player1Month = self.player1.returnMonth()
-            for i in range(len(self.Player1Month)):
-                self.LplayerPts1 = Label(text=self.Player1Month[i], width=2, height=1, font=self.fontstyle2, bg="green",
-                                         fg="white")
-                self.LplayerPts1.place(x=80 + i * 30, y=310)
+            self.printPts()
             self.checkWinner()
 
         self.Deal["state"] = "disabled"
