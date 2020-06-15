@@ -46,11 +46,7 @@ class Gamble:
         self.PlayerValue3 = []
         self.DealerValue = []
 
-        self.Player1Score = 0
-        self.Player2Score = 0
-        self.Player3Score = 0
-        self.DealerScore = 0
-
+        self.madelist = []
         self.deckN = 0
         self.window.mainloop()
 
@@ -381,6 +377,8 @@ class Gamble:
 
     def made10(self, List, Status):
         made = False
+        sortedlist = []
+        indexlist = [False]*5
         for i in itertools.combinations(List, 3):
             if sum(list(i)) % 10 == 0:
                 made = True
@@ -427,8 +425,16 @@ class Gamble:
                     Status.configure(text="팍팍싸(8 8 4)")
                 elif sortedlist == [2, 9, 9]:
                     Status.configure(text="구구리(9 9 2)")
+                else:
+                    sortedlist = []
+                    made = False
         if made == False:
             Status.configure(text="노 메이드")
+        elif made == True:
+            for i in List:
+                if i in sortedlist:
+                    indexlist[List.index(i)] = True
+        self.madelist = indexlist
 
     def checkWinner(self):
         for i in range(5):
