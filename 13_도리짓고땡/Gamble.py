@@ -30,25 +30,20 @@ class Gamble:
         self.betMoney3 = 0
         self.playerMoney = 1000
 
-        # 이 배열들 하나로 합치는 게 편할 듯 - 이렇게 하는 거 맞나..?
-        # 얘는 따로 둘래 그냥,,,
         self.LcardsPlayer1 = []
         self.LcardsPlayer2 = []
         self.LcardsPlayer3 = []
         self.LcardsDealer = []
 
-        # 그냥 모르겠으면 위에 처럼 다 나눠서 걍 해버리기
-        # 밑에 얘네 둘은 아직 건드리지 않은 것들
-        # 포커에서 추가한 배열인가? 여기서도 필요하겠지 그럼...
-        self.PlayerValue = []
-        for i in range(3):
-            self.PlayerValue.append([])
-        self.DealerValue = []
+        self.Player1Month = []
+        self.Player2Month = []
+        self.Player3Month = []
+        self.DealerMonth = []
 
-        self.PlayerSuit = []
-        for i in range(3):
-            self.PlayerSuit.append([])
-        self.DealerSuit = []
+        self.Player1Value = []
+        self.Player2Value = []
+        self.Player3Value = []
+        self.DealerValue = []
 
         self.deckN = 0
         self.window.mainloop()
@@ -105,14 +100,6 @@ class Gamble:
         self.LdealerStatus.place(x=250, y=10)
 
         # 월
-        Status = [3, 9, 2, 3, 3]
-        Bool = [0, 1, 0, 1, 1]
-        for i in range(len(Status)):
-            if Bool[i] == True:
-                self.LplayerPts1 = Label(text=Status[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-            elif Bool[i] == False:
-                self.LplayerPts1 = Label(text=Status[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="red")
-            self.LplayerPts1.place(x=80 + 30 * i, y=310)
 
         # 승 / 패
         self.Lstatus1 = Label(text="승", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
@@ -248,7 +235,6 @@ class Gamble:
             p = PhotoImage(file="GodoriCards/" + newCard.filename())
             self.LcardsPlayer1.append(Label(self.window, image=p))
 
-            # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer1[self.player1.inHand() - 1].image = p
             self.LcardsPlayer1[self.player1.inHand() - 1].place(x=50 + (i + self.count) * 30, y=380)
 
@@ -262,7 +248,6 @@ class Gamble:
             p = PhotoImage(file="GodoriCards/" + newCard.filename())
             self.LcardsPlayer2.append(Label(self.window, image=p))
 
-            # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer2[self.player2.inHand() - 1].image = p
             self.LcardsPlayer2[self.player2.inHand() - 1].place(x=250 + (i + self.count) * 30, y=380)
 
@@ -276,7 +261,6 @@ class Gamble:
             p = PhotoImage(file="GodoriCards/" + newCard.filename())
             self.LcardsPlayer3.append(Label(self.window, image=p))
 
-            # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer3[self.player3.inHand() - 1].image = p
             self.LcardsPlayer3[self.player3.inHand() - 1].place(x=450 + (i + self.count) * 30, y=380)
 
@@ -286,17 +270,33 @@ class Gamble:
         if self.count == 0:
             self.deal()
             self.count += 1
+            self.Player1Month = self.player1.returnMonth()
+            for i in range(len(self.Player1Month)):
+                self.LplayerPts1 = Label(text=self.Player1Month[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+                self.LplayerPts1.place(x=80 + i * 30, y=310)
+
         elif self.count == 1:
             self.hitDealer(3)
             self.hitPlayer1(3)
             self.hitPlayer2(3)
             self.hitPlayer3(3)
             self.count += 3
+            self.Player1Month = self.player1.returnMonth()
+            for i in range(len(self.Player1Month)):
+                self.LplayerPts1 = Label(text=self.Player1Month[i], width=2, height=1, font=self.fontstyle2, bg="green",
+                                         fg="white")
+                self.LplayerPts1.place(x=80 + i * 30, y=310)
+
         elif self.count == 4:
             self.hitDealer(1)
             self.hitPlayer1(1)
             self.hitPlayer2(1)
             self.hitPlayer3(1)
+            self.Player1Month = self.player1.returnMonth()
+            for i in range(len(self.Player1Month)):
+                self.LplayerPts1 = Label(text=self.Player1Month[i], width=2, height=1, font=self.fontstyle2, bg="green",
+                                         fg="white")
+                self.LplayerPts1.place(x=80 + i * 30, y=310)
             self.checkWinner()
 
         self.Deal["state"] = "disabled"
@@ -354,6 +354,10 @@ class Gamble:
         self.LbetMoney1.configure(text=str(self.betMoney) + "만")
         self.LbetMoney2.configure(text=str(self.betMoney) + "만")
         self.LbetMoney3.configure(text=str(self.betMoney) + "만")
+
+    def make10(self):
+        pass
+
 
     def checkWinner(self):
         for i in range(5):
