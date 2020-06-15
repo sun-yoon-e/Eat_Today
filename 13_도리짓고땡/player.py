@@ -19,12 +19,12 @@ class Player:
         self.suits.clear()
         self.values.clear()
 
-    def returnValue(self):
-        for i in range(len(self.cards)):
-            self.values.append(self.cards[i].getValue())
-        return self.values
-
-    def returnSuit(self):
-        for i in range(len(self.cards)):
-            self.suits.append(self.cards[i].getSuit())
-        return self.suits
+    # def returnValue(self):
+    #     for i in range(len(self.cards)):
+    #         self.values.append(self.cards[i].getValue())
+    #     return self.values
+    #
+    # def returnSuit(self):
+    #     for i in range(len(self.cards)):
+    #         self.suits.append(self.cards[i].getSuit())
+    #     return self.suits

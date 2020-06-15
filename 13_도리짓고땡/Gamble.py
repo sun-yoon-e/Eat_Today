@@ -14,6 +14,7 @@ class Gamble:
         self.window.configure(bg="green")
         self.fontstyle = font.Font(self.window, size=24, weight='bold', family='Consolas')
         self.fontstyle2 = font.Font(self.window, size=16, weight='bold', family='Consolas')
+        self.fontstyle3 = font.Font(self.window, size=13, weight='bold', family='Consolas')
         self.setupButton()
         self.setupLabel()
         self.cardDeck = [i for i in range(40)]
@@ -88,25 +89,69 @@ class Gamble:
         self.LplayerMoney = Label(text="1000만원", width=15, height=1, font=self.fontstyle, bg="green", fg="pink")
         self.LplayerMoney.place(x=560, y=500)
 
-        # 이 부분은 족보 코딩하고 꾸미기
-        self.LplayerStatus1 = Label(text="", width=20, height=1, font=self.fontstyle, bg="green", fg="cyan")
-        #self.LplayerStatus1.place(x=220, y=400)
-        self.LplayerStatus2 = Label(text="", width=20, height=1, font=self.fontstyle, bg="green", fg="cyan")
-        # self.LplayerStatus2.place(x=220, y=400)
-        self.LplayerStatus3 = Label(text="", width=20, height=1, font=self.fontstyle, bg="green", fg="cyan")
-        # self.LplayerStatus3.place(x=220, y=400)
+        # 족보
+        self.LplayerStatus1 = Label(text="가나다(1 1 2) 3땡", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
+        self.LplayerStatus1.place(x=50, y=280)
+        self.LplayerStatus2 = Label(text="가나다(1 1 2) 3땡", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
+        self.LplayerStatus2.place(x=240, y=280)
+        self.LplayerStatus3 = Label(text="가나다(1 1 2) 3땡", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
+        self.LplayerStatus3.place(x=430, y=280)
+        self.LdealerStatus = Label(text="가나다(1 1 2) 3땡", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
+        self.LdealerStatus.place(x=250, y=10)
 
-        self.LdealerStatus = Label(text="", width=20, height=1, font=self.fontstyle, bg="green", fg="cyan")
-        #self.LdealerStatus.place(x=220, y=100)
+        # 월
+        self.LplayerPts11 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts11.place(x=80, y=310)
+        self.LplayerPts12 = Label(text="9 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts12.place(x=110, y=310)
+        self.LplayerPts13 = Label(text="2 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts13.place(x=140, y=310)
+        self.LplayerPts14 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts14.place(x=170, y=310)
+        self.LplayerPts15 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts15.place(x=200, y=310)
 
-        self.Lstatus1 = Label(text="", width=15, height=1, font=self.fontstyle, bg="green", fg="red")
-        #self.Lstatus1.place(x=500, y=300)
-        self.Lstatus2 = Label(text="", width=15, height=1, font=self.fontstyle, bg="green", fg="red")
-        # self.Lstatus2.place(x=500, y=300)
-        self.Lstatus3 = Label(text="", width=15, height=1, font=self.fontstyle, bg="green", fg="red")
-        # self.Lstatus3.place(x=500, y=300)
+        self.LplayerPts11 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts11.place(x=280, y=310)
+        self.LplayerPts12 = Label(text="9 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts12.place(x=310, y=310)
+        self.LplayerPts13 = Label(text="2 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts13.place(x=340, y=310)
+        self.LplayerPts14 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts14.place(x=370, y=310)
+        self.LplayerPts15 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts15.place(x=400, y=310)
 
-    # 복잡해서 다 1, 2, 3 으로 만들어버림ㅠ 최적화 어떻게 해...
+        self.LplayerPts11 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts11.place(x=470, y=310)
+        self.LplayerPts12 = Label(text="9 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts12.place(x=500, y=310)
+        self.LplayerPts13 = Label(text="2 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts13.place(x=530, y=310)
+        self.LplayerPts14 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts14.place(x=560, y=310)
+        self.LplayerPts15 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LplayerPts15.place(x=590, y=310)
+
+        self.LdealerPts1 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LdealerPts1.place(x=280, y=40)
+        self.LdealerPts2 = Label(text="1 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LdealerPts2.place(x=310, y=40)
+        self.LdealerPts3 = Label(text="5 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LdealerPts3.place(x=340, y=40)
+        self.LdealerPts4 = Label(text="7 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LdealerPts4.place(x=370, y=40)
+        self.LdealerPts5 = Label(text="8 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        self.LdealerPts5.place(x=400, y=40)
+
+        # 승 / 패
+        self.Lstatus1 = Label(text="승", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
+        self.Lstatus1.place(x=90, y=230)
+        self.Lstatus2 = Label(text="패", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
+        self.Lstatus2.place(x=280, y=230)
+        self.Lstatus3 = Label(text="승", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
+        self.Lstatus3.place(x=470, y=230)
+
     def pressed15(self):
         self.betMoney1 += 5
         if self.betMoney1 <= self.playerMoney:
@@ -221,11 +266,12 @@ class Gamble:
             self.LcardsDealer.append(Label(self.window, image=p))
 
             self.LcardsDealer[self.dealer.inHand() - 1].image = p
-            self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + (i + self.count) * 30, y=50)
+            self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + (i + self.count) * 30, y=110)
+
+            
 
             #PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
-    # 얘도 1, 2, 3 다 나눠놨다 ㅋㅋㅋ 절대 못 합쳐 !!! 어렵다 어려워
     def hitPlayer1(self, n):
         for i in range(n):
             newCard = Card(self.cardDeck[self.deckN])
@@ -236,7 +282,7 @@ class Gamble:
 
             # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer1[self.player1.inHand() - 1].image = p
-            self.LcardsPlayer1[self.player1.inHand() - 1].place(x=50 + (i + self.count) * 30, y=350)
+            self.LcardsPlayer1[self.player1.inHand() - 1].place(x=50 + (i + self.count) * 30, y=380)
 
             #PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
@@ -250,7 +296,7 @@ class Gamble:
 
             # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer2[self.player2.inHand() - 1].image = p
-            self.LcardsPlayer2[self.player2.inHand() - 1].place(x=250 + (i + self.count) * 30, y=350)
+            self.LcardsPlayer2[self.player2.inHand() - 1].place(x=250 + (i + self.count) * 30, y=380)
 
             #PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
@@ -264,12 +310,11 @@ class Gamble:
 
             # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer3[self.player3.inHand() - 1].image = p
-            self.LcardsPlayer3[self.player3.inHand() - 1].place(x=450 + (i + self.count) * 30, y=350)
+            self.LcardsPlayer3[self.player3.inHand() - 1].place(x=450 + (i + self.count) * 30, y=380)
 
             #PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def pressedDeal(self):
-        # 이 부분 대충 짰음 복잡해! 짱시러!
         if self.count == 0:
             self.deal()
             self.count += 1
@@ -347,6 +392,8 @@ class Gamble:
             p = PhotoImage(file="GodoriCards/" + self.dealer.cards[i].filename())
             self.LcardsDealer[i].configure(image=p) # 이미지 레퍼런스 변경
             self.LcardsDealer[i].image = p          # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
+
+        #self.LdealerPts1.configure(fg='thistle') -> 메이드 만든 카드 숫자는 색 변경 해주기
 
         self.betMoney1 = 0
         self.betMoney2 = 0
