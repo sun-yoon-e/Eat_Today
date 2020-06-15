@@ -4,6 +4,7 @@ from winsound import *
 from card import *
 from player import *
 import random
+import itertools
 
 
 class Gamble:
@@ -30,25 +31,20 @@ class Gamble:
         self.betMoney3 = 0
         self.playerMoney = 1000
 
-        # 이 배열들 하나로 합치는 게 편할 듯 - 이렇게 하는 거 맞나..?
-        # 얘는 따로 둘래 그냥,,,
         self.LcardsPlayer1 = []
         self.LcardsPlayer2 = []
         self.LcardsPlayer3 = []
         self.LcardsDealer = []
 
-        # 그냥 모르겠으면 위에 처럼 다 나눠서 걍 해버리기
-        # 밑에 얘네 둘은 아직 건드리지 않은 것들
-        # 포커에서 추가한 배열인가? 여기서도 필요하겠지 그럼...
-        self.PlayerValue = []
-        for i in range(3):
-            self.PlayerValue.append([])
-        self.DealerValue = []
+        self.Player1Month = []
+        self.Player2Month = []
+        self.Player3Month = []
+        self.DealerMonth = []
 
-        self.PlayerSuit = []
-        for i in range(3):
-            self.PlayerSuit.append([])
-        self.DealerSuit = []
+        self.Player1Value = []
+        self.Player2Value = []
+        self.Player3Value = []
+        self.DealerValue = []
 
         self.deckN = 0
         self.window.mainloop()
@@ -90,66 +86,21 @@ class Gamble:
         self.LplayerMoney.place(x=560, y=500)
 
         # 족보
-        self.LplayerStatus1 = Label(text="가나다(1 1 2) 3땡", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
+        self.LplayerStatus1 = Label(text="", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
         self.LplayerStatus1.place(x=50, y=280)
-        self.LplayerStatus2 = Label(text="가나다(1 1 2) 3땡", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
+        self.LplayerStatus2 = Label(text="", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
         self.LplayerStatus2.place(x=240, y=280)
-        self.LplayerStatus3 = Label(text="가나다(1 1 2) 3땡", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
+        self.LplayerStatus3 = Label(text="", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
         self.LplayerStatus3.place(x=430, y=280)
-        self.LdealerStatus = Label(text="가나다(1 1 2) 3땡", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
+        self.LdealerStatus = Label(text="", width=20, height=1, font=self.fontstyle3, bg="green", fg="cyan")
         self.LdealerStatus.place(x=250, y=10)
 
-        # 월
-        self.LplayerPts11 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts11.place(x=80, y=310)
-        self.LplayerPts12 = Label(text="9 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts12.place(x=110, y=310)
-        self.LplayerPts13 = Label(text="2 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts13.place(x=140, y=310)
-        self.LplayerPts14 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts14.place(x=170, y=310)
-        self.LplayerPts15 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts15.place(x=200, y=310)
-
-        self.LplayerPts11 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts11.place(x=280, y=310)
-        self.LplayerPts12 = Label(text="9 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts12.place(x=310, y=310)
-        self.LplayerPts13 = Label(text="2 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts13.place(x=340, y=310)
-        self.LplayerPts14 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts14.place(x=370, y=310)
-        self.LplayerPts15 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts15.place(x=400, y=310)
-
-        self.LplayerPts11 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts11.place(x=470, y=310)
-        self.LplayerPts12 = Label(text="9 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts12.place(x=500, y=310)
-        self.LplayerPts13 = Label(text="2 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts13.place(x=530, y=310)
-        self.LplayerPts14 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts14.place(x=560, y=310)
-        self.LplayerPts15 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LplayerPts15.place(x=590, y=310)
-
-        self.LdealerPts1 = Label(text="3 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LdealerPts1.place(x=280, y=40)
-        self.LdealerPts2 = Label(text="1 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LdealerPts2.place(x=310, y=40)
-        self.LdealerPts3 = Label(text="5 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LdealerPts3.place(x=340, y=40)
-        self.LdealerPts4 = Label(text="7 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LdealerPts4.place(x=370, y=40)
-        self.LdealerPts5 = Label(text="8 ", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
-        self.LdealerPts5.place(x=400, y=40)
-
         # 승 / 패
-        self.Lstatus1 = Label(text="승", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
+        self.Lstatus1 = Label(text="", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
         self.Lstatus1.place(x=90, y=230)
-        self.Lstatus2 = Label(text="패", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
+        self.Lstatus2 = Label(text="", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
         self.Lstatus2.place(x=280, y=230)
-        self.Lstatus3 = Label(text="승", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
+        self.Lstatus3 = Label(text="", width=3, height=1, font=self.fontstyle, bg="green", fg="red")
         self.Lstatus3.place(x=470, y=230)
 
     def pressed15(self):
@@ -268,9 +219,7 @@ class Gamble:
             self.LcardsDealer[self.dealer.inHand() - 1].image = p
             self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + (i + self.count) * 30, y=110)
 
-            
-
-            #PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+            # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def hitPlayer1(self, n):
         for i in range(n):
@@ -314,21 +263,46 @@ class Gamble:
 
             #PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
+    def printPts(self):
+        self.Player1Month = self.player1.returnMonth()
+        self.Player2Month = self.player2.returnMonth()
+        self.Player3Month = self.player3.returnMonth()
+
+        for i in range(len(self.Player1Month)):
+            self.LplayerPts1 = Label(text=self.Player1Month[i], width=2, height=1, font=self.fontstyle2, bg="green",
+                                     fg="white")
+            self.LplayerPts1.place(x=80 + i * 30, y=310)
+
+        for i in range(len(self.Player2Month)):
+            self.LplayerPts2 = Label(text=self.Player2Month[i], width=2, height=1, font=self.fontstyle2, bg="green",
+                                     fg="white")
+            self.LplayerPts2.place(x=280 + i * 30, y=310)
+
+        for i in range(len(self.Player3Month)):
+            self.LplayerPts3 = Label(text=self.Player3Month[i], width=2, height=1, font=self.fontstyle2, bg="green",
+                                     fg="white")
+            self.LplayerPts3.place(x=470 + i * 30, y=310)
+
     def pressedDeal(self):
         if self.count == 0:
             self.deal()
             self.count += 1
+            self.printPts()
+
         elif self.count == 1:
             self.hitDealer(3)
             self.hitPlayer1(3)
             self.hitPlayer2(3)
             self.hitPlayer3(3)
             self.count += 3
+            self.printPts()
+
         elif self.count == 4:
             self.hitDealer(1)
             self.hitPlayer1(1)
             self.hitPlayer2(1)
             self.hitPlayer3(1)
+            self.printPts()
             self.checkWinner()
 
         self.Deal["state"] = "disabled"
@@ -387,13 +361,49 @@ class Gamble:
         self.LbetMoney2.configure(text=str(self.betMoney) + "만")
         self.LbetMoney3.configure(text=str(self.betMoney) + "만")
 
+        self.Player1Month = []
+        self.Player2Month = []
+        self.Player3Month = []
+        self.DealerMonth = []
+        self.printPts()
+        # for i in range(5):
+        #     self.LplayerPts1 = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        #     self.LplayerPts1.place(x=80 + i * 30, y=310)
+        #     self.LplayerPts2 = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        #     self.LplayerPts2.place(x=280 + i * 30, y=310)
+        #     self.LplayerPts3 = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        #     self.LplayerPts3.place(x=470 + i * 30, y=310)
+        #     self.LdealerPts = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+        #     self.LdealerPts.place(x=280 + i * 30, y=40)
+
     def checkWinner(self):
         for i in range(5):
             p = PhotoImage(file="GodoriCards/" + self.dealer.cards[i].filename())
             self.LcardsDealer[i].configure(image=p) # 이미지 레퍼런스 변경
             self.LcardsDealer[i].image = p          # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
 
+        self.DealerMonth = self.dealer.returnMonth()
+        for i in range(len(self.DealerMonth)):
+            self.LdealerPts = Label(text=self.DealerMonth[i], width=2, height=1, font=self.fontstyle2, bg="green",
+                                    fg="white")
+            self.LdealerPts.place(x=280 + i * 30, y=40)
         #self.LdealerPts1.configure(fg='thistle') -> 메이드 만든 카드 숫자는 색 변경 해주기
+
+        for i in itertools.permutations(self.DealerMonth, 3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         self.betMoney1 = 0
         self.betMoney2 = 0
