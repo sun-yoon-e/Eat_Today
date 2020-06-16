@@ -375,7 +375,7 @@ class Gamble:
             self.LdealerPts = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
             self.LdealerPts.place(x=280 + i * 30, y=40)
 
-    def made10(self, List, Status):
+    def made10(self, List, Status, Pts, x, y):
         made = False
         sortedlist = []
         indexlist = [False]*5
@@ -435,6 +435,12 @@ class Gamble:
                 if i in sortedlist:
                     indexlist[List.index(i)] = True
         self.madelist = indexlist
+        for i in range(len(self.madelist)):
+            if self.madelist[i] == True:
+                Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="orange")
+            elif self.madelist[i] == False:
+                Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
+            Pts.place(x=x + i * 30, y=y)
 
     def checkWinner(self):
         for i in range(5):
@@ -444,14 +450,13 @@ class Gamble:
 
         self.DealerMonth = self.dealer.returnMonth()
         for i in range(len(self.DealerMonth)):
-            self.LdealerPts = Label(text=self.DealerMonth[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
+            self.LdealerPts = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
             self.LdealerPts.place(x=280 + i * 30, y=40)
-        # self.LdealerPts1.configure(fg='thistle') -> 메이드 만든 카드 숫자는 색 변경 해주기
 
-        self.made10(self.DealerMonth, self.LdealerStatus)
-        self.made10(self.PlayerMonth1, self.LplayerStatus1)
-        self.made10(self.PlayerMonth2, self.LplayerStatus2)
-        self.made10(self.PlayerMonth3, self.LplayerStatus3)
+        self.made10(self.DealerMonth, self.LdealerStatus, self.LdealerPts, 280, 40)
+        self.made10(self.PlayerMonth1, self.LplayerStatus1, self.LplayerPts1, 80, 310)
+        self.made10(self.PlayerMonth2, self.LplayerStatus2, self.LplayerPts2, 280, 310)
+        self.made10(self.PlayerMonth3, self.LplayerStatus3, self.LplayerPts3, 470, 310)
 
         self.betMoney1 = 0
         self.betMoney2 = 0
