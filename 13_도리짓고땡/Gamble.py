@@ -374,11 +374,13 @@ class Gamble:
             self.LdealerPts = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
             self.LdealerPts.place(x=280 + i * 30, y=40)
 
-    def made10(self, List, Status, Pts, x, y):
+    def made10(self, List, Status, Pts, x, y):  #score리턴
         made = False
         madelist = []
         L = List.copy()
         status = ""
+        rest = ""
+        score = 0
         for i in itertools.combinations(List, 3):
             if sum(list(i)) % 10 == 0:
                 made = True
@@ -442,12 +444,39 @@ class Gamble:
                 Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
             Pts.place(x = x + i * 30, y = y)
 
-        #족보 계산
+        #자투리 계산
         if made == True:
             L = list(filter(None, L))
-            print("L", L)
+            L.sort()
+            if L == [3, 8]:  #38광땡
+                rest = "38광땡"
+                score = 21
+            elif L == [1, 3]:   #13광땡
+                rest = "13광땡"
+                score = 20
+            elif L[0] == L[1]:  #땡
+                rest = str(L[0]) + "땡"
+                score = 9 + L[0]
+            elif L == [2, 8]:    #28망통
+                rest = "28망통"
+                score = 1
+            elif L == [3, 7]:   #37망통
+                rest = "37망통"
+                score = 1
+            else:   #끗
+                rest = str(sum(L) % 10) + "끗"
+                score = 1 + sum(L) % 10
 
-        Status.configure(text = status)
+        #메이드+자투리 출력
+        Status.configure(text = status + " " + rest)
+
+        return score
+
+    def check(self, dealer, player):
+        if player > dealer:
+            return "승"
+        else:
+            return "패"
 
     def checkWinner(self):
         for i in range(5):
@@ -460,10 +489,14 @@ class Gamble:
             self.LdealerPts = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
             self.LdealerPts.place(x=280 + i * 30, y=40)
 
-        self.made10(self.DealerMonth, self.LdealerStatus, self.LdealerPts, 280, 40)
-        self.made10(self.PlayerMonth1, self.LplayerStatus1, self.LplayerPts1, 80, 310)
-        self.made10(self.PlayerMonth2, self.LplayerStatus2, self.LplayerPts2, 280, 310)
-        self.made10(self.PlayerMonth3, self.LplayerStatus3, self.LplayerPts3, 470, 310)
+        self.dealer.score = self.made10(self.DealerMonth, self.LdealerStatus, self.LdealerPts, 280, 40)
+        self.player1.score = self.made10(self.PlayerMonth1, self.LplayerStatus1, self.LplayerPts1, 80, 310)
+        self.player2.score = self.made10(self.PlayerMonth2, self.LplayerStatus2, self.LplayerPts2, 280, 310)
+        self.player3.score = self.made10(self.PlayerMonth3, self.LplayerStatus3, self.LplayerPts3, 470, 310)
+
+        self.Lstatus1.configure(text=self.check(self.dealer.score, self.player1.score))
+        self.Lstatus2.configure(text=self.check(self.dealer.score, self.player2.score))
+        self.Lstatus3.configure(text=self.check(self.dealer.score, self.player3.score))
 
         self.betMoney1 = 0
         self.betMoney2 = 0

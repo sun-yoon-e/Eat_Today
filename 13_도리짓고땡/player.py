@@ -5,6 +5,7 @@ class Player:
         self.months = []
         self.values = []
         self.N = 0
+        self.score = 0
 
     def inHand(self):
         return self.N
