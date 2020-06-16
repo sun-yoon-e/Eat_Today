@@ -378,69 +378,76 @@ class Gamble:
         made = False
         madelist = []
         L = List.copy()
+        status = ""
         for i in itertools.combinations(List, 3):
             if sum(list(i)) % 10 == 0:
                 made = True
-                sortedlist = sorted(list(i))
-                if sortedlist == [1, 1, 8]:
-                    Status.configure(text="콩콩팔(1 1 8)")
-                elif sortedlist == [1, 2, 7]:
-                    Status.configure(text="삐리칠(1 2 7)")
-                elif sortedlist == [1, 3, 6]:
-                    Status.configure(text="물삼육(1 3 6)")
-                elif sortedlist == [1, 4, 5]:
-                    Status.configure(text="빽새오(1 4 5)")
-                elif sortedlist == [1, 9, 10]:
-                    Status.configure(text="삥구장(1 9 10)")
-                elif sortedlist == [2, 2, 6]:
-                    Status.configure(text="니니육(2 2 6)")
-                elif sortedlist == [2, 3, 5]:
-                    Status.configure(text="이삼오(2 3 5)")
-                elif sortedlist == [2, 8, 10]:
-                    Status.configure(text="이판장(2 8 10)")
-                elif sortedlist == [3, 3, 4]:
-                    Status.configure(text="심심새(3 3 4)")
-                elif sortedlist == [3, 7, 10]:
-                    Status.configure(text="삼칠장(3 7 10)")
-                elif sortedlist == [3, 8, 9]:
-                    Status.configure(text="삼빡구(3 8 9)")
-                elif sortedlist == [2, 4, 4]:
-                    Status.configure(text="살살이(4 4 2)")
-                elif sortedlist == [4, 6, 10]:
-                    Status.configure(text="사륙장(4 6 10)")
-                elif sortedlist == [4, 7, 9]:
-                    Status.configure(text="사칠구(4 7 9)")
-                elif sortedlist == [5, 5, 10]:
-                    Status.configure(text="꼬꼬장(5 5 10)")
-                elif sortedlist == [5, 6, 9]:
-                    Status.configure(text="오륙구(5 6 9)")
-                elif sortedlist == [5, 7, 8]:
-                    Status.configure(text="오리발(5 7 8)")
-                elif sortedlist == [6, 6, 8]:
-                    Status.configure(text="쭉쭉팔(6 6 8)")
-                elif sortedlist == [6, 7, 7]:
-                    Status.configure(text="철철육(7 7 6)")
-                elif sortedlist == [4, 8, 8]:
-                    Status.configure(text="팍팍싸(8 8 4)")
-                elif sortedlist == [2, 9, 9]:
-                    Status.configure(text="구구리(9 9 2)")
+                madelist = sorted(list(i))
+                if madelist == [1, 1, 8]:
+                    status = "콩콩팔(1 1 8)"
+                elif madelist == [1, 2, 7]:
+                    status = "삐리칠(1 2 7)"
+                elif madelist == [1, 3, 6]:
+                    status = "물삼육(1 3 6)"
+                elif madelist == [1, 4, 5]:
+                    status = "빽새오(1 4 5)"
+                elif madelist == [1, 9, 10]:
+                    status = "삥구장(1 9 10)"
+                elif madelist == [2, 2, 6]:
+                    status = "니니육(2 2 6)"
+                elif madelist == [2, 3, 5]:
+                    status = "이삼오(2 3 5)"
+                elif madelist == [2, 8, 10]:
+                    status = "이판장(2 8 10)"
+                elif madelist == [3, 3, 4]:
+                    status = "심심새(3 3 4)"
+                elif madelist == [3, 7, 10]:
+                    status = "삼칠장(3 7 10)"
+                elif madelist == [3, 8, 9]:
+                    status = "삼빡구(3 8 9)"
+                elif madelist == [2, 4, 4]:
+                    status = "살살이(4 4 2)"
+                elif madelist == [4, 6, 10]:
+                    status = "사륙장(4 6 10)"
+                elif madelist == [4, 7, 9]:
+                    status = "사칠구(4 7 9)"
+                elif madelist == [5, 5, 10]:
+                    status = "꼬꼬장(5 5 10)"
+                elif madelist == [5, 6, 9]:
+                    status = "오륙구(5 6 9)"
+                elif madelist == [5, 7, 8]:
+                    status = "오리발(5 7 8)"
+                elif madelist == [6, 6, 8]:
+                    status = "쭉쭉팔(6 6 8)"
+                elif madelist == [6, 7, 7]:
+                    status = "철철육(7 7 6)"
+                elif madelist == [4, 8, 8]:
+                    status = "팍팍싸(8 8 4)"
+                elif madelist == [2, 9, 9]:
+                    status = "구구리(9 9 2)"
                 else:
-                    sortedlist = []
+                    madelist = []
                     made = False
         if made == False:
-            Status.configure(text="노 메이드")
+            status = "노 메이드"
         elif made == True:
             for i in range(len(madelist)):
-                madeindex = L.index(madelist[i])
-                L[madeindex] = ""
-            print("L", L, "madelist", madelist)
+                L[L.index(madelist[i])] = ""
 
+        #월 출력
         for i in range(len(L)):
             if L[i] == "":
                 Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="orange")
             else:
                 Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
-            Pts.place(x=x + i * 30, y=y)
+            Pts.place(x = x + i * 30, y = y)
+
+        #족보 계산
+        if made == True:
+            L = list(filter(None, L))
+            print("L", L)
+
+        Status.configure(text = status)
 
     def checkWinner(self):
         for i in range(5):
