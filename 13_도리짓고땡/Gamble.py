@@ -46,7 +46,6 @@ class Gamble:
         self.PlayerValue3 = []
         self.DealerValue = []
 
-        self.madelist = []
         self.deckN = 0
         self.window.mainloop()
 
@@ -377,8 +376,8 @@ class Gamble:
 
     def made10(self, List, Status, Pts, x, y):
         made = False
-        sortedlist = []
-        indexlist = [False]*5
+        madelist = []
+        L = List.copy()
         for i in itertools.combinations(List, 3):
             if sum(list(i)) % 10 == 0:
                 made = True
@@ -431,14 +430,15 @@ class Gamble:
         if made == False:
             Status.configure(text="노 메이드")
         elif made == True:
-            for i in List:
-                if i in sortedlist:
-                    indexlist[List.index(i)] = True
-        self.madelist = indexlist
-        for i in range(len(self.madelist)):
-            if self.madelist[i] == True:
+            for i in range(len(madelist)):
+                madeindex = L.index(madelist[i])
+                L[madeindex] = ""
+            print("L", L, "madelist", madelist)
+
+        for i in range(len(L)):
+            if L[i] == "":
                 Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="orange")
-            elif self.madelist[i] == False:
+            else:
                 Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
             Pts.place(x=x + i * 30, y=y)
 
