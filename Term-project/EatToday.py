@@ -59,10 +59,11 @@ class EatToday:
     def initCityListBox(self):    #시(군) 선택창
         global Search
         ListScrollbar = Scrollbar(self.window)
-        ListScrollbar.place(x=230, y=130)
+        ListScrollbar.place(x=215, y=133)
 
-        Search = Listbox(self.window, font=self.font3, activestyle='dotbox', width=13, height=1, bd=12,
-                             cursor='heart', relief='ridge', yscrollcommand=ListScrollbar.set, fg='thistle4')
+        Search = Listbox(self.window, font=self.font3, activestyle='dotbox', width=13, height=2, bd=2,
+                             cursor='heart', relief='ridge', fg='thistle4', selectbackground='thistle4',
+                         yscrollcommand=ListScrollbar.set)
 
         for i in range(31):
             Search.insert(i, Food.CityList[i])
@@ -73,10 +74,10 @@ class EatToday:
 
     def initInputLabel(self):   #검색 창
         global InputLabel
-        InputLabel = Entry(self.window, font=self.font3, width=15, bd=12, relief='ridge', cursor='heart', fg='thistle4')
+        InputLabel = Entry(self.window, font=self.font, width=14, bd=2, relief='ridge', cursor='heart', fg='thistle4')
 
         InputLabel.pack()
-        InputLabel.place(x=263, y=130)
+        InputLabel.place(x=245, y=136)
 
     def initSearchButton(self):
         SearchButton = Button(self.window, font=self.font2, bg='lavender blush', text="검색", cursor='heart', command=self.SearchButtonAction)
@@ -139,10 +140,12 @@ class EatToday:
         EateryText.delete(1.0, END)
         SearchIndex = Search.curselection()[0]
 
+        EateryText.insert(INSERT, '          ' + spam.start() + '\n')
         CategoryButton = 0
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery(0, i)
+        EateryText.insert(INSERT, '           ' + spam.end())
 
         self.initGraph()
         self.drawGraph()
@@ -161,10 +164,12 @@ class EatToday:
         EateryText.delete(1.0, END)
         SearchIndex = Search.curselection()[0]
 
+        EateryText.insert(INSERT, '          ' + spam.start() + '\n')
         CategoryButton = 1
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery(1, i)
+        EateryText.insert(INSERT, '           ' + spam.end())
 
         self.initGraph()
         self.drawGraph()
@@ -183,10 +188,12 @@ class EatToday:
         EateryText.delete(1.0, END)
         SearchIndex = Search.curselection()[0]
 
+        EateryText.insert(INSERT, '          ' + spam.start() + '\n')
         CategoryButton = 2
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery(2, i)
+        EateryText.insert(INSERT, '           ' + spam.end())
 
         self.initGraph()
         self.drawGraph()
@@ -205,10 +212,12 @@ class EatToday:
         EateryText.delete(1.0, END)
         SearchIndex = Search.curselection()[0]
 
+        EateryText.insert(INSERT, '          ' + spam.start() + '\n')
         CategoryButton = 3
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery(3, i)
+        EateryText.insert(INSERT, '           ' + spam.end())
 
         self.initGraph()
         self.drawGraph()
@@ -227,10 +236,12 @@ class EatToday:
         EateryText.delete(1.0, END)
         SearchIndex = Search.curselection()[0]
 
+        EateryText.insert(INSERT, '          ' + spam.start() + '\n')
         CategoryButton = 4
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery(4, i)
+        EateryText.insert(INSERT, '           ' + spam.end())
 
         self.initGraph()
         self.drawGraph()
@@ -249,10 +260,12 @@ class EatToday:
         EateryText.delete(1.0, END)
         SearchIndex = Search.curselection()[0]
 
+        EateryText.insert(INSERT, '          ' + spam.start() + '\n')
         CategoryButton = 5
         for i in range(31):
             if SearchIndex == i:
                 self.InsertEatery(5, i)
+        EateryText.insert(INSERT, '           ' + spam.end())
 
         self.initGraph()
         self.drawGraph()
@@ -271,22 +284,17 @@ class EatToday:
                 count += 1
 
     def initEateryList(self):
-        Escrollbar = Scrollbar(self.window)
-        Escrollbar.pack()
-        Escrollbar.place(x=277, y=270)
+        # Escrollbar = Scrollbar(self.window)
+        # Escrollbar.pack()
+        # Escrollbar.place(x=270, y=270)
 
         global EateryText
-        EateryText = Text(self.window, width=32, height=22, borderwidth=12, relief='ridge',
-                          cursor='heart', yscrollcommand=Escrollbar.set)
-
+        EateryText = Text(self.window, width=36, height=24, borderwidth=2, relief='ridge', cursor='heart')
+                            #, yscrollcommand=Escrollbar.set)
         EateryText.pack()
-        EateryText.place(x=25, y=270)
-
-        Escrollbar.config(command=EateryText.yview)
-        Escrollbar.pack()
-        Escrollbar.place(x=277, y=270)
-
+        EateryText.place(x=27, y=270)
         EateryText.configure(state='disabled')
+        #Escrollbar.config(command=EateryText.yview)
 
     def InsertInformation(self, CategoryNum, StoreName):
         global InfoText, Search, Name, Lat, Long, MailList
@@ -326,21 +334,18 @@ class EatToday:
                 Long = List[i][6]
 
     def initInformation(self):
-        Iscrollbar = Scrollbar(self.window)
-        Iscrollbar.pack()
-        Iscrollbar.place(x=563, y=270)
+        # Iscrollbar = Scrollbar(self.window)
+        # Iscrollbar.pack()
+        # Iscrollbar.place(x=555, y=270)
 
         global InfoText
-        InfoText = Text(self.window, width=32, height=22, borderwidth=12, relief='ridge',
-                        cursor='heart', yscrollcommand=Iscrollbar.set)
+        InfoText = Text(self.window, width=36, height=24, borderwidth=  2, relief='ridge', cursor='heart')
+                        #, yscrollcommand=Iscrollbar.set)
         InfoText.pack()
-        InfoText.place(x=310, y=270)
-
-        Iscrollbar.config(command=InfoText.yview)
-        Iscrollbar.pack()
-        Iscrollbar.place(x=563, y=270)
-
+        InfoText.place(x=312, y=270)
         InfoText.configure(state='disabled')
+        #Iscrollbar.config(command=InfoText.yview)
+
 
     def initGraph(self):
         self.graphCanvas = Canvas(self.window, cursor='heart', width=310, height=120, bg='floral white')
@@ -386,7 +391,7 @@ class EatToday:
         global Name, Lat, Long
         map = folium.Map(location=[Lat, Long], zoom_start=15)           # 위도, 경도 지정
         icon = folium.Icon(icon='glyphicon glyphicon-cutlery', color='pink')
-        folium.Marker([Lat, Long], poup=Name, icon=icon).add_to(map)    # 마커 지정
+        folium.Marker([Lat, Long], popup=Name, icon=icon).add_to(map)   # 마커 지정
         map.save('Eat_Today_Map.html')                                  # html 파일로 저장
         webbrowser.open_new('Eat_Today_Map.html')
 

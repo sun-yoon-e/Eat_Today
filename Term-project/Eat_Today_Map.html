@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_96e2ed4c4eee4c51a0189164545bbfb3 {
+                #map_5fc24deeec8e4d4aadd5eedcf5b4acaf {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -35,15 +35,15 @@
 </head>
 <body>    
     
-            <div class="folium-map" id="map_96e2ed4c4eee4c51a0189164545bbfb3" ></div>
+            <div class="folium-map" id="map_5fc24deeec8e4d4aadd5eedcf5b4acaf" ></div>
         
 </body>
 <script>    
     
-            var map_96e2ed4c4eee4c51a0189164545bbfb3 = L.map(
-                "map_96e2ed4c4eee4c51a0189164545bbfb3",
+            var map_5fc24deeec8e4d4aadd5eedcf5b4acaf = L.map(
+                "map_5fc24deeec8e4d4aadd5eedcf5b4acaf",
                 {
-                    center: [37.7730951, 127.3715946],
+                    center: [37.6353589, 127.2075339],
                     crs: L.CRS.EPSG3857,
                     zoom: 15,
                     zoomControl: true,
@@ -55,21 +55,34 @@
 
         
     
-            var tile_layer_2722295b887c4e3c84d28bb7aa674457 = L.tileLayer(
+            var tile_layer_c2fb6bc7aec546c3b2c117cf14fa4a49 = L.tileLayer(
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_96e2ed4c4eee4c51a0189164545bbfb3);
+            ).addTo(map_5fc24deeec8e4d4aadd5eedcf5b4acaf);
         
     
-            var marker_a64789b9fe2343308a52b869105c73c2 = L.marker(
-                [37.7730951, 127.3715946],
-                {"poup": "\ubc24\ub098\ubb34\uc2dd\ub2f9"}
-            ).addTo(map_96e2ed4c4eee4c51a0189164545bbfb3);
+            var marker_75f4547b6e43441e93e1f0a0c401389d = L.marker(
+                [37.6353589, 127.2075339],
+                {}
+            ).addTo(map_5fc24deeec8e4d4aadd5eedcf5b4acaf);
         
     
-            var icon_8c972fd2202844149a87ffdbbcccdb4f = L.AwesomeMarkers.icon(
+            var icon_a4ec09258012412e99a7be49b8d03140 = L.AwesomeMarkers.icon(
                 {"extraClasses": "fa-rotate-0", "icon": "glyphicon glyphicon-cutlery", "iconColor": "white", "markerColor": "pink", "prefix": "glyphicon"}
             );
-            marker_a64789b9fe2343308a52b869105c73c2.setIcon(icon_8c972fd2202844149a87ffdbbcccdb4f);
+            marker_75f4547b6e43441e93e1f0a0c401389d.setIcon(icon_a4ec09258012412e99a7be49b8d03140);
         
+    
+        var popup_83f0463ef84249af8a74e9c0aef7bf9a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3961ed18b9274b87bbae5e4e8a1cbb6f = $(`<div id="html_3961ed18b9274b87bbae5e4e8a1cbb6f" style="width: 100.0%; height: 100.0%;">다리원</div>`)[0];
+            popup_83f0463ef84249af8a74e9c0aef7bf9a.setContent(html_3961ed18b9274b87bbae5e4e8a1cbb6f);
+        
+
+        marker_75f4547b6e43441e93e1f0a0c401389d.bindPopup(popup_83f0463ef84249af8a74e9c0aef7bf9a)
+        ;
+
+        
+    
 </script>
