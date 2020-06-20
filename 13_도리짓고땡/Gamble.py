@@ -219,9 +219,9 @@ class Gamble:
             self.LcardsDealer.append(Label(self.window, image=p))
 
             self.LcardsDealer[self.dealer.inHand() - 1].image = p
-            self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + (i + self.count) * 30, y=110)
+            self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + (i + self.count) * 30, y=90)
 
-            # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def hitPlayer1(self, n):
         for i in range(n):
@@ -233,9 +233,9 @@ class Gamble:
 
             # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer1[self.player1.inHand() - 1].image = p
-            self.LcardsPlayer1[self.player1.inHand() - 1].place(x=50 + (i + self.count) * 30, y=380)
+            self.LcardsPlayer1[self.player1.inHand() - 1].place(x=50 + (i + self.count) * 30, y=350)
 
-            # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def hitPlayer2(self, n):
         for i in range(n):
@@ -247,9 +247,9 @@ class Gamble:
 
             # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer2[self.player2.inHand() - 1].image = p
-            self.LcardsPlayer2[self.player2.inHand() - 1].place(x=250 + (i + self.count) * 30, y=380)
+            self.LcardsPlayer2[self.player2.inHand() - 1].place(x=250 + (i + self.count) * 30, y=350)
 
-            # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def hitPlayer3(self, n):
         for i in range(n):
@@ -261,9 +261,9 @@ class Gamble:
 
             # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer3[self.player3.inHand() - 1].image = p
-            self.LcardsPlayer3[self.player3.inHand() - 1].place(x=450 + (i + self.count) * 30, y=380)
+            self.LcardsPlayer3[self.player3.inHand() - 1].place(x=450 + (i + self.count) * 30, y=350)
 
-            # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def printMonth(self):
         self.PlayerMonth1 = self.player1.returnMonth()
@@ -385,10 +385,10 @@ class Gamble:
             self.LdealerPts = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
             self.LdealerPts.place(x=280 + i * 30, y=40)
 
-        self.dealer.score = self.made10(self.DealerMonth, self.LdealerStatus, self.LdealerPts, 280, 40)
-        self.player1.score = self.made10(self.PlayerMonth1, self.LplayerStatus1, self.LplayerPts1, 80, 310)
-        self.player2.score = self.made10(self.PlayerMonth2, self.LplayerStatus2, self.LplayerPts2, 280, 310)
-        self.player3.score = self.made10(self.PlayerMonth3, self.LplayerStatus3, self.LplayerPts3, 470, 310)
+        self.dealer.score = self.made10(self.dealer, self.LcardsDealer, self.DealerMonth, self.LdealerStatus, 280, 40)
+        self.player1.score = self.made10(self.player1, self.LcardsPlayer1, self.PlayerMonth1, self.LplayerStatus1, 80, 310)
+        self.player2.score = self.made10(self.player2, self.LcardsPlayer2, self.PlayerMonth2, self.LplayerStatus2, 280, 310)
+        self.player3.score = self.made10(self.player3, self.LcardsPlayer3, self.PlayerMonth3, self.LplayerStatus3, 470, 310)
 
         self.Lstatus1.configure(text=self.check(self.dealer.score, self.player1.score))
         self.Lstatus2.configure(text=self.check(self.dealer.score, self.player2.score))
@@ -432,10 +432,12 @@ class Gamble:
     def check(self, dealer, player):
         if player > dealer:
             return "승"
-        else:
+        elif player < dealer:
             return "패"
+        else:
+            return "무"
 
-    def made10(self, List, Status, Pts, x, y):  #score리턴
+    def made10(self, Player, Cards, List, Status, x, y):  #score리턴
         made = False
         madelist = []
         L = List.copy()
@@ -501,6 +503,14 @@ class Gamble:
         for i in range(len(L)):
             if L[i] == "":
                 Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="orange")
+                if Cards == self.LcardsDealer:
+                    Cards[i].place(y=90 + 30)
+                if Cards == self.LcardsPlayer1:
+                    Cards[i].place(y=350 + 30)
+                if Cards == self.LcardsPlayer2:
+                    Cards[i].place(y=350 + 30)
+                if Cards == self.LcardsPlayer3:
+                    Cards[i].place(y=350 + 30)
             else:
                 Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
             Pts.place(x = x + i * 30, y = y)
@@ -510,11 +520,32 @@ class Gamble:
             L = list(filter(None, L))
             L.sort()
             if L == [3, 8]:  #38광땡
-                rest = "38광땡"
-                score = 21
+                rest = "1끗"
+                score = 2
+                for i in range(5):
+                    if List[i] == 3 and Player.cards[i].filename() == "3.1.gif":
+                            for j in range(5):
+                                if List[i] == 8 and Player.cards[i].filename() == "8.1.gif":
+                                    rest = "38광땡"
+                                    score = 22
+            elif L == [1, 8]:   #18광땡
+                rest = "9끗"
+                score = 5
+                for i in range(5):
+                    if List[i] == 1 and Player.cards[i].filename() == "1.1.gif":
+                        for j in range(5):
+                            if List[i] == 8 and Player.cards[i].filename() == "8.1.gif":
+                                rest = "18광땡"
+                                score = 21
             elif L == [1, 3]:   #13광땡
-                rest = "13광땡"
-                score = 20
+                rest = "4끗"
+                score = 5
+                for i in range(5):
+                    if List[i] == 1 and Player.cards[i].filename() == "1.1.gif":
+                        for j in range(5):
+                            if List[i] == 3 and Player.cards[i].filename() == "3.1.gif":
+                                rest = "13광땡"
+                                score = 20
             elif L[0] == L[1]:  #땡
                 rest = str(L[0]) + "땡"
                 score = 9 + L[0]
