@@ -4,6 +4,7 @@ import folium
 import webbrowser
 import Food
 import Gmail
+import spam
 
 bgColor = 'lemon chiffon'
 CategoryButton = 0
