@@ -81,7 +81,7 @@ def handle(msg):
         print('try to 확인')
         check(chat_id)
     else:
-        noti.sendMessage(chat_id, '모르는 명령어입니다.\n 맛집 (ex:시흥시) 을 입력하세요.')
+        noti.sendMessage(chat_id, '모르는 명령어입니다.\n' + '맛집 (ex:시흥시) 을 입력하세요.')
 
 
 today = date.today()
