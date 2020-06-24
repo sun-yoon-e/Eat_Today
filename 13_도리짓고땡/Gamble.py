@@ -77,7 +77,7 @@ class Gamble:
         self.Again['bg'] = 'gray'
 
     def setupLabel(self):
-        #돈
+        # 돈
         self.LbetMoney1 = Label(text="0만", width=4, height=1, font=self.fontstyle, bg="green", fg="yellow")
         self.LbetMoney1.place(x=80, y=500)
         self.LbetMoney2 = Label(text="0만", width=4, height=1, font=self.fontstyle, bg="green", fg="yellow")
@@ -219,9 +219,9 @@ class Gamble:
             self.LcardsDealer.append(Label(self.window, image=p))
 
             self.LcardsDealer[self.dealer.inHand() - 1].image = p
-            self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + (i + self.count) * 30, y=110)
+            self.LcardsDealer[self.dealer.inHand() - 1].place(x=250 + (i + self.count) * 30, y=90)
 
-            # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def hitPlayer1(self, n):
         for i in range(n):
@@ -233,9 +233,9 @@ class Gamble:
 
             # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer1[self.player1.inHand() - 1].image = p
-            self.LcardsPlayer1[self.player1.inHand() - 1].place(x=50 + (i + self.count) * 30, y=380)
+            self.LcardsPlayer1[self.player1.inHand() - 1].place(x=50 + (i + self.count) * 30, y=350)
 
-            # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def hitPlayer2(self, n):
         for i in range(n):
@@ -247,9 +247,9 @@ class Gamble:
 
             # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer2[self.player2.inHand() - 1].image = p
-            self.LcardsPlayer2[self.player2.inHand() - 1].place(x=250 + (i + self.count) * 30, y=380)
+            self.LcardsPlayer2[self.player2.inHand() - 1].place(x=250 + (i + self.count) * 30, y=350)
 
-            # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def hitPlayer3(self, n):
         for i in range(n):
@@ -261,9 +261,9 @@ class Gamble:
 
             # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
             self.LcardsPlayer3[self.player3.inHand() - 1].image = p
-            self.LcardsPlayer3[self.player3.inHand() - 1].place(x=450 + (i + self.count) * 30, y=380)
+            self.LcardsPlayer3[self.player3.inHand() - 1].place(x=450 + (i + self.count) * 30, y=350)
 
-            # PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
+        PlaySound('sounds/cardFlip1.wav', SND_FILENAME)
 
     def printMonth(self):
         self.PlayerMonth1 = self.player1.returnMonth()
@@ -271,15 +271,18 @@ class Gamble:
         self.PlayerMonth3 = self.player3.returnMonth()
 
         for i in range(len(self.PlayerMonth1)):
-            self.LplayerPts1 = Label(text=self.PlayerMonth1[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+            self.LplayerPts1 = Label(text=self.PlayerMonth1[i], width=2, height=1, font=self.fontstyle2, bg="green",
+                                     fg="white")
             self.LplayerPts1.place(x=80 + i * 30, y=310)
 
         for i in range(len(self.PlayerMonth2)):
-            self.LplayerPts2 = Label(text=self.PlayerMonth2[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+            self.LplayerPts2 = Label(text=self.PlayerMonth2[i], width=2, height=1, font=self.fontstyle2, bg="green",
+                                     fg="white")
             self.LplayerPts2.place(x=280 + i * 30, y=310)
 
         for i in range(len(self.PlayerMonth3)):
-            self.LplayerPts3 = Label(text=self.PlayerMonth3[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+            self.LplayerPts3 = Label(text=self.PlayerMonth3[i], width=2, height=1, font=self.fontstyle2, bg="green",
+                                     fg="white")
             self.LplayerPts3.place(x=470 + i * 30, y=310)
 
     def pressedDeal(self):
@@ -374,7 +377,73 @@ class Gamble:
             self.LdealerPts = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
             self.LdealerPts.place(x=280 + i * 30, y=40)
 
-    def made10(self, List, Status, Pts, x, y):  #score리턴
+    def checkWinner(self):
+        for i in range(5):
+            p = PhotoImage(file="GodoriCards/" + self.dealer.cards[i].filename())
+            self.LcardsDealer[i].configure(image=p)  # 이미지 레퍼런스 변경
+            self.LcardsDealer[i].image = p  # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
+
+        self.DealerMonth = self.dealer.returnMonth()
+        for i in range(len(self.DealerMonth)):
+            self.LdealerPts = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+            self.LdealerPts.place(x=280 + i * 30, y=40)
+
+        self.dealer.score = self.made10(self.dealer, self.LcardsDealer, self.DealerMonth, self.LdealerStatus, 280, 40)
+        self.player1.score = self.made10(self.player1, self.LcardsPlayer1, self.PlayerMonth1, self.LplayerStatus1, 80,
+                                         310)
+        self.player2.score = self.made10(self.player2, self.LcardsPlayer2, self.PlayerMonth2, self.LplayerStatus2, 280,
+                                         310)
+        self.player3.score = self.made10(self.player3, self.LcardsPlayer3, self.PlayerMonth3, self.LplayerStatus3, 470,
+                                         310)
+
+        self.Lstatus1.configure(text=self.check(self.dealer.score, self.player1.score))
+        self.Lstatus2.configure(text=self.check(self.dealer.score, self.player2.score))
+        self.Lstatus3.configure(text=self.check(self.dealer.score, self.player3.score))
+
+        if self.check(self.dealer.score, self.player1.score) == "승":
+            self.playerMoney += self.betMoney1 * 2
+        if self.check(self.dealer.score, self.player2.score) == "승":
+            self.playerMoney += self.betMoney2 * 2
+        if self.check(self.dealer.score, self.player3.score) == "승":
+            self.playerMoney += self.betMoney3 * 2
+
+        self.betMoney1 = 0
+        self.betMoney2 = 0
+        self.betMoney3 = 0
+        self.LplayerMoney.configure(text=str(self.playerMoney) + "만원")
+        self.LbetMoney1.configure(text=str(self.betMoney1) + "만")
+        self.LbetMoney2.configure(text=str(self.betMoney2) + "만")
+        self.LbetMoney3.configure(text=str(self.betMoney3) + "만")
+
+        self.p1_5['state'] = 'disabled'
+        self.p1_5['bg'] = 'gray'
+        self.p1_1['state'] = 'disabled'
+        self.p1_1['bg'] = 'gray'
+
+        self.p2_5['state'] = 'disabled'
+        self.p2_5['bg'] = 'gray'
+        self.p2_1['state'] = 'disabled'
+        self.p2_1['bg'] = 'gray'
+
+        self.p3_5['state'] = 'disabled'
+        self.p3_5['bg'] = 'gray'
+        self.p3_1['state'] = 'disabled'
+        self.p3_1['bg'] = 'gray'
+
+        self.Deal['state'] = 'disabled'
+        self.Deal['bg'] = 'gray'
+        self.Again['state'] = 'active'
+        self.Again['bg'] = 'white'
+
+    def check(self, dealer, player):
+        if player > dealer:
+            return "승"
+        elif player < dealer:
+            return "패"
+        else:
+            return "무"
+
+    def made10(self, Player, Cards, List, Status, x, y):  # score리턴
         made = False
         madelist = []
         L = List.copy()
@@ -436,95 +505,79 @@ class Gamble:
             for i in range(len(madelist)):
                 L[L.index(madelist[i])] = ""
 
-        #월 출력
+        # 월 출력
         for i in range(len(L)):
             if L[i] == "":
                 Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="orange")
+                if Cards == self.LcardsDealer:
+                    Cards[i].place(y=90 + 30)
+                if Cards == self.LcardsPlayer1:
+                    Cards[i].place(y=350 + 30)
+                if Cards == self.LcardsPlayer2:
+                    Cards[i].place(y=350 + 30)
+                if Cards == self.LcardsPlayer3:
+                    Cards[i].place(y=350 + 30)
             else:
-                Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
-            Pts.place(x = x + i * 30, y = y)
+                Pts = Label(text=List[i], width=2, height=1, font=self.fontstyle2, bg="green", fg="white")
+            Pts.place(x=x + i * 30, y=y)
 
-        #자투리 계산
+        # 자투리 계산
         if made == True:
             L = list(filter(None, L))
             L.sort()
-            if L == [3, 8]:  #38광땡
-                rest = "38광땡"
-                score = 21
-            elif L == [1, 3]:   #13광땡
-                rest = "13광땡"
-                score = 20
-            elif L[0] == L[1]:  #땡
+            if L == [3, 8]:  # 38광땡
+                rest = "1끗"
+                score = 2
+                for i in range(5):
+                    if List[i] == 3 and Player.cards[i].filename() == "3.1.gif":
+                        for j in range(5):
+                            if List[i] == 8 and Player.cards[i].filename() == "8.1.gif":
+                                rest = "38광땡"
+                                score = 22
+            elif L == [1, 8]:  # 18광땡
+                rest = "9끗"
+                score = 5
+                for i in range(5):
+                    if List[i] == 1 and Player.cards[i].filename() == "1.1.gif":
+                        for j in range(5):
+                            if List[i] == 8 and Player.cards[i].filename() == "8.1.gif":
+                                rest = "18광땡"
+                                score = 21
+            elif L == [1, 3]:  # 13광땡
+                rest = "4끗"
+                score = 5
+                for i in range(5):
+                    if List[i] == 1 and Player.cards[i].filename() == "1.1.gif":
+                        for j in range(5):
+                            if List[i] == 3 and Player.cards[i].filename() == "3.1.gif":
+                                rest = "13광땡"
+                                score = 20
+            elif L[0] == L[1]:  # 땡
                 rest = str(L[0]) + "땡"
                 score = 9 + L[0]
-            elif L == [2, 8]:    #28망통
-                rest = "28망통"
+            elif L == [1, 9]:
+                rest = "망통"
                 score = 1
-            elif L == [3, 7]:   #37망통
-                rest = "37망통"
+            elif L == [2, 8]:  # 28망통
+                rest = "망통"
                 score = 1
-            else:   #끗
+            elif L == [3, 7]:  # 37망통
+                rest = "망통"
+                score = 1
+            elif L == [4, 6]:
+                rest = "망통"
+                score = 1
+            elif L == [5, 5]:
+                rest = "망통"
+                score = 1
+            else:  # 끗
                 rest = str(sum(L) % 10) + "끗"
                 score = 1 + sum(L) % 10
 
-        #메이드+자투리 출력
-        Status.configure(text = status + " " + rest)
+        # 메이드+자투리 출력
+        Status.configure(text=status + " " + rest)
 
         return score
-
-    def check(self, dealer, player):
-        if player > dealer:
-            return "승"
-        else:
-            return "패"
-
-    def checkWinner(self):
-        for i in range(5):
-            p = PhotoImage(file="GodoriCards/" + self.dealer.cards[i].filename())
-            self.LcardsDealer[i].configure(image=p)  # 이미지 레퍼런스 변경
-            self.LcardsDealer[i].image = p  # 파이썬은 라벨 이미지 레퍼런스를 갖고 있어야 이미지가 보임
-
-        self.DealerMonth = self.dealer.returnMonth()
-        for i in range(len(self.DealerMonth)):
-            self.LdealerPts = Label(text="", width=2, height=1, font=self.fontstyle2, bg="green",fg="white")
-            self.LdealerPts.place(x=280 + i * 30, y=40)
-
-        self.dealer.score = self.made10(self.DealerMonth, self.LdealerStatus, self.LdealerPts, 280, 40)
-        self.player1.score = self.made10(self.PlayerMonth1, self.LplayerStatus1, self.LplayerPts1, 80, 310)
-        self.player2.score = self.made10(self.PlayerMonth2, self.LplayerStatus2, self.LplayerPts2, 280, 310)
-        self.player3.score = self.made10(self.PlayerMonth3, self.LplayerStatus3, self.LplayerPts3, 470, 310)
-
-        self.Lstatus1.configure(text=self.check(self.dealer.score, self.player1.score))
-        self.Lstatus2.configure(text=self.check(self.dealer.score, self.player2.score))
-        self.Lstatus3.configure(text=self.check(self.dealer.score, self.player3.score))
-
-        self.betMoney1 = 0
-        self.betMoney2 = 0
-        self.betMoney3 = 0
-        self.LplayerMoney.configure(text=str(self.playerMoney) + "만원")
-        self.LbetMoney1.configure(text=str(self.betMoney1) + "만")
-        self.LbetMoney2.configure(text=str(self.betMoney2) + "만")
-        self.LbetMoney3.configure(text=str(self.betMoney3) + "만")
-
-        self.p1_5['state'] = 'disabled'
-        self.p1_5['bg'] = 'gray'
-        self.p1_1['state'] = 'disabled'
-        self.p1_1['bg'] = 'gray'
-
-        self.p2_5['state'] = 'disabled'
-        self.p2_5['bg'] = 'gray'
-        self.p2_1['state'] = 'disabled'
-        self.p2_1['bg'] = 'gray'
-
-        self.p3_5['state'] = 'disabled'
-        self.p3_5['bg'] = 'gray'
-        self.p3_1['state'] = 'disabled'
-        self.p3_1['bg'] = 'gray'
-
-        self.Deal['state'] = 'disabled'
-        self.Deal['bg'] = 'gray'
-        self.Again['state'] = 'active'
-        self.Again['bg'] = 'white'
 
 
 Gamble()
